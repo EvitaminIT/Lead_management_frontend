@@ -51,6 +51,8 @@ import {
     Radio,
     Collapse,
     Switch,
+    Navbar,
+  
   } from "@material-tailwind/react";
   import GroupsIcon from '@mui/icons-material/Groups';
   import PestControlIcon from '@mui/icons-material/PestControl';
@@ -60,7 +62,7 @@ import {
   import CottageIcon from '@mui/icons-material/Cottage';
   import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
   import ExploreIcon from '@mui/icons-material/Explore';
-  import { ChevronRightIcon, ChevronDownIcon,RocketLaunchIcon,PlusIcon, ArrowRightIcon, ArrowLeftIcon,HomeIcon,CogIcon,UserIcon } from "@heroicons/react/24/outline";
+  import { ChevronRightIcon, ChevronDownIcon,RocketLaunchIcon,PlusIcon, ArrowRightIcon, ArrowLeftIcon,HomeIcon,CogIcon,UserIcon,Bars3Icon, XMarkIcon, } from "@heroicons/react/24/outline";
   import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
   import EditCalendarIcon from '@mui/icons-material/EditCalendar';
   import ImportContactsIcon from '@mui/icons-material/ImportContacts';
@@ -88,7 +90,18 @@ import {
     Cog6ToothIcon,
     InboxIcon,
     PowerIcon,
+    Bars4Icon,
+    GlobeAmericasIcon,
+    NewspaperIcon,
+    PhoneIcon,
+    RectangleGroupIcon,
+    SquaresPlusIcon,
+    SunIcon,
+    TagIcon,
+    UserGroupIcon,
   } from "@heroicons/react/24/solid";
+
+  import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 
   import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined';
   import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
@@ -245,6 +258,19 @@ const index ={
     DownloadIcon,
     ClearOutlinedIcon,
     HttpsOutlinedIcon,
+    Bars4Icon,
+    GlobeAmericasIcon,
+    NewspaperIcon,
+    PhoneIcon,
+    RectangleGroupIcon,
+    SquaresPlusIcon,
+    SunIcon,
+    TagIcon,
+    UserGroupIcon,
+    Bars3Icon,
+    XMarkIcon,
+    Navbar,
+    NotificationsOutlinedIcon,
 }
 
 export default index;

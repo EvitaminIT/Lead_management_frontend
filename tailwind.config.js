@@ -20,17 +20,17 @@ module.exports = withMT({
         poppins: ['Poppins', 'sans'],
       },
     },
-    screens: {
-      'sm': {'min': '576px', 'max': '767px'},
-      'md': {'min': '768px', 'max': '991px'},
-      'lg': {'min': '992px', 'max': '1199px'},
-      'xl': {'min': '1200px','max':'1400px'},
-      'xl2':{'min':'1401px'}
-    },
+    // screens: {
+    //   'sm': {'min': '576px', 'max': '767px'},
+    //   'md': {'min': '768px', 'max': '991px'},
+    //   'lg': {'min': '992px', 'max': '1199px'},
+    //   'xl': {'min': '1200px','max':'1400px'},
+    //   'xl2':{'min':'1401px'}
+    // },
   },
   plugins: [
-    // require('tailwind-scrollbar-hide'),
-    // require('tailwind-scrollbar')({ nocompatible: true }),
+    require('tailwind-scrollbar-hide'),
+    require('tailwind-scrollbar')({ nocompatible: true }),
   ],
 })
 
