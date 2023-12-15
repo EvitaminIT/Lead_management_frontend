@@ -1,13 +1,13 @@
-import teamleadIMG from '../../../Image/Total_Leads.svg'
-import AskDetIMG from '../../../Image/Asked_for_Details.svg'
-import AssoNotAssIMG from '../../../Image/Associate_Not_Assigned.svg'
-import ClosedLeadIMG from '../../../Image/Closed_Leads.svg'
-import FollUPIMG from '../../../Image/Follow_Up.svg'
-import NotInIMG from '../../../Image/Not_Interested.svg'
-import OpnLedIMG from '../../../Image/Open_Leads.svg'
-import PaymValIMG from '../../../Image/Payment_Validation_Pending.svg'
-import PendPayIMG from '../../../Image/Pending_For_Payment.svg'
-import UnResIMG from '../../../Image/Unresponsive.svg'
+import teamleadIMG from '../../Image/Total_Leads.svg'
+import AskDetIMG from '../../Image/Asked_for_Details.svg'
+import AssoNotAssIMG from '../../Image/Associate_Not_Assigned.svg'
+import ClosedLeadIMG from '../../Image/Closed_Leads.svg'
+import FollUPIMG from '../../Image/Follow_Up.svg'
+import NotInIMG from '../../Image/Not_Interested.svg'
+import OpnLedIMG from '../../Image/Open_Leads.svg'
+import PaymValIMG from '../../Image/Payment_Validation_Pending.svg'
+import PendPayIMG from '../../Image/Pending_For_Payment.svg'
+import UnResIMG from '../../Image/Unresponsive.svg'
 
 
 export const total_head=[

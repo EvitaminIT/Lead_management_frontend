@@ -1,0 +1,12 @@
+/* Target autofilled inputs in WebKit browsers */
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px rgb(47, 54, 66) inset !important; /* Change the box shadow color */
+    -webkit-text-fill-color: white !important; /* Change the text color */
+  }
+  
+  /* Optional: Remove the default blue border for autofilled inputs in Chrome */
+  input:-webkit-autofill:focus {
+    border: none !important;
+    -webkit-box-shadow: 0 0 0 30px rgb(47, 54, 66) inset !important;
+  }
+  

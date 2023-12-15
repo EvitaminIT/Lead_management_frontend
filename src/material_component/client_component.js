@@ -102,7 +102,7 @@ import {
   } from "@heroicons/react/24/solid";
 
   import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
-
+  import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
   import LocalHospitalOutlinedIcon from '@mui/icons-material/LocalHospitalOutlined';
   import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 
@@ -133,9 +133,10 @@ import {
   import DownloadIcon from '@mui/icons-material/Download';
   import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
   import HttpsOutlinedIcon from '@mui/icons-material/HttpsOutlined';
+  import PowerSettingsNewOutlinedIcon from '@mui/icons-material/PowerSettingsNewOutlined';
 
 
-const index ={
+const Index ={
     Card,
     Input,
     Checkbox,
@@ -271,6 +272,8 @@ const index ={
     XMarkIcon,
     Navbar,
     NotificationsOutlinedIcon,
+    DeleteOutlineOutlinedIcon,
+    PowerSettingsNewOutlinedIcon,
 }
 
-export default index;
+export default Index;

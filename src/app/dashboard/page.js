@@ -1,38 +1,38 @@
 "use client"
 import React from 'react'
-import index from '@/material_component/client_component'
+import Index from '@/material_component/client_component'
 import Image from 'next/image'
 import { total_head,TABLE_HEAD,TABLE_ROWS } from './SSRcomponent'
-import side_art from '../../../Image/side_Artboard.svg'
+import side_art from '../../Image/side_Artboard.svg'
 
 
-export default function page() {
+export default function Page() {
   return (
     <div className='grid grid-cols-5 gap-4 w-full rounded-t-[40px] bg-[#2F3642] py-10 px-32 overflow-auto h-[75.2vh] scrollbar-thin scrollbar-thumb-green-500 scrollbar-track-gray-200 scrollbar-thumb-rounded-lg scrollbar-w-lg'>
     {total_head.map((details)=>{
         return(
             <>
-      <index.Card className={`grid grid-cols-3 gap-2 p-6  ${details.title==="Converted Leads"?"bg-[#E8FAD1]":""} ${details.title==="Not Interested"?"bg-[#F9CECE]":""}`}>
+      <Index.Card className={`grid grid-cols-3 gap-2 p-6  ${details.title==="Converted Leads"?"bg-[#E8FAD1]":""} ${details.title==="Not Interested"?"bg-[#F9CECE]":""}`}>
         <div className='flex items-center'>
             <Image src={details.image} />
         </div>
         <div className='col-span-2 text-center flex flex-col justify-around'>
            <div className=''>
-            <index.Typography className='text-xl'>{details.title}</index.Typography>
+            <Index.Typography className='text-xl'>{details.title}</Index.Typography>
            </div>
            <div className='border-t-2 border-[#D9D9D9]'>
-            <index.Typography className='text-3xl'>{details.total_no}</index.Typography>
+            <Index.Typography className='text-3xl'>{details.total_no}</Index.Typography>
            </div>
         </div>
-      </index.Card>
+      </Index.Card>
             </>
         )
     })}
 
     {/* table */}
-     <index.Card className='col-span-4 p-4'>
-     <index.Typography className='text-2xl px-[12px] text-[#67B037] font-bold'>Team Performance</index.Typography>
-     <index.Card className="shadow-none h-full w-full overflow-scroll">
+     <Index.Card className='col-span-4 p-4'>
+     <Index.Typography className='text-2xl px-[12px] text-[#67B037] font-bold'>Team Performance</Index.Typography>
+     <Index.Card className="shadow-none h-full w-full overflow-scroll">
       <table className="w-full min-w-max table-auto text-left">
         <thead>
           <tr>
@@ -41,106 +41,106 @@ export default function page() {
                 key={head}
                 className="p-4"
               >
-                <index.Typography
+                <Index.Typography
                   variant="small"
                   color="blue-gray"
                   className="font-bold leading-none"
                 >
                   {head}
-                </index.Typography>
+                </Index.Typography>
               </th>
             ))}
           </tr>
         </thead>
         <tbody>
           {TABLE_ROWS.map(({ name, job, date }) => {
-            const isLast = index === TABLE_ROWS.length - 1;
+            const isLast = Index === TABLE_ROWS.length - 1;
             const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
  
             return (
               <tr key={name}>
                 <td className={classes}>
-                  <index.Typography
+                  <Index.Typography
                     variant="small"
                     color="blue-gray"
                     className="font-normal"
                   >
                     {name}
-                  </index.Typography>
+                  </Index.Typography>
                 </td>
                 <td className={classes}>
-                  <index.Typography
+                  <Index.Typography
                     variant="small"
                     color="blue-gray"
                     className="font-normal"
                   >
                     {job}
-                  </index.Typography>
+                  </Index.Typography>
                 </td>
                 <td className={classes}>
-                  <index.Typography
+                  <Index.Typography
                     variant="small"
                     color="blue-gray"
                     className="font-normal"
                   >
                     {date}
-                  </index.Typography>
+                  </Index.Typography>
                 </td>
                 <td className={classes}>
-                  <index.Typography
+                  <Index.Typography
                     variant="small"
                     color="blue-gray"
                     className="font-normal"
                   >
                     {date}
-                  </index.Typography>
+                  </Index.Typography>
                 </td>
                 <td className={classes}>
-                  <index.Typography
+                  <Index.Typography
                     variant="small"
                     color="blue-gray"
                     className="font-normal"
                   >
                     {date}
-                  </index.Typography>
+                  </Index.Typography>
                 </td>
                 <td className={classes}>
-                  <index.Typography
+                  <Index.Typography
                     variant="small"
                     color="blue-gray"
                     className="font-normal"
                   >
                     {date}
-                  </index.Typography>
+                  </Index.Typography>
                 </td>
                 <td className={classes}>
-                  <index.Typography
+                  <Index.Typography
                     variant="small"
                     color="blue-gray"
                     className="font-normal"
                   >
                     {date}
-                  </index.Typography>
+                  </Index.Typography>
                 </td>
                 <td className={classes}>
-                  <index.Typography
+                  <Index.Typography
                     variant="small"
                     color="blue-gray"
                     className="font-normal"
                   >
                     {date}
-                  </index.Typography>
+                  </Index.Typography>
                 </td>
               </tr>
             );
           })}
         </tbody>
       </table>
-    </index.Card>
-     </index.Card>
-     <index.Card>
+    </Index.Card>
+     </Index.Card>
+     <Index.Card>
         <Image src={side_art}/>
-     </index.Card>
+     </Index.Card>
     </div>
   )
 }

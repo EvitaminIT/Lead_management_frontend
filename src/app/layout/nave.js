@@ -1,10 +1,13 @@
-import { Nav_component } from "./SSRcomponet";
 import React from "react";
-import index from "@/material_component/client_component";
+import Index from "@/material_component/client_component";
 import { usePathname } from 'next/navigation';
+import Link from "next/link";
+import { LogoutSpeed_Di } from "./Logout_speed_dailer";
 
  
-export function NavbarWithMegaMenu() {
+export function NavbarWithMegaMenu({
+  tabs,
+}) {
   const [openNav, setOpenNav] = React.useState(false);
   const pathname = usePathname();
   React.useEffect(() => {
@@ -14,33 +17,30 @@ export function NavbarWithMegaMenu() {
     );
   }, []);
  
+
+
   return (
-    <index.Navbar className="mx-auto max-w-screen-xl px-4 py-2 shadow-none">
+    <Index.Navbar className="max-w-screen-xl px-4 py-2 shadow-none float-right">
       <div className="flex items-center justify-between text-blue-gray-900">
         <div className="hidden lg:block">
-          <index.List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1">
+          <Index.List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1">
 
-         { Nav_component.map((data)=>{
+         {tabs? tabs.map((data,index)=>{
             return(
                 <>              
-          <index.Typography
-        as="a"
-        href="#"
-        variant="text"
-        className="font-medium"
-      >
-        <index.ListItem className={`flex items-center gap-2 py-2 pr-4  ${pathname===data.Navigation ? "bg-[#2F3642] text-white":""}`}>
+         <Link key={index} href={String(data.navigation)}>
+        <Index.ListItem className={`flex items-center gap-2 py-2 pr-4 capitalize ${pathname===data.navigation ? "!bg-[#2F3642] !text-white":""}`}>
           {data.title}
-        </index.ListItem>
-      </index.Typography>
-                </>
+        </Index.ListItem>
+         </Link>
+          </>
             )
-         }) }
-          </index.List>
+         }) :""}
+          </Index.List>
         </div>
         <div className="hidden lg:flex gap-6 items-center">
         <div className="relative text-gray-600">
-      <index.Input
+      <Index.Input
         type="search"
         name="search"
         placeholder="Search..."
@@ -66,36 +66,37 @@ export function NavbarWithMegaMenu() {
       </button>
     </div>
     <div className="pl-10">
-        <index.IconButton className="rounded-full bg-[#2F3642]"><index.NotificationsOutlinedIcon/></index.IconButton>
-    </div>
-    <div>
-    <index.Avatar src="https://docs.material-tailwind.com/img/face-2.jpg" withBorder={true} color="green" alt="avatar" size="lg" />
+        <Index.IconButton className="rounded-full bg-[#2F3642]"><Index.NotificationsOutlinedIcon/></Index.IconButton>
     </div>
         </div>
-        <index.IconButton
+    <div>
+    {/* <Index.Avatar src="https://docs.material-tailwind.com/img/face-2.jpg" withBorder={true} color="green" alt="avatar" size="lg" /> */}
+    <LogoutSpeed_Di/>
+    </div>
+        <Index.IconButton
           variant="text"
           color="blue-gray"
           className="lg:hidden"
           onClick={() => setOpenNav(!openNav)}
         >
           {openNav ? (
-            <index.XMarkIcon className="h-6 w-6" strokeWidth={2} />
+            <Index.XMarkIcon className="h-6 w-6" strokeWidth={2} />
           ) : (
-            <index.Bars3Icon className="h-6 w-6" strokeWidth={2} />
+            <Index.Bars3Icon className="h-6 w-6" strokeWidth={2} />
           )}
-        </index.IconButton>
+        </Index.IconButton>
       </div>
-      {/* <index.Collapse open={openNav}>
+      {/* <Index.Collapse open={openNav}>
         <NavList />
         <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden">
-          <index.Button variant="outlined" size="sm" color="blue-gray" fullWidth>
+          <Index.Button variant="outlined" size="sm" color="blue-gray" fullWidth>
             Log In
-          </index.Button>
-          <index.Button variant="gradient" size="sm" fullWidth>
+          </Index.Button>
+          <Index.Button variant="gradient" size="sm" fullWidth>
             Sign In
-          </index.Button>
+          </Index.Button>
         </div>
-      </index.Collapse> */}
-    </index.Navbar>
+      </Index.Collapse> */}
+    </Index.Navbar>
   );
 }
