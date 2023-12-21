@@ -32,6 +32,33 @@ export const TABLE_ROWS = [
 ];
 
 
+export const edit_from_title=[
+  {
+    title:"All Identifiers",
+  },
+  {
+    title:"Business Identifiers",
+  },
+  {
+    title:"Comment",
+  },
+  {
+    title:"Contact Preference",
+  },
+  {
+    title:"Followup",
+  },
+  {
+    title:"Seller Address",
+  },
+  {
+    title:"Service",
+  },
+  {
+    title:"Website Store",
+  },
+
+]
 
 
 export const data = [
@@ -49,27 +76,45 @@ export const data = [
 
 export const Add_lead_manuinput=[
   {
-    title:"Lead id",
-    name:"Lead_id"
+    title:"Country",
+    name:"country"
+  },
+  {
+    title:"Marketplace",
+    name:"marketplace"
+  },
+  {
+    title:"Service Category",
+    name:"service_category"
   },
   {
     title:"Requester name",
-    name:"Requester_name"
+    name:"requester_name"
   },
   {
     title:"Phone number",
-    name:"Phone_number"
-  },
-  {
-    title:"Phone number alternate",
-    name:"Phone_number_alternate"
+    name:"phone_number"
   },
   {
     title:"Email id",
-    name:"Email_id"
+    name:"email_id"
   },
-  {
-    title:"Poc name",
-    name:"Poc_name"
-  },
+
 ]
+
+
+
+// util.js
+
+export const convertToSlug = (inputString) => {
+  // Convert to lowercase and replace spaces with underscores
+  const slug = inputString.toLowerCase().replace(/\s+/g, '_');
+  return slug;
+};
+
+
+export const removeUnderscores = (inputString) => {
+  // Remove underscores from the input string
+  const resultString = inputString.replace(/_/g, ' ');
+  return resultString;
+};

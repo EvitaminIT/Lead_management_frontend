@@ -6,40 +6,57 @@ import Index from '@/material_component/client_component';
 
 const pagecount=5
 
-export default function Body() {
-  
+export default function Body() {  
+  const BL_view_data = useSelector((state) => state.view_all_leadsReducer.Bl_data);
   const [active, setActive] = React.useState(1);
- 
-
-
+  const [goInput, setgoInput] = React.useState();
   const dispatch=useDispatch()
   const token = useSelector((state) => state.myReducer.token);
   React.useEffect(() => {
     dispatch(viewall_Leads_api({accessToken:token.access,pages:active}))
   }, [])
-  
-  const disp =(page)=>{
-    dispatch(viewall_Leads_api({accessToken:token.access,pages:page}))
-  }
-
-  const BL_view_data = useSelector((state) => state.view_all_leadsReducer.Bl_data);
-
-
   const next = () => {
     dispatch(viewall_Leads_api({accessToken:token.access,pages:active+1}))
-    if (active === BL_view_data.pagecount) return;
+    if (active === BL_view_data.total_pages) return;
     setActive(active + 1);
     
   };
- 
   const prev = () => {
     dispatch(viewall_Leads_api({accessToken:token.access,pages:active-1}))
     if (active === 1) return;
     setActive(active - 1);
   };
 
+  const onchange=(e)=>{
+    setgoInput(e.target.value)
+ }
 
-  
+ const go_search=()=>{
+  dispatch(viewall_Leads_api({accessToken:token.access,pages:goInput}))
+  console.log(BL_view_data.current_page,"desh")
+ } 
+
+// const go_search = async () => {
+//   try {
+//     // Assuming viewall_Leads_api is an async thunk created using createAsyncThunk
+//     await dispatch(viewall_Leads_api({ accessToken: token.access, pages: goInput }));
+
+//     // If the above dispatch is successful, you can access BL_view_data.current_page
+//     console.log(BL_view_data.current_page, 'desh');
+    
+//     // Assuming setActive is a function that sets some state
+//     setActive(BL_view_data.current_page);
+//   } catch (error) {
+//     // Handle errors if necessary
+//     console.error('Error dispatching viewall_Leads_api:', error);
+//   }
+// };
+
+if(active!==BL_view_data.current_page){
+  setActive(BL_view_data.current_page)
+}
+
+console.log(BL_view_data.current_page, 'desh2');
   
   return (
     <>
@@ -47,7 +64,28 @@ export default function Body() {
     <div className='p-4 bg-[#F2F2F2] rounded-lg'>
     <Table table_Row={BL_view_data.data}/>
     <div className='grid grid-cols-3 gap-4 mt-4'>
-      <div></div>
+      <div>
+      <div className='flex items-center gap-2'>
+        <Index.Typography>Page</Index.Typography>
+        <div>
+          
+        </div>
+        <input
+          type='number'
+          name="gopage"
+          onChange={onchange}
+          // value={active}
+          placeholder={active}
+          className='!w-16 py-2 text-sm px-1 focus:outline-none !border !border-gray-300 text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 focus:!border-t-gray-900 focus:ring-gray-900/10 rounded-md'
+           labelProps={{
+            className: "hidden",
+          }}
+          containerProps={{ className: "min-w-[100px]" }}/>
+          <Index.Typography>of</Index.Typography>
+          <Index.Typography>{BL_view_data.total_pages}</Index.Typography>
+          <Index.Button size='md' onClick={go_search}>Go</Index.Button>
+      </div>
+      </div>
       <div></div>
       <div>
     <div className="flex items-center gap-8 float-right">
@@ -61,13 +99,13 @@ export default function Body() {
       </Index.IconButton>
       <Index.Typography color="gray" className="font-normal">
         Page <strong className="text-gray-900">{active}</strong> of{" "}
-        <strong className="text-gray-900">{BL_view_data.pagecount}</strong>
+        <strong className="text-gray-900">{BL_view_data.total_pages}</strong>
       </Index.Typography>
       <Index.IconButton
         size="sm"
         className='bg-[#67B037]'
         onClick={next}
-        disabled={active === BL_view_data.pagecount}
+        disabled={active === BL_view_data.total_pages}
       >
         <Index.ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
       </Index.IconButton>

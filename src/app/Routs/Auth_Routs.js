@@ -1,13 +1,13 @@
 // import { deleteCookie } from "cookies-next";
 
-function getAccountType(argument) {
-    const typeMap = {
-        "HR":"/hr/deshbord",
-        "SUB_ADMIN":'/adminPanal/deshbord'
-    };
+// function getAccountType(argument) {
+//     const typeMap = {
+//         "HR":"/hr/deshbord",
+//         "SUB_ADMIN":'/adminPanal/deshbord'
+//     };
 
-    return typeMap[argument];
-}
+//     return typeMap[argument];
+// }
 
 
 
@@ -23,9 +23,9 @@ export const auth_Logout=(router,lod)=>{
   }
 }
 
-export const chk_token =(router)=>{
-    router.push("/")
-    // deleteCookie("tokenErr")
-}
+// export const chk_token =(router)=>{
+//     router.push("/")
+//     // deleteCookie("tokenErr")
+// }
 
 

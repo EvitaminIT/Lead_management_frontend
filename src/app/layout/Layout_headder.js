@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux';
 
 export default function Layout_headder() {
   const user_link = useSelector((state) => state.myReducer.user_link);
-  console.log(user_link,"desh2")
   return (
     <>
     <div className='px-32 grid grid-cols-5 gap-4 p-10'>

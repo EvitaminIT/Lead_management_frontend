@@ -7,5 +7,13 @@ export const API ={
     },
     Business_leads:{
         view_all_leads:"/business_leads/view_all_leads",
+        get_lead:"/business_leads/view_lead",
+        add_manual_leads:"/business_leads/create_lead_manual",
+        add_and_view_new_service:"/business_leads/field_add_new_service",
+        upload_file_bl:"/business_leads/upload",
+        delete_for_app:"/business_leads/add_lead_delete_approval",
+    },
+    Dropdown:{
+        table_drop:"/dropdown/options"
     }
 }

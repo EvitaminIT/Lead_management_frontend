@@ -1,10 +1,12 @@
 import React from 'react'
-import index from '@/material_component/client_component'
+import Index from '@/material_component/client_component'
 import { TABLE_HEAD,TABLE_ROWS } from './SSRcomponent';
 import { viewall_Leads_api } from '../redux/Slice/Bussness_leads/view_all_LedSlice';
 import { useDispatch,useSelector } from 'react-redux';
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import Diloge from './diloge';
+import DeleteBtn from './deleteBtn';
 
 export default function Table({
   table_Row 
@@ -12,7 +14,7 @@ export default function Table({
 
   return (
     <div className='bg-transparent'>
-        <index.Card className="h-full w-full overflow-scroll bg-transparent shadow-none scrollbar-thin scrollbar-thumb-green-500 scrollbar-track-gray-200 scrollbar-thumb-rounded-lg scrollbar-w-lg h-[55vh]">
+        <Index.Card className="h-full w-full overflow-scroll bg-transparent shadow-none scrollbar-thin scrollbar-thumb-green-500 scrollbar-track-gray-200 scrollbar-thumb-rounded-lg scrollbar-w-lg h-[55vh]">
       <table className="w-full min-w-max table-auto text-left bg-transparent">
         <thead>
           <tr>
@@ -21,106 +23,107 @@ export default function Table({
                 key={head}
                 className="border-b border-blue-gray-100 bg-transparent p-4"
               >
-                <index.Typography
+                <Index.Typography
                   variant="small"
                   color="blue-gray"
                   className="font-semibold leading-none opacity-70"
                 >
                   {head}
-                </index.Typography>
+                </Index.Typography>
               </th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {table_Row.map(({ lead_id, requester_name, service_category,lead_status }) => {
-            const isLast = index === TABLE_ROWS.length - 1;
+          {table_Row.map(({ lead_id, requester_name, service_category,lead_status },index) => {
+            const isLast = Index === TABLE_ROWS.length - 1;
             const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
  
             return (
               <tr key={lead_id}>
                 <td className={classes}>
-                  <index.Typography
+                  <Index.Typography
                     variant="small"
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {table_Row ? lead_id : <Skeleton />}
-                  </index.Typography>
+                    {lead_id ? lead_id : <Skeleton/>}
+                  </Index.Typography>
                 </td>
                 <td className={classes}>
-                  <index.Typography
+                  <Index.Typography
                     variant="small"
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {requester_name}
-                  </index.Typography>
+                    {requester_name ? requester_name : <Skeleton/> }
+                  </Index.Typography>
                 </td>
                 <td className={classes}>
-                  <index.Typography
+                  <Index.Typography
                     variant="small"
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {service_category}
-                  </index.Typography>
+                    {service_category ? service_category : <Skeleton/>}
+                  </Index.Typography>
                 </td>
                 <td className={classes}>
-                  <index.Typography
+                  <Index.Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-normal"
+                  >
+                    {index}
+                  </Index.Typography>
+                </td>
+                <td className={classes}>
+                  <Index.Typography
                     variant="small"
                     color="blue-gray"
                     className="font-normal"
                   >
                     {/* {date} */}
-                  </index.Typography>
+                  </Index.Typography>
                 </td>
                 <td className={classes}>
-                  <index.Typography
+                  <Index.Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-normal"
+                  >
+                    {lead_status ? lead_status :<Skeleton />}
+                  </Index.Typography>
+                </td>
+                <td className={classes}>
+                  <Index.Typography
                     variant="small"
                     color="blue-gray"
                     className="font-normal"
                   >
                     {/* {date} */}
-                  </index.Typography>
+                  </Index.Typography>
                 </td>
                 <td className={classes}>
-                  <index.Typography
-                    variant="small"
-                    color="blue-gray"
-                    className="font-normal"
-                  >
-                    {lead_status}
-                  </index.Typography>
-                </td>
-                <td className={classes}>
-                  <index.Typography
+                  <Index.Typography
                     variant="small"
                     color="blue-gray"
                     className="font-normal"
                   >
                     {/* {date} */}
-                  </index.Typography>
-                </td>
-                <td className={classes}>
-                  <index.Typography
-                    variant="small"
-                    color="blue-gray"
-                    className="font-normal"
-                  >
-                    {/* {date} */}
-                  </index.Typography>
+                  </Index.Typography>
                 </td>
                 <td className={`${classes} space-x-2`}>
-                  <index.IconButton size='sm' className='bg-[#67B037]'><index.RemoveRedEyeOutlinedIcon/></index.IconButton>
-                  <index.IconButton size='sm' className='bg-[#E55B5B]'><index.DeleteOutlineOutlinedIcon/></index.IconButton>
+                  {/* <Index.IconButton size='sm' className='bg-[#67B037]'><Index.RemoveRedEyeOutlinedIcon/></Index.IconButton> */}
+                  <Diloge btn={"table_edit"} Lead_id={lead_id}/>
+                  <DeleteBtn Lead_id={lead_id}/>
                 </td>
               </tr>
             );
           })}
         </tbody>
       </table>
-    </index.Card>
+    </Index.Card>
     </div>
   )
 }

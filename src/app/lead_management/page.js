@@ -34,7 +34,7 @@ export default function Page() {
          <Diloge btn={"Update Lead"}/>
         </div>
         <div>
-            <Diloge btn={"Create Lead"}/>
+          <Diloge btn={"Create Lead"}/>
         </div>
     </div>
     </div>
