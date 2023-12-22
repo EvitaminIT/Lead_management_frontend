@@ -28,7 +28,8 @@ export default function Edit_popup({
   led_id,
 }) {
   const [isChecked, setChecked] = React.useState(false);
-  const from_data = useSelector((state) => state.GetInd_leadsReducer.Ind_led_data)
+  const from_data2 = useSelector((state) => state.GetInd_leadsReducer.Ind_led_data)
+  const from_data=from_data2?from_data2:[]
   const token = useSelector((state) => state.myReducer.token);
   const dispatch = useDispatch()
   const [open, setOpen] = React.useState(0);

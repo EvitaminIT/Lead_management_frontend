@@ -15,8 +15,10 @@ export const Add_manual_Leads_api = createAsyncThunk('Add_manual_leadsReducer/Au
             "Authorization":`Bearer ${accessToken}`
         }
       })
+      console.log(response,"inslice")
       return response.data
     } catch (error) {
+      console.log(error,"inslice")
       throw error.response.data;
     }
   });

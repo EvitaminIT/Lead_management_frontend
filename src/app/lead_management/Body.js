@@ -8,12 +8,13 @@ const pagecount=5
 
 export default function Body() {  
   const BL_view_data = useSelector((state) => state.view_all_leadsReducer.Bl_data);
+  const page_bl=BL_view_data? BL_view_data.current_page:""
   const [active, setActive] = React.useState(1);
   const [goInput, setgoInput] = React.useState();
   const dispatch=useDispatch()
   const token = useSelector((state) => state.myReducer.token);
   React.useEffect(() => {
-    dispatch(viewall_Leads_api({accessToken:token.access,pages:active}))
+    dispatch(viewall_Leads_api({accessToken:token.access,pages:1}))
   }, [])
   const next = () => {
     dispatch(viewall_Leads_api({accessToken:token.access,pages:active+1}))
@@ -36,33 +37,19 @@ export default function Body() {
   console.log(BL_view_data.current_page,"desh")
  } 
 
-// const go_search = async () => {
-//   try {
-//     // Assuming viewall_Leads_api is an async thunk created using createAsyncThunk
-//     await dispatch(viewall_Leads_api({ accessToken: token.access, pages: goInput }));
 
-//     // If the above dispatch is successful, you can access BL_view_data.current_page
-//     console.log(BL_view_data.current_page, 'desh');
-    
-//     // Assuming setActive is a function that sets some state
-//     setActive(BL_view_data.current_page);
-//   } catch (error) {
-//     // Handle errors if necessary
-//     console.error('Error dispatching viewall_Leads_api:', error);
-//   }
-// };
-
-if(active!==BL_view_data.current_page){
-  setActive(BL_view_data.current_page)
+if(active!==page_bl){
+  setActive(page_bl)
 }
 
-console.log(BL_view_data.current_page, 'desh2');
+console.log(BL_view_data,active, 'desh2');
   
   return (
     <>
     <br/>
     <div className='p-4 bg-[#F2F2F2] rounded-lg'>
-    <Table table_Row={BL_view_data.data}/>
+
+    <Table table_Row={BL_view_data? BL_view_data.data:[]}/>
     <div className='grid grid-cols-3 gap-4 mt-4'>
       <div>
       <div className='flex items-center gap-2'>
@@ -82,7 +69,7 @@ console.log(BL_view_data.current_page, 'desh2');
           }}
           containerProps={{ className: "min-w-[100px]" }}/>
           <Index.Typography>of</Index.Typography>
-          <Index.Typography>{BL_view_data.total_pages}</Index.Typography>
+          <Index.Typography>{BL_view_data? BL_view_data.total_pages:""}</Index.Typography>
           <Index.Button size='md' onClick={go_search}>Go</Index.Button>
       </div>
       </div>
@@ -99,13 +86,13 @@ console.log(BL_view_data.current_page, 'desh2');
       </Index.IconButton>
       <Index.Typography color="gray" className="font-normal">
         Page <strong className="text-gray-900">{active}</strong> of{" "}
-        <strong className="text-gray-900">{BL_view_data.total_pages}</strong>
+        <strong className="text-gray-900">{BL_view_data? BL_view_data.total_pages:""}</strong>
       </Index.Typography>
       <Index.IconButton
         size="sm"
         className='bg-[#67B037]'
         onClick={next}
-        disabled={active === BL_view_data.total_pages}
+        disabled={BL_view_data? active === BL_view_data.total_pages:""}
       >
         <Index.ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
       </Index.IconButton>

@@ -27,7 +27,8 @@ export default function Add_lead_manuall() {
   dispatch(view_country_api(token.access))
 }, [])
 const submint_Lodeing = useSelector((state) => state.Add_manual_leadsReducer.loading);
-const country = useSelector((state) => state.add_and_view_new_service_Reducer.data_country);
+const country_call = useSelector((state) => state.add_and_view_new_service_Reducer.data_country);
+const country=country_call?country_call:[]
 const Marketplace_state = useSelector((state) => state.add_and_view_new_service_Reducer.data_market);
 const Service_state = useSelector((state) => state.add_and_view_new_service_Reducer.data_Service);
 
@@ -47,7 +48,7 @@ const Service=Service_state? Service_state :[];
 
 const setCountry=(value)=>{
    setSelCountry(value)
-   setManulLeaddetails({...ManulLeaddetails,"country":value})
+   setManulLeaddetails({...ManulLeaddetails,"service_country":value})
    dispatch(view_Marketpalce_api({accessToken:token.access,country:value}))
 } 
 
