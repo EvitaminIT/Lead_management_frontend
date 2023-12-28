@@ -12,6 +12,7 @@ import Search_by_leadReducer from './Slice/Bussness_leads/Search_by_leads'
 import View_all_Emp_Reducer from './Slice/Employee/ViewAllEmployeeRedu'
 import Delete_Emp_Reducer from './Slice/Employee/Delete_Emp'
 import Search_EmpReducer from './Slice/Employee/SearchEmpRedu'
+import View_all_Service_Reducer from './Slice/Evitamin/Veiw_all_serviceRedu'
 
 
 const rootReducer = combineReducers({
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   View_all_Emp_Reducer:View_all_Emp_Reducer,
   Delete_Emp_Reducer:Delete_Emp_Reducer,
   Search_EmpReducer:Search_EmpReducer,
+  View_all_Service_Reducer:View_all_Service_Reducer,
 });
 
 export default rootReducer;

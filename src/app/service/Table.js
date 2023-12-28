@@ -4,13 +4,20 @@ import { TABLE_HEAD,TABLE_ROWS } from './SSRcomponent';
 import { useDispatch,useSelector } from 'react-redux';
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-// import Diloge from './diloge';
-// import DeleteBtn from './deleteBtn';
+import { View_all_Service_API } from '../redux/Slice/Evitamin/Veiw_all_serviceRedu';
+import { MoonLoader } from 'react-spinners';
 
 export default function Table({
   table_Row 
 }) {
-
+  const dispatch=useDispatch()
+  const token = useSelector((state) => state.myReducer.token);
+  React.useEffect(() => {
+    dispatch(View_all_Service_API({accessToken:token.access,page:1}))
+}, [])
+  const table_loading = useSelector((state) => state.View_all_Service_Reducer.loading); 
+  const table_coll = useSelector((state) => state.View_all_Service_Reducer.data);
+  const table_data=table_coll?table_coll.data:[]
   return (
     <div className='bg-transparent'>
         <Index.Card className="h-full w-full overflow-scroll bg-transparent shadow-none scrollbar-thin scrollbar-thumb-green-500 scrollbar-track-gray-200 scrollbar-thumb-rounded-lg scrollbar-w-lg h-[55vh]">
@@ -33,9 +40,10 @@ export default function Table({
             ))}
           </tr>
         </thead>
+        {table_loading==="pending" ? "":
         <tbody>
-          {TABLE_ROWS.map(({ name },index) => {
-            const isLast = Index === TABLE_ROWS.length - 1;
+          {table_data.map(({ service_id,country,marketplace,services,price_for_mou },index) => {
+            const isLast = Index === table_data.length - 1;
             const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
  
             return (
@@ -46,47 +54,47 @@ export default function Table({
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {name}
+                    {service_id}
                     {/* {lead_id ? lead_id : <Skeleton/>} */}
                   </Index.Typography>
                 </td>
-                <td className={classes}>
+                <td className={`${classes} capitalize`}>
                   <Index.Typography
                     variant="small"
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {/* {requester_name ? requester_name : <Skeleton/> } */}
+                  {marketplace}
                   </Index.Typography>
                 </td>
-                <td className={classes}>
+                <td className={`${classes} capitalize`}>
                   <Index.Typography
                     variant="small"
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {/* {service_category ? service_category : <Skeleton/>} */}
+                    {country}
                   </Index.Typography>
                 </td>
-                <td className={classes}>
+                <td className={`${classes} capitalize`}>
                   <Index.Typography
                     variant="small"
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {/* {index} */}
+                   {services}
                   </Index.Typography>
                 </td>
-                <td className={classes}>
+                <td className={`${classes} capitalize`}>
                   <Index.Typography
                     variant="small"
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {/* {date} */}
+                    {price_for_mou}
                   </Index.Typography>
                 </td>
-                <td className={classes}>
+                <td className={`${classes} capitalize`}>
                   <Index.Typography
                     variant="small"
                     color="blue-gray"
@@ -95,7 +103,7 @@ export default function Table({
                     {/* {lead_status ? lead_status :<Skeleton />} */}
                   </Index.Typography>
                 </td>
-                <td className={classes}>
+                <td className={`${classes} capitalize`}>
                   <Index.Typography
                     variant="small"
                     color="blue-gray"
@@ -104,7 +112,7 @@ export default function Table({
                     {/* {date} */}
                   </Index.Typography>
                 </td>
-                <td className={classes}>
+                <td className={`${classes} capitalize`}>
                   <Index.Typography
                     variant="small"
                     color="blue-gray"
@@ -122,7 +130,13 @@ export default function Table({
             );
           })}
         </tbody>
+      } 
       </table>
+      { table_loading==="pending"? 
+      <div className='h-full flex justify-center items-center'>
+        <MoonLoader color="#2F3642" />
+        </div>
+      :""}
     </Index.Card>
     </div>
   )

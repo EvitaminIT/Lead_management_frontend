@@ -9,12 +9,15 @@ import { Search_by_leadResetState } from "../redux/Slice/Bussness_leads/Search_b
 
 
 export default function Page() {
+  const search_data = useSelector((state) => state.Search_by_leadReducer.data);
   const [ Search, SetSearch ] =React.useState()
   const dispatch =useDispatch()
   const token = useSelector((state) => state.myReducer.token);
   const onChange = (e)=>{
      SetSearch(e.target.value)
   }
+
+
 
   const dispatch_search=()=>{
      dispatch(Search_by_lead_api({ accessToken: token.access, Lead_id:Search }))
@@ -79,7 +82,7 @@ export default function Page() {
       </span>
     </div>
         </div>
-        <div>
+        <div className="invisible">
          <Diloge btn={"Update Lead"}/>
         </div>
         <div>

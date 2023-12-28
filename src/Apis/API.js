@@ -21,6 +21,9 @@ export const API ={
         viewAllEmp:"/employees/view_all_user",
         Delete_Emp:"/employees/add_user_delete_approval",
         Search_user:"/employees/view_user_search",
+    },
+    Evits:{
+        viewAllService:"/evitamin/view_all_services"
     }
 
 }
