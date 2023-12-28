@@ -6,19 +6,17 @@ import { toast } from "react-toastify";
 
 
 
-export const resetState = createAction('Add_manual_leadsReducer/resetState');
+export const resetState = createAction('Delete_Emp_Reducer/resetState');
 
-export const Add_manual_Leads_api = createAsyncThunk('Add_manual_leadsReducer/AuthpostApiData', async({accessToken,data}) => {
+export const Delete_Emp_API = createAsyncThunk('Delete_Emp_Reducer/Delete_Emp_API', async({accessToken,Emp_ID}) => {
     try {
-      const response = await API_Service.post(API.Business_leads.add_manual_leads,data,{
+      const response = await API_Service.delete(`${API.Employee.Delete_Emp}/${Emp_ID}`,{
         headers:{
             "Authorization":`Bearer ${accessToken}`
         }
       })
-      console.log(response,"inslice")
       return response.data
     } catch (error) {
-      console.log(error,"inslice")
       throw error.response.data;
     }
   });
@@ -26,8 +24,8 @@ export const Add_manual_Leads_api = createAsyncThunk('Add_manual_leadsReducer/Au
   
 
   // Create a slice to manage the state
-  const Add_manual_leadsReducer = createSlice({
-    name: 'Add_manual_leadsReducer',
+  const Delete_Emp_Reducer = createSlice({
+    name: 'Delete_Emp_Reducer',
     initialState: {
       error: null,
       loading: 'idle',
@@ -46,13 +44,13 @@ export const Add_manual_Leads_api = createAsyncThunk('Add_manual_leadsReducer/Au
     },
     extraReducers: (builder) => {
       builder
-        .addCase(Add_manual_Leads_api.pending, (state) => {
+        .addCase(Delete_Emp_API.pending, (state) => {
           state.loading = 'pending';
         })
-        .addCase(Add_manual_Leads_api.fulfilled, (state, action) => {
+        .addCase(Delete_Emp_API.fulfilled, (state, action) => {
           state.loading = 'fulfilled';
           state.data=action.payload.data
-          toast.success('Lead Add Successfully', {
+          toast.success(action.payload.message, {
             position: "top-center",
             autoClose: 2000,
             hideProgressBar: true,
@@ -63,22 +61,12 @@ export const Add_manual_Leads_api = createAsyncThunk('Add_manual_leadsReducer/Au
             theme: "light",
             });
         })
-        .addCase(Add_manual_Leads_api.rejected, (state, action) => {
+        .addCase(Delete_Emp_API.rejected, (state, action) => {
           state.loading = 'rejected';
-          toast.error(action.error.message, {
-            position: "top-center",
-            autoClose: 2000,
-            hideProgressBar: true,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            });
         });
     },
   });
   
  
 
-  export default Add_manual_leadsReducer.reducer;
+  export default Delete_Emp_Reducer.reducer;

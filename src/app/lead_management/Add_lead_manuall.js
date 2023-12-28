@@ -35,7 +35,7 @@ const Service_state = useSelector((state) => state.add_and_view_new_service_Redu
 const Marketplace = Marketplace_state ? Marketplace_state :[];
 const Service=Service_state? Service_state :[];
 
-
+console.log(submint_Lodeing,"tstst")
  const add_data =()=>{
    dispatch(Add_manual_Leads_api({ accessToken: token.access, data:ManulLeaddetails })) 
    dispatch(resetState_add_view_leads())
@@ -64,11 +64,6 @@ const setSvervice=(value)=>{
 } 
 
 // submint_Lodeing==="fulfilled" ?  dispatch(resetState_add_view_leads()) : "";
-
-
-
-
-
 
 
   return (

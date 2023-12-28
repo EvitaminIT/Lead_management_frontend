@@ -1,50 +1,31 @@
-"use client"
 import React from 'react'
 import Index from '@/material_component/client_component'
-import Image from 'next/image'
-import { total_head,TABLE_HEAD,TABLE_ROWS } from './SSRcomponent'
-import side_art from '../../Image/side_Artboard.svg'
+import { TABLE_HEAD,TABLE_ROWS } from './SSRcomponent';
+import { useDispatch,useSelector } from 'react-redux';
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+// import Diloge from './diloge';
+// import DeleteBtn from './deleteBtn';
 
+export default function Table({
+  table_Row 
+}) {
 
-export default function Page() {
   return (
-    <div className='grid grid-cols-5 gap-4 w-full rounded-t-[40px] bg-[#2F3642] py-10 px-32 overflow-auto !h-[75.2vh] scrollbar-thin scrollbar-thumb-green-500 scrollbar-track-gray-200 scrollbar-thumb-rounded-lg scrollbar-w-lg'>
-    {total_head.map((details)=>{
-        return(
-            <>
-      <Index.Card className={`grid grid-cols-3 gap-2 p-6  ${details.title==="Converted Leads"?"bg-[#E8FAD1]":""} ${details.title==="Not Interested"?"bg-[#F9CECE]":""}`}>
-        <div className='flex items-center'>
-            <Image src={details.image} />
-        </div>
-        <div className='col-span-2 text-center flex flex-col justify-around'>
-           <div className=''>
-            <Index.Typography className='text-xl'>{details.title}</Index.Typography>
-           </div>
-           <div className='border-t-2 border-[#D9D9D9]'>
-            <Index.Typography className='text-3xl'>{details.total_no}</Index.Typography>
-           </div>
-        </div>
-      </Index.Card>
-            </>
-        )
-    })}
-
-    {/* table */}
-     <Index.Card className='col-span-4 p-4'>
-     <Index.Typography className='text-2xl px-[12px] text-[#67B037] font-bold'>Team Performance</Index.Typography>
-     <Index.Card className="shadow-none h-full w-full overflow-scroll">
-      <table className="w-full min-w-max table-auto text-left">
+    <div className='bg-transparent'>
+        <Index.Card className="h-full w-full overflow-scroll bg-transparent shadow-none scrollbar-thin scrollbar-thumb-green-500 scrollbar-track-gray-200 scrollbar-thumb-rounded-lg scrollbar-w-lg h-[55vh]">
+      <table className="w-full min-w-max table-auto text-left bg-transparent">
         <thead>
           <tr>
             {TABLE_HEAD.map((head) => (
               <th
                 key={head}
-                className="p-4"
+                className="border-b border-blue-gray-100 bg-transparent p-4"
               >
                 <Index.Typography
                   variant="small"
                   color="blue-gray"
-                  className="font-bold leading-none"
+                  className="font-semibold leading-none opacity-70"
                 >
                   {head}
                 </Index.Typography>
@@ -53,12 +34,12 @@ export default function Page() {
           </tr>
         </thead>
         <tbody>
-          {TABLE_ROWS.map(({ name, job, date }) => {
+          {TABLE_ROWS.map(({ name },index) => {
             const isLast = Index === TABLE_ROWS.length - 1;
             const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
  
             return (
-              <tr key={name}>
+              <tr key={""}>
                 <td className={classes}>
                   <Index.Typography
                     variant="small"
@@ -66,6 +47,7 @@ export default function Page() {
                     className="font-normal"
                   >
                     {name}
+                    {/* {lead_id ? lead_id : <Skeleton/>} */}
                   </Index.Typography>
                 </td>
                 <td className={classes}>
@@ -74,7 +56,7 @@ export default function Page() {
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {job}
+                    {/* {requester_name ? requester_name : <Skeleton/> } */}
                   </Index.Typography>
                 </td>
                 <td className={classes}>
@@ -83,7 +65,7 @@ export default function Page() {
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {date}
+                    {/* {service_category ? service_category : <Skeleton/>} */}
                   </Index.Typography>
                 </td>
                 <td className={classes}>
@@ -92,7 +74,7 @@ export default function Page() {
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {date}
+                    {/* {index} */}
                   </Index.Typography>
                 </td>
                 <td className={classes}>
@@ -101,7 +83,7 @@ export default function Page() {
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {date}
+                    {/* {date} */}
                   </Index.Typography>
                 </td>
                 <td className={classes}>
@@ -110,7 +92,7 @@ export default function Page() {
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {date}
+                    {/* {lead_status ? lead_status :<Skeleton />} */}
                   </Index.Typography>
                 </td>
                 <td className={classes}>
@@ -119,7 +101,7 @@ export default function Page() {
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {date}
+                    {/* {date} */}
                   </Index.Typography>
                 </td>
                 <td className={classes}>
@@ -128,8 +110,13 @@ export default function Page() {
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {date}
+                    {/* {date} */}
                   </Index.Typography>
+                </td>
+                <td className={`${classes} space-x-2`}>
+                  {/* <Index.IconButton size='sm' className='bg-[#67B037]'><Index.RemoveRedEyeOutlinedIcon/></Index.IconButton> */}
+                  {/* <Diloge btn={"table_edit"} Lead_id={lead_id}/>
+                  <DeleteBtn Lead_id={lead_id}/> */}
                 </td>
               </tr>
             );
@@ -137,10 +124,6 @@ export default function Page() {
         </tbody>
       </table>
     </Index.Card>
-     </Index.Card>
-     <Index.Card>
-        <Image src={side_art}/>
-     </Index.Card>
     </div>
   )
 }

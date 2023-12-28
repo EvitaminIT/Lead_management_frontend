@@ -7,7 +7,6 @@ import { headers } from "../../../../../next.config";
 export const resetState_viewll_led_BL = createAction('view_all_leadsReducer/resetState');
 
 export const viewall_Leads_api = createAsyncThunk('view_all_leadsReducer/AuthpostApiData', async({accessToken,pages}) => {
-    console.log(pages,"inVSlice")
     try {
       const response = await API_Service.get(`${API.Business_leads.view_all_leads}/${pages}`,{
         headers:{
@@ -36,7 +35,7 @@ export const viewall_Leads_api = createAsyncThunk('view_all_leadsReducer/Authpos
         return {
           ...state,
           error: null,
-          BL_view_loading: 'idle',
+          loading: 'idle',
           Bl_data:null,
         };
       },
@@ -44,10 +43,10 @@ export const viewall_Leads_api = createAsyncThunk('view_all_leadsReducer/Authpos
     extraReducers: (builder) => {
       builder
         .addCase(viewall_Leads_api.pending, (state) => {
-          state.BL_view_loading = 'pending';
+          state.loading = 'pending';
         })
         .addCase(viewall_Leads_api.fulfilled, (state, action) => {
-          state.BL_view_loading = 'fulfilled';
+          state.loading = 'fulfilled';
           state.Bl_data=action.payload.data
         //   state.Bl_count=action.payload.pagecount
         //   state.user_link=action.payload.data.user_links
@@ -55,7 +54,7 @@ export const viewall_Leads_api = createAsyncThunk('view_all_leadsReducer/Authpos
         //   state.data = action.payload?.data?.user_details?.user || null;
         })
         .addCase(viewall_Leads_api.rejected, (state, action) => {
-          state.BL_view_loading = 'rejected';
+          state.loading = 'rejected';
         //   state.error = action.error.message;
         //   console.log(action.error.message, 'action');
         });

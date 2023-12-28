@@ -1,10 +1,6 @@
 import React from "react";
-import {
-  Accordion,
-  AccordionHeader,
-  AccordionBody,
-} from "@material-tailwind/react";
- 
+import Index from "@/material_component/client_component";
+
 function Icon({ id, open }) {
   return (
     <svg
@@ -20,41 +16,43 @@ function Icon({ id, open }) {
   );
 }
  
-export function AccordionCustomIcon() {
+export function Edit_User() {
   const [open, setOpen] = React.useState(0);
  
   const handleOpen = (value) => setOpen(open === value ? 0 : value);
  
   return (
     <>
-      <Accordion open={open === 1} icon={<Icon id={1} open={open} />}>
-        <AccordionHeader onClick={() => handleOpen(1)}>What is Material Tailwind?</AccordionHeader>
-        <AccordionBody>
+      <div className="px-6" > 
+      <Index.Accordion open={open === 1} icon={<Icon id={1} open={open} />}>
+        <Index.AccordionHeader onClick={() => handleOpen(1)}>What is Material Tailwind?</Index.AccordionHeader>
+        <Index.AccordionBody>
           We&apos;re not always in the position that we want to be at. We&apos;re constantly
           growing. We&apos;re constantly making mistakes. We&apos;re constantly trying to express
           ourselves and actualize our dreams.
-        </AccordionBody>
-      </Accordion>
-      <Accordion open={open === 2} icon={<Icon id={2} open={open} />}>
-        <AccordionHeader onClick={() => handleOpen(2)}>
+        </Index.AccordionBody>
+      </Index.Accordion>
+      <Index.Accordion open={open === 2} icon={<Icon id={2} open={open} />}>
+        <Index.AccordionHeader onClick={() => handleOpen(2)}>
           How to use Material Tailwind?
-        </AccordionHeader>
-        <AccordionBody>
+        </Index.AccordionHeader>
+        <Index.AccordionBody>
           We&apos;re not always in the position that we want to be at. We&apos;re constantly
           growing. We&apos;re constantly making mistakes. We&apos;re constantly trying to express
           ourselves and actualize our dreams.
-        </AccordionBody>
-      </Accordion>
-      <Accordion open={open === 3} icon={<Icon id={3} open={open} />}>
-        <AccordionHeader onClick={() => handleOpen(3)}>
+        </Index.AccordionBody>
+      </Index.Accordion>
+      <Index.Accordion open={open === 3} icon={<Icon id={3} open={open} />}>
+        <Index.AccordionHeader onClick={() => handleOpen(3)}>
           What can I do with Material Tailwind?
-        </AccordionHeader>
-        <AccordionBody>
+        </Index.AccordionHeader>
+        <Index.AccordionBody>
           We&apos;re not always in the position that we want to be at. We&apos;re constantly
           growing. We&apos;re constantly making mistakes. We&apos;re constantly trying to express
           ourselves and actualize our dreams.
-        </AccordionBody>
-      </Accordion>
+        </Index.AccordionBody>
+      </Index.Accordion>
+      </div>
     </>
   );
 }

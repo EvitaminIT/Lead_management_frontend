@@ -12,8 +12,15 @@ export const API ={
         add_and_view_new_service:"/business_leads/field_add_new_service",
         upload_file_bl:"/business_leads/upload",
         delete_for_app:"/business_leads/add_lead_delete_approval",
+        lead_id_search:"/business_leads/view_lead_search"
     },
     Dropdown:{
         table_drop:"/dropdown/options"
+    },
+    Employee:{
+        viewAllEmp:"/employees/view_all_user",
+        Delete_Emp:"/employees/add_user_delete_approval",
+        Search_user:"/employees/view_user_search",
     }
+
 }

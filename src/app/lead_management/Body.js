@@ -3,6 +3,7 @@ import Table from './Table'
 import { useDispatch,useSelector } from 'react-redux';
 import { viewall_Leads_api } from '../redux/Slice/Bussness_leads/view_all_LedSlice';
 import Index from '@/material_component/client_component';
+import { Search_by_leadResetState } from '../redux/Slice/Bussness_leads/Search_by_leads';
 
 const pagecount=5
 
@@ -20,12 +21,13 @@ export default function Body() {
     dispatch(viewall_Leads_api({accessToken:token.access,pages:active+1}))
     if (active === BL_view_data.total_pages) return;
     setActive(active + 1);
-    
+    dispatch(Search_by_leadResetState())
   };
   const prev = () => {
     dispatch(viewall_Leads_api({accessToken:token.access,pages:active-1}))
     if (active === 1) return;
     setActive(active - 1);
+    dispatch(Search_by_leadResetState())
   };
 
   const onchange=(e)=>{
@@ -34,7 +36,7 @@ export default function Body() {
 
  const go_search=()=>{
   dispatch(viewall_Leads_api({accessToken:token.access,pages:goInput}))
-  console.log(BL_view_data.current_page,"desh")
+  dispatch(Search_by_leadResetState())
  } 
 
 
@@ -42,7 +44,7 @@ if(active!==page_bl){
   setActive(page_bl)
 }
 
-console.log(BL_view_data,active, 'desh2');
+
   
   return (
     <>

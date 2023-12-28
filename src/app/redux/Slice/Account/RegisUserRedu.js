@@ -65,16 +65,6 @@ export const Add_manual_Leads_api = createAsyncThunk('Add_manual_leadsReducer/Au
         })
         .addCase(Add_manual_Leads_api.rejected, (state, action) => {
           state.loading = 'rejected';
-          toast.error(action.error.message, {
-            position: "top-center",
-            autoClose: 2000,
-            hideProgressBar: true,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            });
         });
     },
   });
