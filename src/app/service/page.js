@@ -5,6 +5,7 @@ import Table from './Table'
 import Diloge from './diloge'
 import { useDispatch, useSelector } from 'react-redux'
 import { View_all_Service_API } from '../redux/Slice/Evitamin/Veiw_all_serviceRedu'
+import { Search_service_API,resetSearchService } from '../redux/Slice/Evitamin/SearchServiceRedu'
 
 export default function Page() {
   const dispatch = useDispatch()
@@ -23,18 +24,19 @@ export default function Page() {
     if (active === table_coll.total_pages) return;
     setActive(active + 1);
     SetSearch("")
-    // dispatch(Search_UserResetState())
+    dispatch(resetSearchService())
   };
   const prev = () => {
     dispatch(View_all_Service_API({ accessToken: token.access, page: active - 1 }))
     if (active === 1) return;
     setActive(active - 1);
     SetSearch("")
-    // dispatch(Search_UserResetState())
+    dispatch(resetSearchService())
   };
   const go_search = () => {
     SetSearch("")
     dispatch(View_all_Service_API({ accessToken: token.access, page: goInput }))
+    dispatch(resetSearchService())
   }
 
   const onchange = (e) => {
@@ -42,16 +44,16 @@ export default function Page() {
     // dispatch(Search_by_leadResetState())
   }
 
-  // if (!Search) {
-  //   dispatch(Search_UserResetState())
-  // }
+  if (!Search) {
+    dispatch(resetSearchService())
+  }
 
   if (active !== table_coll.current_page) {
     setActive(table_coll.current_page)
   }
 
   const dispatch_search = () => {
-    dispatch(Search_user_api({ accessToken: token.access, userId: Search }))
+    dispatch(Search_service_API({ accessToken: token.access, service_ID: Search }))
   }
 
   return (
@@ -68,7 +70,7 @@ export default function Page() {
                 <Index.Input
                   type="search"
                   name="search"
-                  onClick={onChangeSearch}
+                  onChange={onChangeSearch}
                   value={Search}
                   placeholder="Search..."
                   className="h-10 px-5 pr-1 rounded-l-full text-sm focus:outline-none !border !border-gray-300 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 focus:!border-t-gray-900 focus:ring-gray-900/10 !bg-[#2F3642] text-white"
@@ -77,7 +79,7 @@ export default function Page() {
                   }}
                 />
                 <span>
-                  <Index.Button type="submit" className="rounded-r-full bg-[#67B037] py-[11px]">
+                  <Index.Button onClick={dispatch_search} type="submit" className="rounded-r-full bg-[#67B037] py-[11px]">
                     Search
                   </Index.Button>
                 </span>

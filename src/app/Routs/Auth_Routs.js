@@ -1,5 +1,7 @@
 // import { deleteCookie } from "cookies-next";
 
+import { useRouter } from "next/router"
+
 // function getAccountType(argument) {
 //     const typeMap = {
 //         "HR":"/hr/deshbord",
@@ -8,8 +10,6 @@
 
 //     return typeMap[argument];
 // }
-
-
 
 export const auth_routs =(router,lod,user)=>{
   if(lod==="fulfilled"){

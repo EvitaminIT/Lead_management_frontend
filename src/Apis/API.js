@@ -23,7 +23,8 @@ export const API ={
         Search_user:"/employees/view_user_search",
     },
     Evits:{
-        viewAllService:"/evitamin/view_all_services"
+        viewAllService:"/evitamin/view_all_services",
+        Serch_Service:"/evitamin/view_services_search"
     }
 
 }

@@ -17,7 +17,9 @@ export default function Table({
 }, [])
   const table_loading = useSelector((state) => state.View_all_Service_Reducer.loading); 
   const table_coll = useSelector((state) => state.View_all_Service_Reducer.data);
-  const table_data=table_coll?table_coll.data:[]
+  const Search_data = useSelector((state) => state.SearchService_Reducer.data);
+  const Search_load = useSelector((state) => state.SearchService_Reducer.loading);
+  const table_data=table_coll || Search_data ?  Search_data? Search_data: table_coll.data :[]
   return (
     <div className='bg-transparent'>
         <Index.Card className="h-full w-full overflow-scroll bg-transparent shadow-none scrollbar-thin scrollbar-thumb-green-500 scrollbar-track-gray-200 scrollbar-thumb-rounded-lg scrollbar-w-lg h-[55vh]">
@@ -40,7 +42,7 @@ export default function Table({
             ))}
           </tr>
         </thead>
-        {table_loading==="pending" ? "":
+        {table_loading==="pending" || Search_load==="pending" ? "":
         <tbody>
           {table_data.map(({ service_id,country,marketplace,services,price_for_mou },index) => {
             const isLast = Index === table_data.length - 1;
@@ -132,7 +134,7 @@ export default function Table({
         </tbody>
       } 
       </table>
-      { table_loading==="pending"? 
+      { table_loading==="pending" || Search_load==="pending"? 
       <div className='h-full flex justify-center items-center'>
         <MoonLoader color="#2F3642" />
         </div>
