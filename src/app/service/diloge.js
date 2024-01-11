@@ -2,6 +2,7 @@ import React from 'react'
 import Index from '@/material_component/client_component'
 import Create_user from './Create_user';
 
+
 export default function Diloge({
   btn,
   Lead_id,
@@ -18,8 +19,9 @@ export default function Diloge({
      <Index.Button onClick={handleOpen} className="rounded-full bg-[#67B037] float-right">{btn}</Index.Button>
     }
     <Index.Dialog
+      className='!h-[40rem]'
       open={open}
-      size='lg'
+      size='md'
       handler={handleOpen}
     //   animate={{
     //     mount: { scale: 1, y: 0 },
@@ -31,8 +33,8 @@ export default function Diloge({
       <div className={`w-full ${btn==="Create"?"grid grid-cols-3 gap-4":""}`}>
         {btn==="Create"?<div></div>:""}
         {btn==="Create"?
-        <div className='text-center'>
-        <Index.Typography color='white'>Create User</Index.Typography>
+        <div className='flex justify-center items-center'>
+        <Index.Typography color='white'>Create Service</Index.Typography>
         </div>
         :""}
       

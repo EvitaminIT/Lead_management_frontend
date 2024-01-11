@@ -51,8 +51,12 @@ export default function Page() {
   dispatch(Search_UserResetState())
 }
 
- if(active!==table_coll.current_page){
-  setActive(table_coll.current_page)
+
+ 
+ const current_page=table_coll? table_coll.current_page:1
+
+ if(active!==current_page){
+  setActive(current_page)
 }
 
 const dispatch_search=()=>{

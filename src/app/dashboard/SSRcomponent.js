@@ -12,12 +12,12 @@ import UnResIMG from '../../Image/Unresponsive.svg'
 
 export const total_head=[
     {
-        title:'Total Leads',
+        title:'Assigned Leads',
         total_no:'80',
         image:teamleadIMG,
     },
     {
-        title:'Yet To Contect',
+        title:'Pitch In Progress',
         total_no:'80',
         image:OpnLedIMG,
     },
@@ -27,7 +27,7 @@ export const total_head=[
         image:ClosedLeadIMG,
     },
     {
-        title:'Follow Up',
+        title:'Pending For Mou',
         total_no:'80',
         image:FollUPIMG,
     },

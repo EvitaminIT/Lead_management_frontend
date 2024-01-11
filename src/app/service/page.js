@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { View_all_Service_API } from '../redux/Slice/Evitamin/Veiw_all_serviceRedu'
 import { Search_service_API,resetSearchService } from '../redux/Slice/Evitamin/SearchServiceRedu'
 
+
 export default function Page() {
   const dispatch = useDispatch()
   const [Search, SetSearch] = React.useState()
@@ -48,9 +49,11 @@ export default function Page() {
     dispatch(resetSearchService())
   }
 
+  if (table_coll){
   if (active !== table_coll.current_page) {
     setActive(table_coll.current_page)
   }
+};
 
   const dispatch_search = () => {
     dispatch(Search_service_API({ accessToken: token.access, service_ID: Search }))

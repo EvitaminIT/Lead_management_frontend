@@ -6,6 +6,8 @@ import { useDispatch,useSelector } from "react-redux"
 import React from "react"
 import { Search_by_lead_api } from "../redux/Slice/Bussness_leads/Search_by_leads"
 import { Search_by_leadResetState } from "../redux/Slice/Bussness_leads/Search_by_leads"
+import CollapseDefault from "./test"
+
 
 
 export default function Page() {
@@ -37,7 +39,7 @@ export default function Page() {
       <div className="grid grid-cols-2 gap-4">
     <div>
         <Index.Typography className="text-[#2F3642] text-2xl">Lead Management</Index.Typography>
-        {/* <SearchBar/> */}
+       {/* <CollapseDefault/> */}
     </div>
     <div className="grid grid-cols-5 gap-0">
        <div>  </div>

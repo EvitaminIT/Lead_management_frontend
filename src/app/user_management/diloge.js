@@ -22,20 +22,20 @@ export default function Diloge({
       open={open}
       size='lg'
       handler={handleOpen}
-    //   animate={{
-    //     mount: { scale: 1, y: 0 },
-    //     unmount: { scale: 0.9, y: -100 },
-    //   }}
     >
-       <Index.DialogHeader className={`pb-0 ${btn==="Create"?"bg-[#2F3642] rounded-t-lg p-1":""}`}>
+       <Index.DialogHeader className={`pb-0 bg-[#2F3642] rounded-t-lg p-1`}>
       
-      <div className={`w-full ${btn==="Create"?"grid grid-cols-3 gap-4":""}`}>
-        {btn==="Create"?<div></div>:""}
+      <div className={`w-full grid grid-cols-3 gap-4`}>
+        <div></div>
         {btn==="Create"?
-        <div className='text-center'>
+        <div className='flex justify-center items-center'>
         <Index.Typography color='white'>Create User</Index.Typography>
         </div>
-        :""}
+        :
+        <div className='flex justify-center items-center'>
+        <Index.Typography color='white'>View / Edit Admin</Index.Typography>
+        </div>
+        }
       
        <div>
       <Index.IconButton

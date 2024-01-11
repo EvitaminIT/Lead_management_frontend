@@ -134,7 +134,8 @@ import {
   import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
   import HttpsOutlinedIcon from '@mui/icons-material/HttpsOutlined';
   import PowerSettingsNewOutlinedIcon from '@mui/icons-material/PowerSettingsNewOutlined';
-
+  import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
+  import RemoveCircleOutlineOutlinedIcon from '@mui/icons-material/RemoveCircleOutlineOutlined';
 
 const Index ={
     Card,
@@ -274,6 +275,8 @@ const Index ={
     NotificationsOutlinedIcon,
     DeleteOutlineOutlinedIcon,
     PowerSettingsNewOutlinedIcon,
+    AddCircleOutlineOutlinedIcon,
+    RemoveCircleOutlineOutlinedIcon,
 }
 
 export default Index;

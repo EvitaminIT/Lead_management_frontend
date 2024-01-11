@@ -27,26 +27,25 @@ export default function DeleteBtn({
         <br/>
         <Index.DialogHeader className='justify-center'> 
             <div className=''>
-          <Index.Typography className='font-semibold'>
-            Are you Sure want to delete this User
-          </Index.Typography>
-          <Index.Typography className='text-center'>
-            {user_name}
+          <Index.Typography >
+          Are you sure you want to delete this user?
           </Index.Typography>
             </div>
         </Index.DialogHeader>
         <Index.DialogBody className='text-center'>
-        <Index.Button
-            variant="text"
-            color="red"
-            onClick={handleOpen}
-            className="mr-1"
-          >
-            <span>Cancel</span>
-          </Index.Button>
-          <Index.Button variant="gradient" color="green" onClick={oncli_delbtn}>
+
+          <Index.Button className='mr-4' variant="gradient" color="green" size='sm' onClick={oncli_delbtn}>
             <span>Confirm</span>
           </Index.Button>
+
+        <Index.Button
+            variant="outlined"
+            onClick={handleOpen}
+            size='sm'
+          >
+            Cancel
+          </Index.Button>
+
         </Index.DialogBody>
         <Index.DialogFooter>
          

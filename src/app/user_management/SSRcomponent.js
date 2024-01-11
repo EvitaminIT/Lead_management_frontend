@@ -39,10 +39,6 @@ export const TABLE_ROWS = [
 
   export const Create_user_manuinput=[
     {
-      title:"Name",
-      name:"name"
-    },
-    {
       title:"Employee I.D.",
       name:"emp_id"
     },
@@ -71,8 +67,37 @@ export const TABLE_ROWS = [
       name:"designation"
     },
     {
-      title:"User Role",
-      name:"user_role"
+      title:"Admin Role",
+      name:"Admin Role"
     },
       
   ]
+
+
+
+export const Edit_form_filds =[
+  {
+    title:"Employee id",
+  },
+  {
+    title:"Name",
+  },
+  {
+    title:"Email id",
+  },
+  {
+    title:"Department",
+  },
+  {
+    title:"Designation",
+  },
+  {
+    title:"Product",
+  },
+  {
+    title:"User Role",
+  },
+  {
+    title:"Employee Status",
+  },
+]
