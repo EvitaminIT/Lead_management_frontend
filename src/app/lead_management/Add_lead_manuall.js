@@ -39,6 +39,8 @@ export default function Add_lead_manuall() {
   const dispatch = useDispatch()
   const [ManulLeaddetails, setManulLeaddetails] = React.useState({})
   const token = useSelector((state) => state.myReducer.token);
+  const [open, setOpen] = React.useState(false);
+  const [Emlopen, setEmlOpen] = React.useState(false);
 
   const AlthandleCountryCodeChange = (event) => {
     const inputCountryCode = event.target.value;
@@ -98,7 +100,7 @@ export default function Add_lead_manuall() {
   const country = country_call ? country_call : []
   const Marketplace_state = useSelector((state) => state.add_and_view_new_service_Reducer.data_market);
   const Service_state = useSelector((state) => state.add_and_view_new_service_Reducer.data_Service);
-  const [open, setOpen] = React.useState(0);
+  // const [open, setOpen] = React.useState(0);
   const handleOpen = (value) => setOpen(open === value ? 0 : value);
   const [Altemlopen, setAltemOpen] = React.useState(0);
   const AltemlhandleOpen = (value) => setAltemOpen(Altemlopen === value ? 0 : value);
@@ -181,7 +183,7 @@ export default function Add_lead_manuall() {
             <Index.Typography className='text-xl'>Phone number:</Index.Typography>
             <Index.Typography className='text-xl font-bold' color='red'>*</Index.Typography>
           </div>
-          <Index.Typography className={`text-xl mt-7 ${open === 0 ? "hidden" : ""}`}>Alternate Phone number:</Index.Typography>
+         
         </div>
         <div className='col-span-2 flex'>
 
@@ -224,7 +226,7 @@ export default function Add_lead_manuall() {
               placeholder="Country Code"
               value={countryCode}
               onChange={handleCountryCodeChange}
-              className="rounded-l-none rounded-r-full !border-t-blue-gray-200 focus:!border-t-gray-900"
+              className="!w-[97%] rounded-l-none rounded-r-full !border-t-blue-gray-200 focus:!border-t-gray-900"
               labelProps={{
                 className: "before:content-none after:content-none",
               }}
@@ -236,13 +238,17 @@ export default function Add_lead_manuall() {
 
 
           <Index.Tooltip className="z-[10000]" content={`${open === 0 ? "Add" : "Remove"} Alternate Phone number`}>
-            <Index.Accordion className="w-[8%]" open={open === 1} icon={<Icon id={1} open={open} />}>
-              <div className='mt-1'>
-                <Index.AccordionHeader className="p-0 border-none " onClick={() => handleOpen(1)} />
-              </div>
-              <div className='relative w-[39.7rem] right-[39.7rem]'>
-                <Index.AccordionBody>
-                  <div className="relative flex w-full">
+          <Index.IconButton  onClick={() => setOpen((cur) => !cur)} className={`bg-transparent shadow-none hover:shadow-none ${open ? "rotate-45" : ""}`}> <Index.AddCircleOutlineOutlinedIcon className={`text-black `}/> </Index.IconButton>
+          </Index.Tooltip>
+        </div>
+          
+       
+        <div className='col-span-3'>
+        <Index.Collapse className='grid grid-cols-3 gap-2' open={open}>
+        <div className='text-xl'>
+       <Index.Typography className='text-xl'>Alternate Phone number:</Index.Typography>
+       </div>
+        <div className="col-span-2 relative flex w-full">
                     <Index.Menu placement="bottom-start">
                       <Index.MenuHandler>
                         <Index.Button
@@ -281,7 +287,7 @@ export default function Add_lead_manuall() {
                       placeholder="Country Code"
                       value={AltcountryCode}
                       onChange={AlthandleCountryCodeChange}
-                      className="rounded-l-none rounded-r-full !border-t-blue-gray-200 focus:!border-t-gray-900"
+                      className="!w-[91%] rounded-l-none rounded-r-full !border-t-blue-gray-200 focus:!border-t-gray-900"
                       labelProps={{
                         className: "before:content-none after:content-none",
                       }}
@@ -290,39 +296,38 @@ export default function Add_lead_manuall() {
                       }}
                     />
                   </div>
-                </Index.AccordionBody>
-              </div>
-            </Index.Accordion>
-          </Index.Tooltip>
+      </Index.Collapse>
         </div>
+
         <div>
           <div className='flex items-center'>
             <Index.Typography className='text-xl'>Email id:</Index.Typography>
           </div>
-          <Index.Typography className={`text-xl mt-7 ${Altemlopen === 0 ? "hidden" : ""}`}>Alternate Email id:</Index.Typography>
         </div>
         <div className='col-span-2 flex'>
-          <Index.Input type='email' className='h-10 px-5 pr-10 text-sm focus:outline-none !border !border-gray-300 text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 focus:!border-t-gray-900 focus:ring-gray-900/10 rounded-full'
+          <Index.Input type='email' className='!w-[97%] h-10 px-5 pr-10 text-sm focus:outline-none !border !border-gray-300 text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 focus:!border-t-gray-900 focus:ring-gray-900/10 rounded-full'
             labelProps={{
               className: "hidden",
             }}
             containerProps={{ className: "min-w-[100px]" }} />
-          <Index.Tooltip className="z-[10000]" content={`${Altemlopen === 0 ? "Add" : "Remove"} Alternate Email`}>
-            <Index.Accordion className="w-[8%]" open={Altemlopen === 1} icon={<Icon id={1} open={Altemlopen} />}>
-              <div className='mt-1'>
-                <Index.AccordionHeader className="p-0 border-none " onClick={() => AltemlhandleOpen(1)} />
-              </div>
-              <div className='relative w-[39.7rem] right-[39.7rem]'>
-                <Index.AccordionBody>
-                  <Index.Input type='email' className='h-10 px-5 pr-10 text-sm focus:outline-none !border !border-gray-300 text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 focus:!border-t-gray-900 focus:ring-gray-900/10 rounded-full'
+             <Index.Tooltip className="z-[10000]" content={`${Emlopen? "Add" : "Remove"} Alternate Phone number`}>
+          <Index.IconButton  onClick={() => setEmlOpen((cur) => !cur)} className={`bg-transparent shadow-none hover:shadow-none ${Emlopen ? "rotate-45" : ""}`}> <Index.AddCircleOutlineOutlinedIcon className={`text-black `}/> </Index.IconButton>
+          </Index.Tooltip>
+        </div>
+
+        <div className='col-span-3'>
+        <Index.Collapse className='grid grid-cols-3 gap-2' open={Emlopen}>
+        <div className='text-xl'>
+       <Index.Typography className='text-xl'>Alternate Email id:</Index.Typography>
+       </div>
+        <div className="col-span-2 relative flex w-full">
+        <Index.Input type='email' className='!w-[92%] h-10 px-5 pr-10 text-sm focus:outline-none !border !border-gray-300 text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 focus:!border-t-gray-900 focus:ring-gray-900/10 rounded-full'
                     labelProps={{
                       className: "hidden",
                     }}
-                    containerProps={{ className: "min-w-[100px]" }} />
-                </Index.AccordionBody>
-              </div>
-            </Index.Accordion>
-          </Index.Tooltip>
+                    containerProps={{ className: "min-w-[100px]" }} />  
+          </div>
+      </Index.Collapse>
         </div>
 
         <div className=''>
@@ -384,9 +389,9 @@ export default function Add_lead_manuall() {
   
         <div className='col-span-2'>
           <div className='grid'>
-          <Index.Checkbox color="green" defaultChecked label="Account Management" />
-          <Index.Checkbox color="green" defaultChecked label="Advertising Optimization" />
-          <Index.Checkbox color="green" defaultChecked label="Cateloging" />
+          <Index.Checkbox color="green"  label="Account Management" />
+          <Index.Checkbox color="green"  label="Advertising Optimization" />
+          <Index.Checkbox color="green"  label="Cateloging" />
           </div>
         </div>
         <div className='flex items-center'>

@@ -90,7 +90,7 @@ export const view_country_api = createAsyncThunk('add_and_view_new_service_Reduc
         })
         .addCase(view_country_api.rejected, (state, action) => {
           state.loading_market = 'rejected';
-          state.error_market=action.payload.data
+          // state.error_market=action.payload.data
         })
         .addCase(view_Marketpalce_api.pending, (state,action) => {
             state.loading_market = 'pending';
