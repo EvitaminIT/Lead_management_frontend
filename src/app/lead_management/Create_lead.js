@@ -1,3 +1,4 @@
+"use client"
 import React,{ useRef } from 'react'
 import Index from '@/material_component/client_component'
 import { useSelector, useDispatch } from "react-redux";

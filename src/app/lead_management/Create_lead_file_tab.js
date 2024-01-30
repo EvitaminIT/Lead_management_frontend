@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import index from '@/material_component/client_component'
 import { data } from './SSRcomponent'

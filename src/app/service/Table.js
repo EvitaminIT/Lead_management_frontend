@@ -15,11 +15,17 @@ export default function Table({
   React.useEffect(() => {
     dispatch(View_all_Service_API({accessToken:token.access,page:1}))
 }, [])
+  const [ TBLdata,setTBLdata ]=React.useState([])
   const table_loading = useSelector((state) => state.View_all_Service_Reducer.loading); 
   const table_coll = useSelector((state) => state.View_all_Service_Reducer.data);
   const Search_data = useSelector((state) => state.SearchService_Reducer.data);
   const Search_load = useSelector((state) => state.SearchService_Reducer.loading);
   const table_data=table_coll || Search_data ?  Search_data? Search_data: table_coll.data :[]
+
+  React.useEffect(() => {
+    setTBLdata(table_data)
+}, [table_data])
+
   return (
     <div className='bg-transparent'>
         <Index.Card className="h-full w-full overflow-scroll bg-transparent shadow-none scrollbar-thin scrollbar-thumb-green-500 scrollbar-track-gray-200 scrollbar-thumb-rounded-lg scrollbar-w-lg h-[55vh]">
@@ -42,10 +48,10 @@ export default function Table({
             ))}
           </tr>
         </thead>
-        {table_loading==="pending" || Search_load==="pending" ? "":
+        {/* {table_loading==="pending" || Search_load==="pending" ? "": */}
         <tbody>
-          {table_data.map(({ service_id,country,marketplace,services,price_for_mou },index) => {
-            const isLast = Index === table_data.length - 1;
+          {TBLdata.map(({ service_id,country,marketplace,services,price_for_mou },index) => {
+            const isLast = Index === TBLdata.length - 1;
             const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
  
             return (
@@ -56,8 +62,8 @@ export default function Table({
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {service_id}
-                    {/* {lead_id ? lead_id : <Skeleton/>} */}
+                    {/* {service_id} */}
+                    {table_loading==="pending" || Search_load==="pending" ? <Skeleton/>: service_id}
                   </Index.Typography>
                 </td>
                 <td className={`${classes} capitalize`}>
@@ -66,7 +72,8 @@ export default function Table({
                     color="blue-gray"
                     className="font-normal"
                   >
-                  {marketplace}
+                  {/* {marketplace} */}
+                  {table_loading==="pending" || Search_load==="pending" ? <Skeleton/>: marketplace}
                   </Index.Typography>
                 </td>
                 <td className={`${classes} capitalize`}>
@@ -75,7 +82,8 @@ export default function Table({
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {country}
+                    {/* {country} */}
+                    {table_loading==="pending" || Search_load==="pending" ? <Skeleton/>: country}
                   </Index.Typography>
                 </td>
                 <td className={`${classes} capitalize`}>
@@ -84,7 +92,8 @@ export default function Table({
                     color="blue-gray"
                     className="font-normal"
                   >
-                   {services}
+                   {/* {services} */}
+                   {table_loading==="pending" || Search_load==="pending" ? <Skeleton/>: services}
                   </Index.Typography>
                 </td>
                 <td className={`${classes} capitalize`}>
@@ -93,7 +102,8 @@ export default function Table({
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {price_for_mou}
+                    {/* {price_for_mou} */}
+                    {table_loading==="pending" || Search_load==="pending" ? <Skeleton/>: price_for_mou}
                   </Index.Typography>
                 </td>
                 <td className={`${classes} capitalize`}>
@@ -102,7 +112,7 @@ export default function Table({
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {/* {lead_status ? lead_status :<Skeleton />} */}
+                    {table_loading==="pending" || Search_load==="pending" ? <Skeleton/>:""}
                   </Index.Typography>
                 </td>
                 <td className={`${classes} capitalize`}>
@@ -111,7 +121,7 @@ export default function Table({
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {/* {date} */}
+                  {table_loading==="pending" || Search_load==="pending" ? <Skeleton/>:""}
                   </Index.Typography>
                 </td>
                 <td className={`${classes} capitalize`}>
@@ -120,7 +130,7 @@ export default function Table({
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {/* {date} */}
+                   {table_loading==="pending" || Search_load==="pending" ? <Skeleton/>:""}
                   </Index.Typography>
                 </td>
                 <td className={`${classes} space-x-2`}>
@@ -132,13 +142,13 @@ export default function Table({
             );
           })}
         </tbody>
-      } 
+      {/* }  */}
       </table>
-      { table_loading==="pending" || Search_load==="pending"? 
+      {/* { table_loading==="pending" || Search_load==="pending"? 
       <div className='h-full flex justify-center items-center'>
         <MoonLoader color="#2F3642" />
         </div>
-      :""}
+      :""} */}
     </Index.Card>
     </div>
   )

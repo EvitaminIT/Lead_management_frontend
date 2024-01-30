@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import Index from '@/material_component/client_component'
 import { Add_lead_manuinput } from './SSRcomponent'
@@ -100,10 +101,7 @@ export default function Add_lead_manuall() {
   const country = country_call ? country_call : []
   const Marketplace_state = useSelector((state) => state.add_and_view_new_service_Reducer.data_market);
   const Service_state = useSelector((state) => state.add_and_view_new_service_Reducer.data_Service);
-  // const [open, setOpen] = React.useState(0);
-  const handleOpen = (value) => setOpen(open === value ? 0 : value);
   const [Altemlopen, setAltemOpen] = React.useState(0);
-  const AltemlhandleOpen = (value) => setAltemOpen(Altemlopen === value ? 0 : value);
   const [isActive, setActive] = React.useState(false);
 
   const Marketplace = Marketplace_state ? Marketplace_state : [];
@@ -165,6 +163,26 @@ export default function Add_lead_manuall() {
               className: "hidden",
             }}
             containerProps={{ className: "min-w-[100px]" }} />
+        </div>
+
+     
+
+        <div className='flex items-center'>
+          <Index.Typography className='text-xl'>Hot Lead (urgent Service)</Index.Typography>
+        </div>
+        <div className='col-span-2'>
+          <div className='grid grid-cols-3 gap-2'>
+            <div className='flex'>
+          <Index.Switch color="green" checked={isActive} onChange={()=>setActive(!isActive)} />
+            </div>
+            <div className='col-span-2 flex justify-start'>
+            <Index.Chip size='sm' className={isActive?"":"invisible"} variant="ghost" value={<div className='flex justify-center items-center'> &#128293; <Index.Typography>
+              Hot Lead
+            </Index.Typography></div>
+            }/>
+          
+            </div>
+          </div>
         </div>
 
         <div className='flex items-center justify-between'>
@@ -237,7 +255,7 @@ export default function Add_lead_manuall() {
           </div>
 
 
-          <Index.Tooltip className="z-[10000]" content={`${open === 0 ? "Add" : "Remove"} Alternate Phone number`}>
+          <Index.Tooltip className="z-[10000]" content={`${open? "Remove" : "Add"} Alternate Phone number`}>
           <Index.IconButton  onClick={() => setOpen((cur) => !cur)} className={`bg-transparent shadow-none hover:shadow-none ${open ? "rotate-45" : ""}`}> <Index.AddCircleOutlineOutlinedIcon className={`text-black `}/> </Index.IconButton>
           </Index.Tooltip>
         </div>
@@ -310,7 +328,7 @@ export default function Add_lead_manuall() {
               className: "hidden",
             }}
             containerProps={{ className: "min-w-[100px]" }} />
-             <Index.Tooltip className="z-[10000]" content={`${Emlopen? "Add" : "Remove"} Alternate Phone number`}>
+             <Index.Tooltip className="z-[10000]" content={`${Emlopen? "Remove" : "Add"} Alternate Email id`}>
           <Index.IconButton  onClick={() => setEmlOpen((cur) => !cur)} className={`bg-transparent shadow-none hover:shadow-none ${Emlopen ? "rotate-45" : ""}`}> <Index.AddCircleOutlineOutlinedIcon className={`text-black `}/> </Index.IconButton>
           </Index.Tooltip>
         </div>
@@ -330,58 +348,6 @@ export default function Add_lead_manuall() {
       </Index.Collapse>
         </div>
 
-        <div className=''>
-          <Index.Typography className='text-xl'>Business Name</Index.Typography>
-          {/* <Index.Typography className='text-xl font-bold' color='red'>*</Index.Typography> */}
-        </div>
-        <div className='col-span-2'>
-          <Index.Input className='!w-[92%] h-10 px-5 pr-10 text-sm focus:outline-none !border !border-gray-300 text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 focus:!border-t-gray-900 focus:ring-gray-900/10 rounded-full'
-            labelProps={{
-              className: "hidden",
-            }}
-            containerProps={{ className: "min-w-[100px]" }} />
-        </div>
-
-        <div className='flex items-center justify-between'>
-          <Index.Typography className='text-xl'>Business Category:</Index.Typography>
-          <Index.Typography className='text-xl font-bold' color='red'>*</Index.Typography>
-        </div>
-        <div className='col-span-2'>
-          <div className='w-[92%] '>
-          <Index.Select className='h-10 px-5 pr-10 text-sm focus:outline-none !border !border-gray-300 text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 focus:!border-t-gray-900 focus:ring-gray-900/10 rounded-full'
-            labelProps={{
-              className: "hidden",
-            }}
-            containerProps={{ className: "min-w-[100px]" }}>
-            <Index.Option>Material Tailwind HTML</Index.Option>
-            <Index.Option>Material Tailwind React</Index.Option>
-            <Index.Option>Material Tailwind Vue</Index.Option>
-            <Index.Option>Material Tailwind Angular</Index.Option>
-            <Index.Option>Material Tailwind Svelte</Index.Option>
-          </Index.Select>
-          </div>
-        </div>
-
-        <div className='flex items-center justify-between'>
-          <Index.Typography className='text-xl'>Client Turnover:</Index.Typography>
-          <Index.Typography className='text-xl font-bold' color='red'>*</Index.Typography>
-        </div>
-        <div className='col-span-2'>
-          <div className='w-[92%] '>
-          <Index.Select className='h-10 px-5 pr-10 text-sm focus:outline-none !border !border-gray-300 text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 focus:!border-t-gray-900 focus:ring-gray-900/10 rounded-full'
-            labelProps={{
-              className: "hidden",
-            }}
-            containerProps={{ className: "min-w-[100px]" }}>
-            <Index.Option>Material Tailwind HTML</Index.Option>
-            <Index.Option>Material Tailwind React</Index.Option>
-            <Index.Option>Material Tailwind Vue</Index.Option>
-            <Index.Option>Material Tailwind Angular</Index.Option>
-            <Index.Option>Material Tailwind Svelte</Index.Option>
-          </Index.Select>
-          </div>
-        </div>
-
         <div className='flex items-center justify-between items-baseline'>
           <Index.Typography className='text-xl'>Service Category:</Index.Typography>
           <Index.Typography className='text-xl font-bold' color='red'>*</Index.Typography>
@@ -394,23 +360,60 @@ export default function Add_lead_manuall() {
           <Index.Checkbox color="green"  label="Cateloging" />
           </div>
         </div>
-        <div className='flex items-center'>
-          <Index.Typography className='text-xl'>Hot Lead (urgent Service)</Index.Typography>
+      
+
+        <div className='flex items-center justify-between items-baseline'>
+          <Index.Typography className='text-xl'>Business Name</Index.Typography>
+          <Index.Typography className='text-xl font-bold' color='red'>*</Index.Typography>
         </div>
         <div className='col-span-2'>
-          <div className='grid grid-cols-3 gap-2'>
-            <div className='flex'>
-          <Index.Switch color="green" checked={isActive} onChange={()=>setActive(!isActive)} />
-            </div>
-            <div className='col-span-2 flex justify-start'>
-            <Index.Chip size='sm' className={isActive?"":"invisible"} variant="ghost" value={<div className='flex justify-center items-center'> &#128293; <Index.Typography>
-              Hot Lead
-            </Index.Typography></div>
-            }/>
-          
-            </div>
+          <Index.Input className='!w-[92%] h-10 px-5 pr-10 text-sm focus:outline-none !border !border-gray-300 text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 focus:!border-t-gray-900 focus:ring-gray-900/10 rounded-full'
+            labelProps={{
+              className: "hidden",
+            }}
+            containerProps={{ className: "min-w-[100px]" }} />
+        </div>
+
+        <div className='flex items-center justify-between'>
+          <Index.Typography className='text-xl'>Business Category:</Index.Typography>
+          {/* <Index.Typography className='text-xl font-bold' color='red'>*</Index.Typography> */}
+        </div>
+        <div className='col-span-2'>
+          <div className='w-[92%] '>
+          <Index.Select className='h-10 px-5 pr-10 text-sm focus:outline-none !border !border-gray-300 text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 focus:!border-t-gray-900 focus:ring-gray-900/10 rounded-full'
+            labelProps={{
+              className: "hidden",
+            }}
+            containerProps={{ className: "min-w-[100px]" }}>
+            <Index.Option>Apparels</Index.Option>
+            <Index.Option>Electronics</Index.Option>
+            <Index.Option>Home & Personal Care</Index.Option>
+          </Index.Select>
           </div>
         </div>
+
+        <div className='flex items-center justify-between'>
+          <Index.Typography className='text-xl'>Client Turnover:</Index.Typography>
+          {/* <Index.Typography className='text-xl font-bold' color='red'>*</Index.Typography> */}
+        </div>
+        <div className='col-span-2'>
+          <div className='w-[92%] '>
+          <Index.Select className='h-10 px-5 pr-10 text-sm focus:outline-none !border !border-gray-300 text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 focus:!border-t-gray-900 focus:ring-gray-900/10 rounded-full'
+            labelProps={{
+              className: "hidden",
+            }}
+            containerProps={{ className: "min-w-[100px]" }}>
+            <Index.Option>Diamond (turnover 50 Lacs +)</Index.Option>
+            <Index.Option>Premium (turnover 25  -  50 Lacs)</Index.Option>
+            <Index.Option>Gold (turnover 5 - 25 Lacs)</Index.Option>
+            <Index.Option>Silver (turnover 1 - 5 Lacs)</Index.Option>
+            <Index.Option>Bronze (turnover less than 1 Lac)</Index.Option>
+          </Index.Select>
+          </div>
+        </div>
+
+       
+     
       </div>
       </div>
         <div className='text-center'>

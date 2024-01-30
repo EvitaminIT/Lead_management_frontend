@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import { edit_from_title } from './SSRcomponent'
 import Index from '@/material_component/client_component'

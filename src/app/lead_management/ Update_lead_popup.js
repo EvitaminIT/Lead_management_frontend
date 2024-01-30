@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import Create_lead from './Create_lead'
 import index from '@/material_component/client_component'

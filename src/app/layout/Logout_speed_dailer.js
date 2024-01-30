@@ -11,7 +11,12 @@
     const dispatch=useDispatch()
     const router = useRouter()
     const loading = useSelector((state) => state.myReducer.loading);
-    auth_Logout(router,loading)
+    // auth_Logout(router,loading)
+    React.useEffect(()=>{
+      if(loading!=="fulfilled"){
+        router.push("/")     
+      }
+    },[loading])
     const Logout =()=>{
       dispatch(resetState())
       dispatch(resetState_viewll_led_BL())

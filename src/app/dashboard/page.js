@@ -12,7 +12,7 @@ export default function Page() {
   const data = useSelector((state) => state.myReducer.data);
   const user_roll=data? data.user_role:""
   return (
-    <div className='grid grid-cols-5 gap-4 w-full rounded-t-[40px] bg-[#2F3642] py-10 px-32 overflow-auto !h-[75.2vh] scrollbar-thin scrollbar-thumb-green-500 scrollbar-track-gray-200 scrollbar-thumb-rounded-lg scrollbar-w-lg'>
+    <div className='grid grid-cols-5 gap-4 w-full rounded-t-[40px] bg-[#2F3642] py-10 px-32 overflow-auto !h-[40.6rem] scrollbar-thin scrollbar-thumb-green-500 scrollbar-track-gray-200 scrollbar-thumb-rounded-lg scrollbar-w-lg'>
       {total_head.map((details) => {
         return (
           <>

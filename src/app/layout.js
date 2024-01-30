@@ -5,6 +5,7 @@ import Providers from './redux/Providers'
 import { Flip, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {

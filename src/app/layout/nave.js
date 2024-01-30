@@ -1,60 +1,55 @@
+
 import React from "react";
 import Index from "@/material_component/client_component";
 import { usePathname } from 'next/navigation';
 import Link from "next/link";
 import { LogoutSpeed_Di } from "./Logout_speed_dailer";
-
+import dynamic from 'next/dynamic'
+import { useSelector } from "react-redux";
 
 export function NavbarWithMegaMenu({
   tabs,
 }) {
+  const[Tab_list,setTab_list]=React.useState([])
   const [openNav, setOpenNav] = React.useState(false);
   const pathname = usePathname();
+  const user_link = useSelector((state) => state.myReducer.user_link);
+
   React.useEffect(() => {
-    window.addEventListener(
-      "resize",
-      () => window.innerWidth >= 960 && setOpenNav(false),
-    );
-  }, []);
+    if(tabs){
+      setTab_list(tabs)
+    }
+  }, [Tab_list]);
 
 
+
+  // const  tab_list= Tab_list?Tab_list: []
 
   return (
     <div className="grid grid-cols-2 gap-4">
-      <Index.Navbar className="max-w-screen-xl px-4 py-2 shadow-none">
-        <div className="text-blue-gray-900">
-          <div className="hidden lg:block">
+      {Tab_list?
+      <Index.Navbar  className="max-w-screen-xl px-4 py-2 shadow-none">
+        <div className="flex items-center justify-between text-blue-gray-900">
+                <div className="hidden lg:block">
             <Index.List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1">
-
-              {tabs ? tabs.map((data, index) => {
+              {Tab_list.map((data, index) => {
                 return (
-                  <>
+                
                     <Link key={index} href={String(data.navigation)}>
+                     
                       <Index.ListItem className={`flex items-center gap-2 py-2 pr-4 capitalize ${pathname === data.navigation ? "!bg-[#2F3642] !text-white" : ""}`}>
                         {data.title}
                       </Index.ListItem>
+                                
                     </Link>
-                  </>
+           
                 )
-              }) : ""}
+              })}
             </Index.List>
           </div>
-
-
-          {/* <Index.IconButton
-          variant="text"
-          color="blue-gray"
-          className="lg:hidden"
-          onClick={() => setOpenNav(!openNav)}
-        >
-          {openNav ? (
-            <Index.XMarkIcon className="h-6 w-6" strokeWidth={2} />
-          ) : (
-            <Index.Bars3Icon className="h-6 w-6" strokeWidth={2} />
-          )}
-        </Index.IconButton> */}
-        </div>
+          </div>
       </Index.Navbar>
+     :""}
       <div className="grid grid-cols-7 gap-4">
       <div className="flex items-center col-span-6 justify-end">
         <div>
@@ -98,3 +93,6 @@ export function NavbarWithMegaMenu({
     </div>
   );
 }
+
+
+export default dynamic(() => Promise.resolve(NavbarWithMegaMenu), { ssr: false })

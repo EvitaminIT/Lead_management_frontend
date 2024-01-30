@@ -5,11 +5,12 @@ import Table from './Table'
 import Diloge from './diloge'
 import { useDispatch, useSelector } from 'react-redux'
 import { View_all_Service_API } from '../redux/Slice/Evitamin/Veiw_all_serviceRedu'
-import { Search_service_API,resetSearchService } from '../redux/Slice/Evitamin/SearchServiceRedu'
+import { Search_service_API, resetSearchService } from '../redux/Slice/Evitamin/SearchServiceRedu'
 
 
 export default function Page() {
   const dispatch = useDispatch()
+  const [TBLdata, setTBLdata] = React.useState([])
   const [Search, SetSearch] = React.useState()
   const [active, setActive] = React.useState(1);
   const [goInput, setgoInput] = React.useState();
@@ -49,15 +50,19 @@ export default function Page() {
     dispatch(resetSearchService())
   }
 
-  if (table_coll){
-  if (active !== table_coll.current_page) {
-    setActive(table_coll.current_page)
-  }
-};
+  if (table_coll) {
+    if (active !== table_coll.current_page) {
+      setActive(table_coll.current_page)
+    }
+  };
 
   const dispatch_search = () => {
     dispatch(Search_service_API({ accessToken: token.access, service_ID: Search }))
   }
+
+  React.useEffect(() => {
+    setTBLdata(table_coll)
+  }, [table_coll])
 
   return (
     <>
@@ -95,6 +100,8 @@ export default function Page() {
           </div>
         </div>
         <br />
+       <div className='p-4 bg-[#F2F2F2] rounded-lg'
+       >
         <Table />
         <div className='grid grid-cols-3 gap-4 mt-4'>
           <div>
@@ -115,7 +122,7 @@ export default function Page() {
                 }}
                 containerProps={{ className: "min-w-[100px]" }} />
               <Index.Typography>of</Index.Typography>
-              <Index.Typography>{table_coll ? table_coll.total_pages : ""}</Index.Typography>
+              <Index.Typography>{TBLdata ? TBLdata.total_pages : ""}</Index.Typography>
               <Index.Button size='md' onClick={go_search}>Go</Index.Button>
             </div>
           </div>
@@ -133,19 +140,21 @@ export default function Page() {
               </Index.IconButton>
               <Index.Typography color="gray" className="font-normal">
                 Page <strong className="text-gray-900">{active}</strong> of{" "}
-                <strong className="text-gray-900">{table_coll ? table_coll.total_pages : ""}</strong>
+                <strong className="text-gray-900">{TBLdata ? TBLdata.total_pages : ""}</strong>
               </Index.Typography>
               <Index.IconButton
                 size="sm"
                 className='bg-[#67B037]'
                 onClick={next}
-                disabled={table_coll ? active === table_coll.total_pages : ""}
+                disabled={TBLdata ? active === TBLdata.total_pages : ""}
               >
                 <Index.ArrowRightIcon strokeWidth={2} className="h-4 w-4 text-white" />
               </Index.IconButton>
             </div>
           </div>
         </div>
+       </div>
+
       </div>
     </>
   )

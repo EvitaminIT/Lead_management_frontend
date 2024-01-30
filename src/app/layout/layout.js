@@ -12,7 +12,7 @@ export default function Layout({children}) {
     { pathname==="/"? "":
     <div>
      <Layout_headder/>
-     <div className={`grid grid-cols-5 gap-0 px-32 relative bottom-14  ${pathname!=="/dashboard"?"hidden":""}`}>
+     <div className={`grid grid-cols-5 gap-0 px-32 relative bottom-[3rem]  ${pathname!=="/dashboard"?"hidden":""}`}>
         <div></div>
         <Wellcome_bnr/>
      </div>

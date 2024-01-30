@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import Index from '@/material_component/client_component'
 import { Delete_lead_for_app_api } from '../redux/Slice/Bussness_leads/delete_lead_for_approvl'

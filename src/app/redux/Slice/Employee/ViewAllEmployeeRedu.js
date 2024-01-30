@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 export const resetState = createAction('View_all_Emp_Reducer/resetState');
 
 export const View_all_Emp_API = createAsyncThunk('View_all_Emp_Reducer/View_all_Emp_API', async({accessToken,page}) => {
+    console.log(page,"wor")
     try {
       const response = await API_Service.get(`${API.Employee.viewAllEmp}/${page}`,{
         headers:{

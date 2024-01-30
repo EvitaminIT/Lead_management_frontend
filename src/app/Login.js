@@ -23,8 +23,14 @@ export default function Login() {
     dispatch(AuthpostApiData(Authdetails))
   }  
 
-  auth_routs(router,loading)
-
+  // auth_routs(router,loading)
+  React.useEffect(() => {
+  if(loading==="fulfilled"){
+    router.push("/dashboard")     
+  }else{
+    router.push("/")
+  }
+  },[loading])
 
   return (
     <div className="flex justify-center bg-[#2F3642] h-[100vh]">

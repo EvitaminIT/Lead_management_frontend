@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import Index from '@/material_component/client_component'
 import Create_lead_file_btn from './Create_lead_file_tab';
