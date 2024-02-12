@@ -1,25 +1,40 @@
 import React from 'react'
 import Index from '@/material_component/client_component'
-import Create_user from './Create_user';
+import Create_user from './CreateAndEditUser';
+import { useDispatch,useSelector } from 'react-redux';
+import { ViewAllServiceAPI } from '../redux/Slice/Leads/Service/VeiwAllServiceRedu';
 
 
 export default function Diloge({
   btn,
-  Lead_id,
-  indx,
+  MPlaceName,
+  MPlaceID,
+  Service_name,
+  serviceID,
 }) {
     const [open, setOpen] = React.useState(false);
- 
+    const dispatch = useDispatch()
     const handleOpen = () => setOpen(!open);
+    const token = useSelector((state) => state.myReducer.token);
+
+    React.useEffect(()=>{
+      open===false?dispatch(ViewAllServiceAPI({accessToken:token.access,page:1})):"";
+    },[open])
+
+    // const closeDiloag=()=>{
+    //   handleOpen()
+    //   dispatch(ViewAllServiceAPI({accessToken:token.access,page:1}))
+    // };   
+
   return (
     <>
-     {btn==="table_edit"?
+     {btn==="Servicetable_edit" || btn==="MarketPlacetable_edit" ?
       <Index.IconButton onClick={handleOpen} size='sm' className='bg-[#67B037]'><Index.RemoveRedEyeOutlinedIcon/></Index.IconButton>
       :  
      <Index.Button onClick={handleOpen} className="rounded-full bg-[#67B037] float-right">{btn}</Index.Button>
     }
     <Index.Dialog
-      className='!h-[40rem]'
+      className='!h-[40rem] bg-blue-gray-50'
       open={open}
       size='md'
       handler={handleOpen}
@@ -28,15 +43,17 @@ export default function Diloge({
     //     unmount: { scale: 0.9, y: -100 },
     //   }}
     >
-       <Index.DialogHeader className={`pb-0 ${btn==="Create"?"bg-[#2F3642] rounded-t-lg p-1":""}`}>
+       <Index.DialogHeader className={`pb-0 ${btn==="Create" || btn==="Servicetable_edit"?"bg-[#2F3642] rounded-t-lg p-1":""}`}>
       
-      <div className={`w-full ${btn==="Create"?"grid grid-cols-3 gap-4":""}`}>
-        {btn==="Create"?<div></div>:""}
-        {btn==="Create"?
+      <div className={`w-full ${btn==="Create" || btn==="Servicetable_edit" ?"grid grid-cols-3 gap-4":""}`}>
+        {btn==="Create" || btn==="Servicetable_edit"?<div></div>:""}
+        {btn==="Create" || btn==="Servicetable_edit"?
         <div className='flex justify-center items-center'>
-        <Index.Typography color='white'>Create Service</Index.Typography>
+        <Index.Typography color='white'>{btn==="Create" ?"Create Service":btn==="Servicetable_edit"?"Edit Service":""}</Index.Typography>
         </div>
-        :""}
+        :
+        ""
+        }
       
        <div>
       <Index.IconButton
@@ -65,17 +82,16 @@ export default function Diloge({
         </div>
        
       </Index.DialogHeader>
-    <Index.DialogBody className={`${btn==="table_edit"?"p-0":""}`}>
-        <div className={`h-[60vh] ${btn==="table_edit"?"bg-[#F2F2F2] rounded-b-lg":""}`}>
-          {btn==="table_edit"? 
-          ""
-          :
-          <Create_user/>
-          }
+    <Index.DialogBody className={`${btn==="Create" || btn==="Servicetable_edit"?"p-0":""}`}>
+        <div className={`h-[60vh] ${btn==="Create" || btn==="Servicetable_edit"?"bg-[#F2F2F2] rounded-b-lg":""}`}>
+        {btn==="Create" || btn==="Servicetable_edit"?
+          <Create_user type={btn} MarPlaceName={MPlaceName} MarPlaceID={MPlaceID} SerName={Service_name} SerID={serviceID} />
+        :''}
         </div>
     </Index.DialogBody>  
     
     </Index.Dialog>
   </>
+
   )
 }

@@ -6,12 +6,11 @@ import { toast } from "react-toastify";
 
 
 
-export const resetState = createAction('View_all_Emp_Reducer/resetState');
+export const resetState = createAction('DeleteCommericalReducer/resetState');
 
-export const View_all_Emp_API = createAsyncThunk('View_all_Emp_Reducer/View_all_Emp_API', async({accessToken,page}) => {
-    console.log(page,"wor")
+export const DeleteCommericalAPI = createAsyncThunk('DeleteCommericalReducer/DeleteCommericalAPI', async({accessToken,serviceID,commercialID}) => {
     try {
-      const response = await API_Service.get(`${API.Account.view_allUser}/${page}`,{
+      const response = await API_Service.delete(`${API.Leads.commercial.DeleteCommercial}/${serviceID}/${commercialID}`,{
         headers:{
             "Authorization":`Bearer ${accessToken}`
         }
@@ -25,8 +24,8 @@ export const View_all_Emp_API = createAsyncThunk('View_all_Emp_Reducer/View_all_
   
 
   // Create a slice to manage the state
-  const View_all_Emp_Reducer = createSlice({
-    name: 'View_all_Emp_Reducer',
+  const DeleteCommericalReducer = createSlice({
+    name: 'DeleteCommericalReducer',
     initialState: {
       error: null,
       loading: 'idle',
@@ -45,14 +44,14 @@ export const View_all_Emp_API = createAsyncThunk('View_all_Emp_Reducer/View_all_
     },
     extraReducers: (builder) => {
       builder
-        .addCase(View_all_Emp_API.pending, (state) => {
+        .addCase(DeleteCommericalAPI.pending, (state) => {
           state.loading = 'pending';
         })
-        .addCase(View_all_Emp_API.fulfilled, (state, action) => {
+        .addCase(DeleteCommericalAPI.fulfilled, (state, action) => {
           state.loading = 'fulfilled';
           state.data=action.payload.data
         })
-        .addCase(View_all_Emp_API.rejected, (state, action) => {
+        .addCase(DeleteCommericalAPI.rejected, (state, action) => {
           state.loading = 'rejected';
         });
     },
@@ -60,4 +59,4 @@ export const View_all_Emp_API = createAsyncThunk('View_all_Emp_Reducer/View_all_
   
  
 
-  export default View_all_Emp_Reducer.reducer;
+  export default DeleteCommericalReducer.reducer;

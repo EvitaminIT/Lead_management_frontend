@@ -1,7 +1,6 @@
 export const TABLE_HEAD=[
     'Employee I.D.',
     'Name',
-    'User Role',
     'Designation',
     'Department',
     'Action',
@@ -48,7 +47,7 @@ export const TABLE_ROWS = [
     },
     {
       title:"User Name",
-      name:"user_name"
+      name:"name"
     },
     {
       title:"Password",
@@ -74,30 +73,59 @@ export const TABLE_ROWS = [
   ]
 
 
+  export const Admin_Create_user_manuinput=[
+    {
+      title:"Employee I.D.",
+      name:"employee_id"
+    },
+    {
+      title:"Email ID",
+      name:"email"
+    },
+    {
+      title:"Name",
+      name:"name"
+    }, 
+    {
+      title:"Department",
+      name:"ev_department"
+    },
+    {
+      title:"Designation",
+      name:"designation"
+    },
+      
+  ]
+
+
 
 export const Edit_form_filds =[
   {
     title:"Employee id",
+    name:"emp_id",
   },
   {
     title:"Name",
+    name:"name",
   },
   {
     title:"Email id",
+    name:"email_id",
   },
   {
     title:"Department",
+    name:"department",
   },
   {
     title:"Designation",
+    name:"designation",
   },
   {
     title:"Product",
-  },
-  {
-    title:"User Role",
+    name:"product",
   },
   {
     title:"Employee Status",
+    name:"employee_status",
   },
 ]

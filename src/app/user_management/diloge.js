@@ -7,6 +7,13 @@ export default function Diloge({
   btn,
   Lead_id,
   indx,
+  Emp_id,
+  Email_id,
+  Designation,
+  Name,
+  Department,
+  Product,
+  Employee_Status
 }) {
     const [open, setOpen] = React.useState(false);
  
@@ -67,7 +74,7 @@ export default function Diloge({
     <Index.DialogBody className={`${btn==="table_edit"?"p-0":""}`}>
         <div className={`h-[60vh] overflow-auto scrollbar-thin scrollbar-thumb-green-500 scrollbar-track-gray-200 scrollbar-thumb-rounded-lg scrollbar-w-lg ${btn==="table_edit"?"bg-[#F2F2F2] rounded-b-lg":""}`}>
           {btn==="table_edit"?
-          <Edit_User/>
+          <Edit_User Emp_id={Emp_id} Name={Name} Department={Department} Designation={Designation} Email_id={Email_id} Product={Product} Employee_Status={Employee_Status} />
           :       
           <Create_user/>
         }

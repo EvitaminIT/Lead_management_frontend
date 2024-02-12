@@ -1,19 +1,30 @@
 // src/reducers/index.js
 import { combineReducers } from 'redux';
-import myReducer from './Slice/AuthSlice'
-import view_all_leadsReducer from './Slice/Bussness_leads/view_all_LedSlice'
-import GetInd_leadsReducer from './Slice/Bussness_leads/Get_ind_leads'
-import Add_manual_leadsReducer from './Slice/Bussness_leads/Add_manual_leads'
-import add_and_view_new_service_Reducer from './Slice/Bussness_leads/add_view_new_ser'
-import upload_file_bl_Reducer from './Slice/Bussness_leads/upload_file_blreducer'
-import GetTableDropRedu from './Slice/Dropdowns/tabledropdown'
-import Delete_lead_for_approvelRedu from './Slice/Bussness_leads/delete_lead_for_approvl'
-import Search_by_leadReducer from './Slice/Bussness_leads/Search_by_leads'
-import View_all_Emp_Reducer from './Slice/Employee/ViewAllEmployeeRedu'
-import Delete_Emp_Reducer from './Slice/Employee/Delete_Emp'
-import Search_EmpReducer from './Slice/Employee/SearchEmpRedu'
-import View_all_Service_Reducer from './Slice/Evitamin/Veiw_all_serviceRedu'
-import SearchService_Reducer from './Slice/Evitamin/SearchServiceRedu'
+import myReducer from './Slice/AuthSlice';
+import view_all_leadsReducer from './Slice/Bussness_leads/view_all_LedSlice';
+import GetInd_leadsReducer from './Slice/Bussness_leads/Get_ind_leads';
+import Add_manual_leadsReducer from './Slice/Bussness_leads/Add_manual_leads';
+import add_and_view_new_service_Reducer from './Slice/Bussness_leads/add_view_new_ser';
+import upload_file_bl_Reducer from './Slice/Bussness_leads/upload_file_blreducer';
+import GetTableDropRedu from './Slice/Dropdowns/Depardropdown';
+import Delete_lead_for_approvelRedu from './Slice/Bussness_leads/delete_lead_for_approvl';
+import Search_by_leadReducer from './Slice/Bussness_leads/Search_by_leads';
+import View_all_Emp_Reducer from './Slice/Employee/ViewAllEmployeeRedu';
+import Delete_Emp_Reducer from './Slice/Employee/Delete_Emp';
+import Search_EmpReducer from './Slice/Employee/SearchEmpRedu';
+import View_all_Service_Reducer from './Slice/Evitamin/Veiw_all_serviceRedu';
+import SearchService_Reducer from './Slice/Evitamin/SearchServiceRedu';
+import GetDesignationDroupRedu from './Slice/Dropdowns/Designationdroup';
+import AddUserReducer from './Slice/Account/RegisterUserRedu';
+import GetProductDroupRedu from './Slice/Dropdowns/Productdropdown';
+import UpdateUserReducer from './Slice/Account/UpdateUserRedu';
+import DeleteUserReducer from './Slice/Account/DeleteUserRedu';
+import ViewAllServiceReducer from './Slice/Leads/Service/VeiwAllServiceRedu';
+import ViewAllMarketReducer from './Slice/Leads/MartketPlace/ViewAllMarkerPlaceRedu';
+import ViewAllCommericalReducer from './Slice/Leads/commercial/ViewAllCommericalRedu';
+import UpdateServiceReducer from './Slice/Leads/Service/UpdateServiceRedu';
+import DeleteCommericalReducer from './Slice/Leads/commercial/DeleteCommericalRedu';
+
 
 
 const rootReducer = combineReducers({
@@ -31,6 +42,16 @@ const rootReducer = combineReducers({
   Search_EmpReducer:Search_EmpReducer,
   View_all_Service_Reducer:View_all_Service_Reducer,
   SearchService_Reducer:SearchService_Reducer,
+  GetDesignationDroupRedu:GetDesignationDroupRedu,
+  AddUserReducer:AddUserReducer,
+  GetProductDroupRedu:GetProductDroupRedu,
+  UpdateUserReducer:UpdateUserReducer,
+  DeleteUserReducer:DeleteUserReducer,
+  ViewAllServiceReducer:ViewAllServiceReducer,
+  ViewAllMarketReducer:ViewAllMarketReducer,
+  ViewAllCommericalReducer:ViewAllCommericalReducer,
+  UpdateServiceReducer:UpdateServiceReducer,
+  DeleteCommericalReducer:DeleteCommericalReducer,
 });
 
 export default rootReducer;

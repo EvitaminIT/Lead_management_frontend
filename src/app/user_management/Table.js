@@ -18,13 +18,14 @@ export default function Table() {
   const search_loading = useSelector((state) => state.Search_EmpReducer.loading);
   const table_coll = useSelector((state) => state.View_all_Emp_Reducer.data);
   const loading = useSelector((state) => state.View_all_Emp_Reducer.loading);
-  const table_call=table_coll?table_coll.data:[]
+  const table_call=table_coll?table_coll.data:[];
   const table_data = Search_data ? Search_data : table_call;
   React.useEffect(()=>{
    setTBLdata(table_data)
   },[table_data])
+  
 
-
+  
   return (
     <div className='bg-transparent'>
       <Index.Card className="h-full w-full overflow-scroll bg-transparent shadow-none scrollbar-thin scrollbar-thumb-green-500 scrollbar-track-gray-200 scrollbar-thumb-rounded-lg scrollbar-w-lg h-[55vh]">
@@ -50,7 +51,7 @@ export default function Table() {
           </thead>
           {/* {loading === "pending" || search_loading === "pending" ? "" : */}
             <tbody>
-              {TBLdata.map(({ employee_id, name, user_role, designation, department, product }, index) => {
+              {TBLdata.map(({ employee_id, name, designation, department, product ,email_id,employee_status }, index) => {
                 const isLast = Index === TBLdata.length - 1;
                 const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 
@@ -82,18 +83,8 @@ export default function Table() {
                         color="blue-gray"
                         className="font-normal"
                       >
-                        {/* {removeUnderscores(user_role)} */}
-                        {loading === "pending" || search_loading === "pending" ? <Skeleton/>: removeUnderscores(user_role)}
-                      </Index.Typography>
-                    </td>
-                    <td className={`${classes} capitalize`}>
-                      <Index.Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
-                      >
                         {/* {removeUnderscores(designation)} */}
-                        {loading === "pending" || search_loading === "pending" ? <Skeleton/>: removeUnderscores(designation)}
+                        {loading === "pending" || search_loading === "pending" ? <Skeleton/>: removeUnderscores(designation.designation)}
                       </Index.Typography>
                     </td>
                     <td className={`${classes} capitalize`}>
@@ -103,13 +94,13 @@ export default function Table() {
                         className="font-normal"
                       >
                         {/* {removeUnderscores(department)} */}
-                        {loading === "pending" || search_loading === "pending" ? <Skeleton/>: removeUnderscores(department)}
+                        {loading === "pending" || search_loading === "pending" ? <Skeleton/>: removeUnderscores(department.department)}
                       </Index.Typography>
                     </td>
                     <td className={`${classes} space-x-2`}>
                     {loading === "pending" || search_loading === "pending" ? <Skeleton/>:
                     <>
-                    <Diloge btn={"table_edit"} />
+                    <Diloge btn={"table_edit"} Email_id={email_id} Employee_Status={employee_status} Emp_id={employee_id} Name={name} Department={department} Designation={designation} Product={product}  />
                     <DeleteBtn Emp_id={employee_id} user_name={name} />
                     </>
                    }

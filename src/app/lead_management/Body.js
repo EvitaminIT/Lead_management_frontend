@@ -17,7 +17,6 @@ export default function Body() {
   const dispatch=useDispatch()
   const token = useSelector((state) => state.myReducer.token);
   
-  console.log(BL_view_data,"hdhd")
 
   React.useEffect(() => {
     dispatch(viewall_Leads_api({accessToken:token.access,pages:1}))

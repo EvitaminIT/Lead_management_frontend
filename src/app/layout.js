@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <Providers>
       <body className={inter.className}>
-      <ToastContainer 
+      {/* <ToastContainer 
        position="top-center"
        autoClose={5000}
        hideProgressBar={false}
@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
        pauseOnHover
        theme="light" 
        transition={Flip}
-      />
+      /> */}
       <Layout/>
       {children}
       </body>

@@ -10,7 +10,7 @@ import { auth_routs } from "./Routs/Auth_Routs"
 import logcss from '../CSS/Login_autofill.css'
 
 export default function Login() {
-   const [Authdetails,setAuthdetails]= React.useState()
+   const [Authdetails,setAuthdetails]= React.useState({})
    const dispatch=useDispatch();
    const router = useRouter()
    const data = useSelector((state) => state.myReducer.data);
@@ -23,17 +23,19 @@ export default function Login() {
     dispatch(AuthpostApiData(Authdetails))
   }  
 
-  // auth_routs(router,loading)
+ 
   React.useEffect(() => {
   if(loading==="fulfilled"){
     router.push("/dashboard")     
   }else{
     router.push("/")
   }
-  },[loading])
+  },[loading,router])
 
   return (
-    <div className="flex justify-center bg-[#2F3642] h-[100vh]">
+    <div className="flex justify-center bg-[#2F3642] h-[100vh]" 
+    
+    >
     <div>
     <Index.Card className="mt-40" color="transparent" shadow={false}>
       <Index.CardHeader className="text-center" color="transparent" shadow={false}>
@@ -57,6 +59,12 @@ export default function Login() {
             label="email" 
             name="email"
             onChange={onchange}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                LoginDispatch();
+              }
+            }}
           />
             </div>
             <div className="flex items-end gap-4">
@@ -70,6 +78,12 @@ export default function Login() {
             label="password" 
             name="password"
             onChange={onchange}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                LoginDispatch();
+              }
+            }}
           />
             </div>
         </div>
@@ -93,8 +107,10 @@ export default function Login() {
           }
           containerProps={{ className: "-ml-2.5" }}
         />
-        <Index.Button onClick={LoginDispatch} size="sm" className="bg-[#7FBA31]">
+        <Index.Button  onClick={LoginDispatch} size="sm" className="bg-[#7FBA31]">
+        <span>
         {loading == "pending" ? <div className="mx-[8.5px]"> <Index.Spinner color="white" /> </div>  : " Log In" }
+        </span>
         </Index.Button>
         </div>
         <Index.Typography color="gray" className="mt-4 text-center font-normal">

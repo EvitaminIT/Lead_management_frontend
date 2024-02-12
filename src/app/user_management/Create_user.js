@@ -1,25 +1,54 @@
-import React from 'react'
-import { Create_user_manuinput } from './SSRcomponent'
-import Index from '@/material_component/client_component'
-import { useDispatch,useSelector } from 'react-redux'
-import { get_regular_Dropdown_api,get_OneDependend_Dropdown_api,get_TwoDependend_Dropdown_api } from '../redux/Slice/Dropdowns/tabledropdown'
-import { removeUnderscores } from '../commen/commen_fun'
+import React from 'react';
+import { Create_user_manuinput,Admin_Create_user_manuinput } from './SSRcomponent';
+import Index from '@/material_component/client_component';
+import { useDispatch,useSelector } from 'react-redux';
+import { getDepartment_Droupdown_API } from '../redux/Slice/Dropdowns/Depardropdown';
+import { removeUnderscores } from '../commen/commen_fun';
+import { DesigDroup_API } from '../redux/Slice/Dropdowns/Designationdroup';
+import { AddUser_API } from '../redux/Slice/Account/RegisterUserRedu';
+import { ToastContainer,Flip, toast } from 'react-toastify';
+import { View_all_Emp_API } from '../redux/Slice/Employee/ViewAllEmployeeRedu';
+
+
+
+
 
 export default function Create_user() {
-    const [CreateUserDetails,setCreateUserDetails]= React.useState({})
+    const [CreateUserDetails,setCreateUserDetails]= React.useState({});
+    const [ depatDroup,setdepatDroup ]=React.useState([]);
+    const [ DesignationDroup,setDesignationDroup ]=React.useState([]);
+    const [ userInputs,setUserInputs ]= React.useState([]);
     const [Seldepartment, setdepartment] = React.useState("");
     const [SelDesignation, setDesignation] = React.useState("");
-    const [SelRole, setRole] = React.useState("");
-    const dispatch=useDispatch()
+    const dispatch=useDispatch();
     const token = useSelector((state) => state.myReducer.token);
-    const department_data = useSelector((state) => state.GetTableDropRedu.reg_drop_data);
-    const designation_data = useSelector((state) => state.GetTableDropRedu.dep_one_data);
-    const user_rol_data = useSelector((state) => state.GetTableDropRedu.dep_two_data);
+    const department_data = useSelector((state) => state.GetTableDropRedu.data);
+    const designation_data = useSelector((state) => state.GetDesignationDroupRedu.data);
     const data = useSelector((state) => state.myReducer.data);
+    const loading = useSelector((state) => state.AddUserReducer.loading);
 
+    
     React.useEffect(() => {
-        dispatch(get_regular_Dropdown_api({accessToken:token.access,Dropdown:"ev_department"}))
+      dispatch(getDepartment_Droupdown_API({accessToken:token.access}))
     }, [])
+
+    React.useEffect(()=>{
+      setDesignationDroup(designation_data)
+    },[designation_data])
+
+    React.useEffect(()=>{
+      setdepatDroup(department_data)
+    },[department_data])
+
+    React.useEffect(()=>{     
+      if(data.department==="admin"){
+        setUserInputs(Admin_Create_user_manuinput)
+      }
+    },[data])
+
+   const dispatch_details=()=>{
+    dispatch(AddUser_API({accessToken:token.access,data:CreateUserDetails}))
+   }    
 
    const onchange=(e)=>{
       setCreateUserDetails({...CreateUserDetails,[e.target.name]:e.target.value})
@@ -29,23 +58,54 @@ export default function Create_user() {
   const setDepartment=(value)=>{
     setdepartment(value)
     setCreateUserDetails({...CreateUserDetails,"department":value})
-    dispatch(get_OneDependend_Dropdown_api({accessToken:token.access,Dropdown:"ev_designation",data1:value}))
+    dispatch(DesigDroup_API({accessToken:token.access,Dep_id:value}))
   }
 
   const setdesignation=(value)=>{
     setDesignation(value)
     setCreateUserDetails({...CreateUserDetails,"designation":value})
-    dispatch(get_TwoDependend_Dropdown_api({accessToken:token.access,Dropdown:"user_role_list",data1:Seldepartment,data2:value}))
   }
 
-  const setUser_Role=(value)=>{
-    setCreateUserDetails({...CreateUserDetails,"user_role":value})
-  } 
+
+  const SelectFiled=({optionList,title,name})=>{
+    const lis=optionList?optionList:[];
+    return(
+      <>
+      <Index.Select name={name} value={title==="Department"? Seldepartment:title==="Designation"?SelDesignation:""} onChange={(value)=>title==="Department"?setDepartment(value):title==="Designation"?setdesignation(value):""} className="h-10 px-5 pr-10 text-sm focus:outline-none !border !border-gray-300 text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 focus:!border-t-gray-900 focus:ring-gray-900/10 rounded-full" 
+       labelProps={{
+        className: "hidden",
+      }}
+      containerProps={{ className: "min-w-[100px]" }}>
+        {lis.map((Opdata,index)=>{
+          return(
+            <Index.Option className="capitalize" value={parseInt(title==="Department"? Opdata.department_id:title==="Designation"?Opdata.designation_id:"")} key={index}>{removeUnderscores(title==="Department"? Opdata.department_name:title==="Designation"?Opdata.designation_name:"")}</Index.Option>
+          )
+        })}
+      </Index.Select>
+      </>
+    )
+  }
+
 
   const user_rol=data?data.user_role:"";
   return (
-    <div className='grid grid-cols-3 gap-4 p-6'>
-       { Create_user_manuinput.map((data)=>{
+    <>
+    <ToastContainer
+     position="top-center"
+     autoClose={5000}
+     hideProgressBar={false}
+     newestOnTop
+     closeOnClick
+     rtl={false}
+     pauseOnFocusLoss={false}
+     draggable={false}
+     pauseOnHover
+     theme="light" 
+     transition={Flip} 
+    />
+    
+    <div className='grid grid-cols-3 gap-4 p-6 h-full'>
+       { userInputs.map((data)=>{
          return(
             <>
        {data.title==="Department" || data.title === "Designation" || data.title === "Admin Role" ? 
@@ -54,33 +114,30 @@ export default function Create_user() {
         <Index.Typography className='text-xl'>{data.title}:</Index.Typography>
        </div>
        <div className='col-span-2'>
-       <Index.Select placeholder={data.title} value={Seldepartment} disabled={data.title === "Designation"? Seldepartment? false : true:data.title === "Admin Role"?SelDesignation? false :true : ""} onChange={(value) => data.title==="Department" ? setDepartment(value): data.title==="Designation"? setdesignation(value):data.title === "Admin Role"? setUser_Role(value):""}  variant="outlined" className='h-10 px-5 pr-10 text-sm focus:outline-none !border !border-gray-300 text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 focus:!border-t-gray-900 focus:ring-gray-900/10 rounded-full'
+       <SelectFiled  optionList={data.title==="Department"?depatDroup:data.title === "Designation"?DesignationDroup:""} title={data.title}/>
+       {/* <Index.Select placeholder={data.title} value={data.title==="Department"? Seldepartment:data.title==="Designation"? SelDesignation:""} disabled={data.title === "Designation"? Seldepartment? false : true: ""} onChange={(value) => data.title==="Department" ? setDepartment(value): data.title==="Designation"? setdesignation(value):""}  variant="outlined" className='h-10 px-5 pr-10 text-sm focus:outline-none !border !border-gray-300 text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 focus:!border-t-gray-900 focus:ring-gray-900/10 rounded-full'
            labelProps={{
             className: "hidden",
           }}
           containerProps={{ className: "min-w-[100px]" }} label="Select Version">
-        {data.title==="Department" && department_data && department_data.title? 
-        department_data.title.map((depart_data,index)=>{
+        {data.title==="Department" ?
+        depatDroup.map((depart_data,index)=>{
             return(
-            <Index.Option className='capitalize'  value={depart_data} id={index+1} key={index}>{removeUnderscores(depart_data)}</Index.Option>  
+            <Index.Option className='capitalize'  value={depart_data.department_id} id={index+1} key={index}>{removeUnderscores(depart_data.department_name)}</Index.Option>  
             )
         })
         : 
-        data.title==="Designation" && designation_data && designation_data.title ? 
-        designation_data.title.map((desig_data,index)=>{
+        data.title==="Designation"?
+        DesignationDroup.map((desig_data,index)=>{
           return(
-            <Index.Option className='capitalize'  value={desig_data} id={index+1} key={index}>{removeUnderscores(desig_data)}</Index.Option> 
-          )
-        }):
-        data.title==="Admin Role" && user_rol_data && user_rol_data.title?
-        user_rol_data.title.map((role_list,index)=>{
-          return(
-            <Index.Option className='capitalize'  value={role_list} id={index+1} key={index}>{removeUnderscores(role_list)}</Index.Option> 
+            <Index.Option className='capitalize'  value={desig_data.designation_id} id={index+1} key={index}>{removeUnderscores(desig_data.designation_name
+              )}</Index.Option> 
           )
         }):""
         }
   
-      </Index.Select>
+      </Index.Select> */}
+
        </div>
         </>
        :
@@ -107,8 +164,13 @@ export default function Create_user() {
          )
       })}
     <div className='col-span-3 text-center mt-4'>
-    <Index.Button disabled={!CreateUserDetails.department || !CreateUserDetails.designation || !CreateUserDetails.user_role || !CreateUserDetails.name || !CreateUserDetails.emp_id || !CreateUserDetails.email || !CreateUserDetails.user_name || !CreateUserDetails.password ||!CreateUserDetails.confirm_password ? true:false}  className='bg-[#67B037]'>Add User</Index.Button>
+    <Index.Button disabled={data.department==="admin"? !CreateUserDetails.department || !CreateUserDetails.designation || !CreateUserDetails.name || !CreateUserDetails.employee_id || !CreateUserDetails.email || !CreateUserDetails.name ? true: loading==="pending"? true:false:""} onClick={dispatch_details}  className='bg-[#67B037]'>
+    <div className='flex justify-center w-[5.5rem]'>
+     Add User {loading==="pending"?  <Index.Spinner className="ml-2 h-4 w-4" />:"" }
+      </div>  
+    </Index.Button>
     </div>
     </div>
+    </>
   )
-}
+};

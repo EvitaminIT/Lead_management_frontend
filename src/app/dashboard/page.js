@@ -12,11 +12,11 @@ export default function Page() {
   const data = useSelector((state) => state.myReducer.data);
   const user_roll=data? data.user_role:""
   return (
+    <>
     <div className='grid grid-cols-5 gap-4 w-full rounded-t-[40px] bg-[#2F3642] py-10 px-32 overflow-auto !h-[40.6rem] scrollbar-thin scrollbar-thumb-green-500 scrollbar-track-gray-200 scrollbar-thumb-rounded-lg scrollbar-w-lg'>
       {total_head.map((details) => {
         return (
           <>
-            {/* {details.title==="Asked for Details" || details.title==="Associate Not Assigned" ? "wrok":""} */}
             <Index.Card className={`${details.title==="Asked for Details" || details.title==="Associate Not Assigned" ? `${user_roll ==="admin" || user_roll ==="lead_manager" ?"!hidden":""}`:"" } grid grid-cols-3 gap-2 p-6  ${details.title === "Converted Leads" ? "bg-[#E8FAD1]" : ""} ${details.title === "Not Interested" ? "bg-[#F9CECE]" : ""}`}>
               <div className='flex items-center'>
                 <Image src={details.image} />
@@ -34,7 +34,6 @@ export default function Page() {
         )
       })}
 
-      {/* table */}
       <Index.Card className='col-span-4 p-4'>
         <div className='flex justify-between mb-2'>
           <Index.Typography className='text-2xl px-[12px] text-[#67B037] font-bold'>Team Performance</Index.Typography>
@@ -161,5 +160,6 @@ export default function Page() {
         <Image src={side_art} />
       </Index.Card>
     </div>
+    </>
   )
 }

@@ -22,14 +22,14 @@ export const AuthpostApiData = createAsyncThunk('myReducer/AuthpostApiData', asy
     initialState: {
       data: null,
       error: null,
-      loading: 'idle', // Redux Toolkit will manage loading state for you
+      loading: 'idle', 
       user_type: null,
       user_link:null,
       token:null,
     },
     reducers: {
       resetState: (state) => {
-        // Reset the state to its initial values
+
         return {
           ...state,
           data: null,

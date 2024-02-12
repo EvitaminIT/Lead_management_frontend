@@ -1,14 +1,14 @@
-export const TABLE_HEAD=[
-    'Service I.D.',
-    'Market Place',
-    'Country',
+export const Service_TABLE_HEAD=[
     'Service Name',
-    'Static Price',
-    'Commission',
-    'Service Currency',
+    'Market Place',
     'Action',
 ]
 
+
+export const Marketplace_TABLE_HEAD=[
+  'Market Place',
+  'Action',
+]
 
 export const TABLE_ROWS = [
     {

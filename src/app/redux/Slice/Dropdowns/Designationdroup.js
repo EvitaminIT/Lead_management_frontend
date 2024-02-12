@@ -1,17 +1,15 @@
 import { createAction, createAsyncThunk,createSlice } from "@reduxjs/toolkit";
 import API_Service from "@/Apis/Base_API";
 import { API } from "@/Apis/API";
-import { toast } from "react-toastify";
+import { Dropdown } from "react-day-picker";
 
 
 
+export const resetState_viewll_led_BL = createAction('GetDesignationDroupRedu/resetState');
 
-export const resetState = createAction('View_all_Emp_Reducer/resetState');
-
-export const View_all_Emp_API = createAsyncThunk('View_all_Emp_Reducer/View_all_Emp_API', async({accessToken,page}) => {
-    console.log(page,"wor")
+export const DesigDroup_API = createAsyncThunk('GetDesignationDroupRedu/DesigDroup_API', async({accessToken,Dep_id}) => {
     try {
-      const response = await API_Service.get(`${API.Account.view_allUser}/${page}`,{
+      const response = await API_Service.get(`${API.Dropdown.Designation}/${Dep_id}`,{
         headers:{
             "Authorization":`Bearer ${accessToken}`
         }
@@ -21,19 +19,18 @@ export const View_all_Emp_API = createAsyncThunk('View_all_Emp_Reducer/View_all_
       throw error.response.data;
     }
   });
-  
-  
 
+  
   // Create a slice to manage the state
-  const View_all_Emp_Reducer = createSlice({
-    name: 'View_all_Emp_Reducer',
+  const GetDesignationDroupRedu = createSlice({
+    name: 'view_all_leadsReducer',
     initialState: {
       error: null,
       loading: 'idle',
       data:null,
     },
     reducers: {
-      resetState: (state) => {
+        resetState_viewll_led_BL: (state) => {
         // Reset the state to its initial values
         return {
           ...state,
@@ -45,19 +42,18 @@ export const View_all_Emp_API = createAsyncThunk('View_all_Emp_Reducer/View_all_
     },
     extraReducers: (builder) => {
       builder
-        .addCase(View_all_Emp_API.pending, (state) => {
+        .addCase(DesigDroup_API.pending, (state) => {
           state.loading = 'pending';
         })
-        .addCase(View_all_Emp_API.fulfilled, (state, action) => {
+        .addCase(DesigDroup_API.fulfilled, (state, action) => {
           state.loading = 'fulfilled';
-          state.data=action.payload.data
+          state.data=action.payload.data;
         })
-        .addCase(View_all_Emp_API.rejected, (state, action) => {
-          state.loading = 'rejected';
-        });
+        .addCase(DesigDroup_API.rejected, (state, action) => {
+          state.error = 'rejected';
+        })
+
     },
   });
   
- 
-
-  export default View_all_Emp_Reducer.reducer;
+  export default GetDesignationDroupRedu.reducer;

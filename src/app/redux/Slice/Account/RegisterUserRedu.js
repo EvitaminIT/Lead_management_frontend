@@ -6,11 +6,11 @@ import { toast } from "react-toastify";
 
 
 
-export const resetState = createAction('Add_manual_leadsReducer/resetState');
+export const resetState = createAction('AddUserReducer/resetState');
 
-export const Add_manual_Leads_api = createAsyncThunk('Add_manual_leadsReducer/AuthpostApiData', async({accessToken,data}) => {
+export const AddUser_API = createAsyncThunk('AddUserReducer/AuthpostApiData', async({accessToken,data}) => {
     try {
-      const response = await API_Service.post(API.Business_leads.add_manual_leads,data,{
+      const response = await API_Service.post(API.Account.User_register,data,{
         headers:{
             "Authorization":`Bearer ${accessToken}`
         }
@@ -24,8 +24,8 @@ export const Add_manual_Leads_api = createAsyncThunk('Add_manual_leadsReducer/Au
   
 
   // Create a slice to manage the state
-  const Add_manual_leadsReducer = createSlice({
-    name: 'Add_manual_leadsReducer',
+  const AddUserReducer = createSlice({
+    name: 'AddUserReducer',
     initialState: {
       error: null,
       loading: 'idle',
@@ -44,13 +44,13 @@ export const Add_manual_Leads_api = createAsyncThunk('Add_manual_leadsReducer/Au
     },
     extraReducers: (builder) => {
       builder
-        .addCase(Add_manual_Leads_api.pending, (state) => {
+        .addCase(AddUser_API.pending, (state) => {
           state.loading = 'pending';
         })
-        .addCase(Add_manual_Leads_api.fulfilled, (state, action) => {
+        .addCase(AddUser_API.fulfilled, (state, action) => {
           state.loading = 'fulfilled';
           state.data=action.payload.data
-          toast.success('Lead Add Successfully', {
+          toast.success(action.payload.message, {
             position: "top-center",
             autoClose: 2000,
             hideProgressBar: true,
@@ -61,7 +61,7 @@ export const Add_manual_Leads_api = createAsyncThunk('Add_manual_leadsReducer/Au
             theme: "light",
             });
         })
-        .addCase(Add_manual_Leads_api.rejected, (state, action) => {
+        .addCase(AddUser_API.rejected, (state, action) => {
           state.loading = 'rejected';
           toast.error(action.error.message, {
             position: "top-center",
@@ -79,4 +79,4 @@ export const Add_manual_Leads_api = createAsyncThunk('Add_manual_leadsReducer/Au
   
  
 
-  export default Add_manual_leadsReducer.reducer;
+  export default AddUserReducer.reducer;

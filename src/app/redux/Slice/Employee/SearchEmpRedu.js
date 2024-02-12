@@ -6,9 +6,9 @@ import { headers } from "../../../../../next.config";
 
 export const Search_UserResetState = createAction('Search_EmpReducer/Search_UserResetState');
 
-export const Search_user_api = createAsyncThunk('Search_EmpReducer/Search_user_api', async({accessToken,userId}) => {
+export const Search_user_api = createAsyncThunk('Search_EmpReducer/Search_user_api', async({accessToken,searchby,element}) => {
     try {
-      const response = await API_Service.get(`${API.Employee.Search_user}/${userId}`,{
+      const response = await API_Service.get(`${API.Employee.Search_user}/${searchby}/${element}`,{
         headers:{
             "Authorization":`Bearer ${accessToken}`
         }

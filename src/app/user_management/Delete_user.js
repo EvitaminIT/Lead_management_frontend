@@ -1,7 +1,7 @@
 import React from 'react'
 import Index from '@/material_component/client_component'
-import { Delete_Emp_API } from '../redux/Slice/Employee/Delete_Emp';
 import { useDispatch,useSelector } from 'react-redux';
+import { DeleteUserAPI } from '../redux/Slice/Account/DeleteUserRedu';
 
 export default function DeleteBtn({
     user_name,
@@ -13,9 +13,9 @@ export default function DeleteBtn({
 
     const dispatch = useDispatch()
     const token = useSelector((state) => state.myReducer.token);
-
+  
     const oncli_delbtn=()=>{
-        dispatch(Delete_Emp_API({ accessToken: token.access, Emp_ID:Emp_id }))
+        dispatch(DeleteUserAPI({ accessToken: token.access, Employee_id:Emp_id }))
         handleOpen()
     }
 

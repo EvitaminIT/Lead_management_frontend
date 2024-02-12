@@ -6,7 +6,10 @@ export const convertToSlug = (inputString) => {
 
 
 export const removeUnderscores = (inputString) => {
-    // Remove underscores from the input string
+    try{
     const resultString = inputString.replace(/_/g, ' ');
     return resultString;
+    }catch{
+      return inputString
+    }
 };
