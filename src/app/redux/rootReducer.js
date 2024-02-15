@@ -24,6 +24,12 @@ import ViewAllMarketReducer from './Slice/Leads/MartketPlace/ViewAllMarkerPlaceR
 import ViewAllCommericalReducer from './Slice/Leads/commercial/ViewAllCommericalRedu';
 import UpdateServiceReducer from './Slice/Leads/Service/UpdateServiceRedu';
 import DeleteCommericalReducer from './Slice/Leads/commercial/DeleteCommericalRedu';
+import CreateServiceReducer  from './Slice/Leads/Service/CreateServiceRedu';
+import CreateMarketPlaceReducer from './Slice/Leads/MartketPlace/CreatMarketPlaceRedu';
+import UpdateMarketPlaceReducer from './Slice/Leads/MartketPlace/UpdateMarketPlaceRedu';
+import DeleteMarketPlaceReducer from './Slice/Leads/MartketPlace/DeleteMarketPlaceRedu';
+import SearchMarketPlaceReducer from './Slice/Leads/MartketPlace/SearchMarketPlaceRedu';
+import SearchServiceReducer from './Slice/Leads/Service/SearchServiceRedu';
 
 
 
@@ -52,6 +58,12 @@ const rootReducer = combineReducers({
   ViewAllCommericalReducer:ViewAllCommericalReducer,
   UpdateServiceReducer:UpdateServiceReducer,
   DeleteCommericalReducer:DeleteCommericalReducer,
+  CreateServiceReducer:CreateServiceReducer,
+  CreateMarketPlaceReducer:CreateMarketPlaceReducer,
+  UpdateMarketPlaceReducer:UpdateMarketPlaceReducer,
+  DeleteMarketPlaceReducer:DeleteMarketPlaceReducer,
+  SearchMarketPlaceReducer:SearchMarketPlaceReducer,
+  SearchServiceReducer:SearchServiceReducer,
 });
 
 export default rootReducer;

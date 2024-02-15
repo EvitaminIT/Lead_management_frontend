@@ -1,8 +1,13 @@
 import React from 'react'
 import Index from '@/material_component/client_component'
-import Create_user from './CreateAndEditUser';
+import Create_user from './CreateAndEdit';
 import { useDispatch,useSelector } from 'react-redux';
 import { ViewAllServiceAPI } from '../redux/Slice/Leads/Service/VeiwAllServiceRedu';
+import { resetState_CreateService } from '../redux/Slice/Leads/Service/CreateServiceRedu';
+import CreateAndEditMarketPlace from './CreateAndEditMarketPlace';
+import { ViewAllMarketPlaceAPI } from '../redux/Slice/Leads/MartketPlace/ViewAllMarkerPlaceRedu';
+import { resetState_CreateMarketpalce } from '../redux/Slice/Leads/MartketPlace/CreatMarketPlaceRedu';
+import { resetState_UpdateMarketpalce } from '../redux/Slice/Leads/MartketPlace/UpdateMarketPlaceRedu';
 
 
 export default function Diloge({
@@ -11,20 +16,42 @@ export default function Diloge({
   MPlaceID,
   Service_name,
   serviceID,
+  page_no,
+  togel,
 }) {
     const [open, setOpen] = React.useState(false);
     const dispatch = useDispatch()
     const handleOpen = () => setOpen(!open);
     const token = useSelector((state) => state.myReducer.token);
+    const creacteService = useSelector((state) => state.CreateServiceReducer.loading);
+    const AddMarketLoading = useSelector((state) => state.CreateMarketPlaceReducer.loading);
+    const UpdateMarketLoading = useSelector((state) => state.UpdateMarketPlaceReducer.loading);
 
     React.useEffect(()=>{
-      open===false?dispatch(ViewAllServiceAPI({accessToken:token.access,page:1})):"";
-    },[open])
+      if(UpdateMarketLoading==="fulfilled"){
+        // dispatch(ViewAllMarketPlaceAPI({ accessToken: token.access}))
+        // dispatch(resetState_UpdateMarketpalce())
+        setOpen(false)
+      }
+    },[UpdateMarketLoading])
 
-    // const closeDiloag=()=>{
-    //   handleOpen()
-    //   dispatch(ViewAllServiceAPI({accessToken:token.access,page:1}))
-    // };   
+    React.useEffect(()=>{
+      if(AddMarketLoading==="fulfilled"){
+        dispatch(ViewAllMarketPlaceAPI({ accessToken: token.access}))
+        dispatch(resetState_CreateMarketpalce())
+        setOpen(false);
+      }
+    },[AddMarketLoading])
+
+    React.useEffect(()=>{
+      if(creacteService==="fulfilled"){
+        dispatch(ViewAllServiceAPI({accessToken:token.access,page:page_no}))
+        dispatch(resetState_CreateService())
+        setOpen(false);
+      }
+    },[creacteService])
+
+
 
   return (
     <>
@@ -34,22 +61,27 @@ export default function Diloge({
      <Index.Button onClick={handleOpen} className="rounded-full bg-[#67B037] float-right">{btn}</Index.Button>
     }
     <Index.Dialog
-      className='!h-[40rem] bg-blue-gray-50'
+      className={`${togel==="services"?'!h-[40rem]':''} bg-blue-gray-50`}
       open={open}
-      size='md'
+      size={togel==="services"?"md":"xs"}
       handler={handleOpen}
     //   animate={{
     //     mount: { scale: 1, y: 0 },
     //     unmount: { scale: 0.9, y: -100 },
     //   }}
     >
-       <Index.DialogHeader className={`pb-0 ${btn==="Create" || btn==="Servicetable_edit"?"bg-[#2F3642] rounded-t-lg p-1":""}`}>
+       <Index.DialogHeader className={`pb-0 ${btn==="Create" || btn==="MarketPlacetable_edit" || btn==="Servicetable_edit"?"bg-[#2F3642] rounded-t-lg p-1":""}`}>
       
-      <div className={`w-full ${btn==="Create" || btn==="Servicetable_edit" ?"grid grid-cols-3 gap-4":""}`}>
-        {btn==="Create" || btn==="Servicetable_edit"?<div></div>:""}
-        {btn==="Create" || btn==="Servicetable_edit"?
+      <div className={`w-full ${btn==="Create" || btn==="MarketPlacetable_edit" || btn==="Servicetable_edit" ?"grid grid-cols-3 gap-4":""}`}>
+        {btn==="Create" || btn==="MarketPlacetable_edit" || btn==="Servicetable_edit"?<div></div>:""}
+        {btn==="Create" || btn==="MarketPlacetable_edit" || btn==="Servicetable_edit"?
         <div className='flex justify-center items-center'>
-        <Index.Typography color='white'>{btn==="Create" ?"Create Service":btn==="Servicetable_edit"?"Edit Service":""}</Index.Typography>
+        <Index.Typography color='white'> 
+        {togel==="services"?
+          btn==="Create" ?"Create Service":btn==="Servicetable_edit"?"Edit Service":""
+          :btn==="Create"?"Create Marketplace":"Update Marketplace"
+        }
+          </Index.Typography>
         </div>
         :
         ""
@@ -83,10 +115,12 @@ export default function Diloge({
        
       </Index.DialogHeader>
     <Index.DialogBody className={`${btn==="Create" || btn==="Servicetable_edit"?"p-0":""}`}>
-        <div className={`h-[60vh] ${btn==="Create" || btn==="Servicetable_edit"?"bg-[#F2F2F2] rounded-b-lg":""}`}>
-        {btn==="Create" || btn==="Servicetable_edit"?
-          <Create_user type={btn} MarPlaceName={MPlaceName} MarPlaceID={MPlaceID} SerName={Service_name} SerID={serviceID} />
-        :''}
+        <div className={`${togel==="services"?'h-[60vh]':''} ${btn==="Create" || btn==="Servicetable_edit"?"bg-[#F2F2F2] rounded-b-lg":""}`}>
+        {togel==="services"?
+        btn==="Create" || btn==="Servicetable_edit"?
+          <Create_user PageNo={page_no} type={btn} MarPlaceName={MPlaceName} MarPlaceID={MPlaceID} SerName={Service_name} SerID={serviceID} />
+        :''
+      :<CreateAndEditMarketPlace Btn={btn} MarketPlaceID={MPlaceID} MarketPlaceName={MPlaceName} />}
         </div>
     </Index.DialogBody>  
     

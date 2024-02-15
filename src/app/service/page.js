@@ -7,19 +7,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Search_service_API, resetSearchService } from '../redux/Slice/Evitamin/SearchServiceRedu';
 import { ViewAllServiceAPI } from '../redux/Slice/Leads/Service/VeiwAllServiceRedu';
 import { ViewAllMarketPlaceAPI } from '../redux/Slice/Leads/MartketPlace/ViewAllMarkerPlaceRedu';
+import { motion } from 'framer-motion';
+import { SearchServiceAPI,resetState_SearchService } from '../redux/Slice/Leads/Service/SearchServiceRedu';
+import { addUnderscores } from '../commen/commen_fun';
+import { SearchMarketPlaceAPI,resetState_SearchMarketpalce } from '../redux/Slice/Leads/MartketPlace/SearchMarketPlaceRedu';
 
-const data = [
-  {
-    label: "Services",
-    value: "services",
-    desc: <Table TableType={"Service"}/>,
-  },
-  {
-    label: "Marketplace",
-    value: "marketplace",
-    desc: <Table TableType={"Markerplace"} />,
-  },
-];
+
+
 
 
 export default function Page() {
@@ -29,18 +23,31 @@ export default function Page() {
   const [Search, SetSearch] = React.useState()
   const [active, setActive] = React.useState(1);
   const [goInput, setgoInput] = React.useState();
+  const [ searchType,setSearchType ]= React.useState("service");
+  const [isVisible, setIsVisible] = React.useState(false);
   const table_coll = useSelector((state) => state.ViewAllServiceReducer.data);
   const token = useSelector((state) => state.myReducer.token);
 
 
-  React.useEffect(()=>{
-     activeTab=="services"? dispatch(ViewAllServiceAPI({ accessToken: token.access, page:active})):dispatch(ViewAllMarketPlaceAPI({ accessToken: token.access}));
-  },[activeTab])
-  
+  const data = [
+    {
+      label: "Services",
+      value: "services",
+      desc: <Table pageNo={active} TableType={"Service"} />,
+    },
+    {
+      label: "Marketplace",
+      value: "marketplace",
+      desc: <Table pageNo={active} TableType={"Markerplace"} />,
+    },
+  ];
 
-  const onChangeSearch = (e) => {
-    SetSearch(e.target.value)
-  }
+
+
+  React.useEffect(() => {
+    activeTab == "services" ? dispatch(ViewAllServiceAPI({ accessToken: token.access, page: active })) : dispatch(ViewAllMarketPlaceAPI({ accessToken: token.access }));
+  }, [activeTab])
+
 
 
   const next = () => {
@@ -48,19 +55,19 @@ export default function Page() {
     if (active === table_coll.total_pages) return;
     setActive(active + 1);
     SetSearch("")
-    dispatch(resetSearchService())
+    dispatch(resetState_SearchService())
   };
   const prev = () => {
     dispatch(ViewAllServiceAPI({ accessToken: token.access, page: active - 1 }))
     if (active === 1) return;
     setActive(active - 1);
     SetSearch("")
-    dispatch(resetSearchService())
+    dispatch(resetState_SearchService())
   };
   const go_search = () => {
     SetSearch("")
     dispatch(ViewAllServiceAPI({ accessToken: token.access, page: goInput }))
-    dispatch(resetSearchService())
+    dispatch(resetState_SearchService())
   }
 
   const onchange = (e) => {
@@ -69,22 +76,37 @@ export default function Page() {
   }
 
   if (!Search) {
-    dispatch(resetSearchService())
+    activeTab==="services"? dispatch(resetState_SearchService()):
+    dispatch(resetState_SearchMarketpalce());
   }
 
   if (table_coll) {
     if (active !== table_coll.current_page) {
-      setActive(table_coll.current_page)
+      setActive(table_coll.current_page);
     }
   };
 
   const dispatch_search = () => {
-    dispatch(Search_service_API({ accessToken: token.access, service_ID: Search }))
+    activeTab==="services"?dispatch(SearchServiceAPI({ accessToken: token.access, SearchType: searchType,data:addUnderscores(Search) })):
+    dispatch(SearchMarketPlaceAPI({ accessToken: token.access,data:addUnderscores(Search) }))
   }
 
+  
   React.useEffect(() => {
     setTBLdata(table_coll)
   }, [table_coll])
+
+   
+  
+  React.useEffect(()=>{
+    activeTab === "services" ? setIsVisible(true):setIsVisible(false);
+  },[activeTab])
+
+
+  const onchangeTab=(value)=>{
+    setActiveTab(value)
+    SetSearch("")
+  }
 
   return (
     <>
@@ -100,30 +122,52 @@ export default function Page() {
                 }}
               >
                 {data.map(({ label, value }) => (
-                  <Index.Tab onClick={() => setActiveTab(value)} className={`${activeTab === value ? "text-white" : ""} font-semibold px-4`} key={value} value={value}>
+                  <Index.Tab onClick={()=>onchangeTab(value)} className={`${activeTab === value ? "text-white" : ""} font-semibold px-4`} key={value} value={value}>
                     {label}
                   </Index.Tab>
                 ))}
               </Index.TabsHeader>
             </div>
             <div className="grid grid-cols-5 gap-0">
-              <div>
-
-              </div>
-              <div className="col-span-2 pr-[0.4rem]">
-                <div className="text-gray-600 flex items-center">
+              <div className={`col-span-3 pr-[0.4rem]`}>
+                <div className="text-gray-600 flex items-center float-right">
                   <Index.Input
                     type="search"
                     name="search"
-                    onChange={onChangeSearch}
+                    onChange={(e)=>SetSearch(e.target.value)}
                     value={Search}
                     placeholder="Search..."
                     className="h-10 px-5 pr-1 rounded-l-full text-sm focus:outline-none !border !border-gray-300 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 focus:!border-t-gray-900 focus:ring-gray-900/10 !bg-[#2F3642] text-white"
                     labelProps={{
                       className: "hidden",
                     }}
+                    containerProps={{
+                      className:""
+                    }}
                   />
-                  <span>
+
+                  <span className={`flex`}>
+
+                    <motion.div
+                        initial={{ opacity: 0, width: 0 }}
+                        animate={{ opacity: isVisible ? 1 : 0, width: isVisible ? 'auto' : 0 }}
+                        transition={{ duration: 0.5 }}
+                        style={{ direction: "rtl" }}
+                        className={`${isVisible?'':"overflow-hidden"}`}
+                    >
+
+                      <Index.Select size='md' value={searchType} onChange={(value)=>setSearchType(value)} className={`!border-l-0 text-sm focus:outline-none border border-gray-300 text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 focus:!border-t-gray-900 focus:ring-gray-900/10 rounded-none text-xs`}
+                        labelProps={{
+                          className: "hidden",
+                        }}
+                        containerProps={{ className: `!min-w-[106px]` }}
+                      >
+                        <Index.Option value='service' className='text-xs float-left'>Service</Index.Option>
+                        <Index.Option value='marketplace' className='text-xs float-left'>Marketplace</Index.Option>
+                      </Index.Select>
+
+                    </motion.div>
+
                     <Index.Button onClick={dispatch_search} type="submit" className="rounded-r-full bg-[#67B037] py-[11px]">
                       Search
                     </Index.Button>
@@ -132,7 +176,7 @@ export default function Page() {
                 <div></div>
               </div>
               <div className='col-span-2'>
-                <Diloge btn={"Create"} />
+                <Diloge btn={"Create"} togel={activeTab} />
               </div>
             </div>
           </div>
@@ -147,7 +191,7 @@ export default function Page() {
               ))}
             </Index.TabsBody>
             {/* <Table /> */}
-            <div className={`grid grid-cols-3 gap-4 mt-4 ${activeTab==="marketplace"?"invisible":""}`}>
+            <div className={`grid grid-cols-3 gap-4 mt-4 ${activeTab === "marketplace" ? "invisible" : ""}`}>
               <div>
                 <div className='flex items-center gap-2'>
                   <Index.Typography>Page</Index.Typography>

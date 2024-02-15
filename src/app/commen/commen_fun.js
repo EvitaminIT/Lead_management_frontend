@@ -13,3 +13,13 @@ export const removeUnderscores = (inputString) => {
       return inputString
     }
 };
+
+
+export const addUnderscores = (inputString) => {
+  try {
+      const resultString = inputString.replace(/ /g, '_');
+      return resultString;
+  } catch {
+      return inputString;
+  }
+};
