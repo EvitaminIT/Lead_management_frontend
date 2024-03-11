@@ -5,9 +5,9 @@ import { Dropdown } from "react-day-picker";
 
 
 
-export const resetState_viewll_led_BL = createAction('GetDesignationDroupRedu/resetState');
+export const ResetDesigDroupdown = createAction('GetDesignationDroupRedu/resetState');
 
-export const DesigDroup_API = createAsyncThunk('GetDesignationDroupRedu/DesigDroup_API', async({accessToken,Dep_id}) => {
+export const DesigDroupAPI = createAsyncThunk('GetDesignationDroupRedu/DesigDroupAPI', async({accessToken,Dep_id}) => {
     try {
       const response = await API_Service.get(`${API.Dropdown.Designation}/${Dep_id}`,{
         headers:{
@@ -30,7 +30,7 @@ export const DesigDroup_API = createAsyncThunk('GetDesignationDroupRedu/DesigDro
       data:null,
     },
     reducers: {
-        resetState_viewll_led_BL: (state) => {
+        ResetDesigDroupdown: (state) => {
         // Reset the state to its initial values
         return {
           ...state,
@@ -42,14 +42,14 @@ export const DesigDroup_API = createAsyncThunk('GetDesignationDroupRedu/DesigDro
     },
     extraReducers: (builder) => {
       builder
-        .addCase(DesigDroup_API.pending, (state) => {
+        .addCase(DesigDroupAPI.pending, (state) => {
           state.loading = 'pending';
         })
-        .addCase(DesigDroup_API.fulfilled, (state, action) => {
+        .addCase(DesigDroupAPI.fulfilled, (state, action) => {
           state.loading = 'fulfilled';
           state.data=action.payload.data;
         })
-        .addCase(DesigDroup_API.rejected, (state, action) => {
+        .addCase(DesigDroupAPI.rejected, (state, action) => {
           state.error = 'rejected';
         })
 

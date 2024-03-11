@@ -1,19 +1,9 @@
 // src/reducers/index.js
 import { combineReducers } from 'redux';
 import myReducer from './Slice/AuthSlice';
-import view_all_leadsReducer from './Slice/Bussness_leads/view_all_LedSlice';
-import GetInd_leadsReducer from './Slice/Bussness_leads/Get_ind_leads';
-import Add_manual_leadsReducer from './Slice/Bussness_leads/Add_manual_leads';
-import add_and_view_new_service_Reducer from './Slice/Bussness_leads/add_view_new_ser';
-import upload_file_bl_Reducer from './Slice/Bussness_leads/upload_file_blreducer';
 import GetTableDropRedu from './Slice/Dropdowns/Depardropdown';
-import Delete_lead_for_approvelRedu from './Slice/Bussness_leads/delete_lead_for_approvl';
-import Search_by_leadReducer from './Slice/Bussness_leads/Search_by_leads';
-import View_all_Emp_Reducer from './Slice/Employee/ViewAllEmployeeRedu';
-import Delete_Emp_Reducer from './Slice/Employee/Delete_Emp';
-import Search_EmpReducer from './Slice/Employee/SearchEmpRedu';
-import View_all_Service_Reducer from './Slice/Evitamin/Veiw_all_serviceRedu';
-import SearchService_Reducer from './Slice/Evitamin/SearchServiceRedu';
+import ViewAllEmpReducer from './Slice/Employee/ViewAllEmployeeRedu';
+import SearchEmpReducer from './Slice/Employee/SearchEmpRedu';
 import GetDesignationDroupRedu from './Slice/Dropdowns/Designationdroup';
 import AddUserReducer from './Slice/Account/RegisterUserRedu';
 import GetProductDroupRedu from './Slice/Dropdowns/Productdropdown';
@@ -30,24 +20,17 @@ import UpdateMarketPlaceReducer from './Slice/Leads/MartketPlace/UpdateMarketPla
 import DeleteMarketPlaceReducer from './Slice/Leads/MartketPlace/DeleteMarketPlaceRedu';
 import SearchMarketPlaceReducer from './Slice/Leads/MartketPlace/SearchMarketPlaceRedu';
 import SearchServiceReducer from './Slice/Leads/Service/SearchServiceRedu';
+import ViewAllEmpStatusReducer from './Slice/Leads/EmpStatus/EmpStatusListRedu';
+import GetArchiveUsersReducer from './Slice/Account/ArchiveUsers/GetArchiveUserRedu';
+import SearchArchiveUsersReducer from './Slice/Account/ArchiveUsers/SearchArchiveUserRedu';
 
 
 
 const rootReducer = combineReducers({
   myReducer: myReducer,
-  view_all_leadsReducer:view_all_leadsReducer,
-  GetInd_leadsReducer:GetInd_leadsReducer,
-  Add_manual_leadsReducer:Add_manual_leadsReducer,
-  add_and_view_new_service_Reducer:add_and_view_new_service_Reducer,
-  upload_file_bl_Reducer:upload_file_bl_Reducer,
   GetTableDropRedu:GetTableDropRedu,
-  Delete_lead_for_approvelRedu:Delete_lead_for_approvelRedu,
-  Search_by_leadReducer:Search_by_leadReducer,
-  View_all_Emp_Reducer:View_all_Emp_Reducer,
-  Delete_Emp_Reducer:Delete_Emp_Reducer,
-  Search_EmpReducer:Search_EmpReducer,
-  View_all_Service_Reducer:View_all_Service_Reducer,
-  SearchService_Reducer:SearchService_Reducer,
+  ViewAllEmpReducer:ViewAllEmpReducer,
+  SearchEmpReducer:SearchEmpReducer,
   GetDesignationDroupRedu:GetDesignationDroupRedu,
   AddUserReducer:AddUserReducer,
   GetProductDroupRedu:GetProductDroupRedu,
@@ -64,6 +47,9 @@ const rootReducer = combineReducers({
   DeleteMarketPlaceReducer:DeleteMarketPlaceReducer,
   SearchMarketPlaceReducer:SearchMarketPlaceReducer,
   SearchServiceReducer:SearchServiceReducer,
+  ViewAllEmpStatusReducer:ViewAllEmpStatusReducer,
+  GetArchiveUsersReducer:GetArchiveUsersReducer,
+  SearchArchiveUsersReducer:SearchArchiveUsersReducer,
 });
 
 export default rootReducer;

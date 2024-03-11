@@ -4,9 +4,9 @@ import { API } from "@/Apis/API";
 import { headers } from "../../../../../next.config";
 
 
-export const Search_UserResetState = createAction('Search_EmpReducer/Search_UserResetState');
+export const SearchUserResetState = createAction('SearchEmpReducer/SearchUserResetState');
 
-export const Search_user_api = createAsyncThunk('Search_EmpReducer/Search_user_api', async({accessToken,searchby,element}) => {
+export const SearchUserAPI = createAsyncThunk('SearchEmpReducer/SearchUserAPI', async({accessToken,searchby,element}) => {
     try {
       const response = await API_Service.get(`${API.Employee.Search_user}/${searchby}/${element}`,{
         headers:{
@@ -22,15 +22,15 @@ export const Search_user_api = createAsyncThunk('Search_EmpReducer/Search_user_a
 
 
   // Create a slice to manage the state
-  const Search_EmpReducer = createSlice({
-    name: 'Search_EmpReducer',
+  const SearchEmpReducer = createSlice({
+    name: 'SearchEmpReducer',
     initialState: {
       error: null,
       loading: 'idle',
       data:null,
     },
     reducers: {
-        Search_UserResetState: (state) => {
+        SearchUserResetState: (state) => {
         // Reset the state to its initial values
         return {
           ...state,
@@ -42,19 +42,19 @@ export const Search_user_api = createAsyncThunk('Search_EmpReducer/Search_user_a
     },
     extraReducers: (builder) => {
       builder
-        .addCase(Search_user_api.pending, (state) => {
+        .addCase(SearchUserAPI.pending, (state) => {
           state.loading = 'pending';
         })
-        .addCase(Search_user_api.fulfilled, (state, action) => {
+        .addCase(SearchUserAPI.fulfilled, (state, action) => {
           state.loading = 'fulfilled';
           state.data=action.payload.data
 
         })
-        .addCase(Search_user_api.rejected, (state, action) => {
+        .addCase(SearchUserAPI.rejected, (state, action) => {
           state.loading = 'rejected';
 
         });
     },
   });
   
-  export default Search_EmpReducer.reducer;
+  export default SearchEmpReducer.reducer;

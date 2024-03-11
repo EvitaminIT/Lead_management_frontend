@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 
 export const resetState = createAction('AddUserReducer/resetState');
 
-export const AddUser_API = createAsyncThunk('AddUserReducer/AuthpostApiData', async({accessToken,data}) => {
+export const AddUserAPI = createAsyncThunk('AddUserReducer/AuthpostApiData', async({accessToken,data}) => {
     try {
       const response = await API_Service.post(API.Account.User_register,data,{
         headers:{
@@ -44,10 +44,10 @@ export const AddUser_API = createAsyncThunk('AddUserReducer/AuthpostApiData', as
     },
     extraReducers: (builder) => {
       builder
-        .addCase(AddUser_API.pending, (state) => {
+        .addCase(AddUserAPI.pending, (state) => {
           state.loading = 'pending';
         })
-        .addCase(AddUser_API.fulfilled, (state, action) => {
+        .addCase(AddUserAPI.fulfilled, (state, action) => {
           state.loading = 'fulfilled';
           state.data=action.payload.data
           toast.success(action.payload.message, {
@@ -61,7 +61,7 @@ export const AddUser_API = createAsyncThunk('AddUserReducer/AuthpostApiData', as
             theme: "light",
             });
         })
-        .addCase(AddUser_API.rejected, (state, action) => {
+        .addCase(AddUserAPI.rejected, (state, action) => {
           state.loading = 'rejected';
           toast.error(action.error.message, {
             position: "top-center",

@@ -1,49 +1,63 @@
 "use client"
-import React from 'react'
-import Index from '@/material_component/client_component'
-import Image from 'next/image'
-import { total_head, TABLE_HEAD, TABLE_ROWS } from './SSRcomponent'
-import side_art from '../../Image/side_Artboard.svg'
-import { useSelector } from 'react-redux'
+import React from 'react';
+import Index from '@/material_component/client_component';
+import Image from 'next/image';
+import { TotalHead } from './SSRcomponent';
+import side_art from '../../Image/side_Artboard.svg';
+import { useSelector } from 'react-redux';
+import Dailoag from './dailoag';
+import OtherPerformence from './OtherPerformence';
+import OverallPerformence from './OverallPerformence';
+import { ServicePerHead,AssociatePerHead } from './SSRcomponent';
+
 
 
 export default function Page() {
-  const [Selselectfild, setSelselectfild] = React.useState("Select_Performance_Type");
+  const [Selselectfild, setSelselectfild] = React.useState("Overall_Performance");
   const data = useSelector((state) => state.myReducer.data);
   const user_roll=data? data.user_role:""
+  
+  function getPerformence(argument) {
+    const typeMap = {
+        "Overall_Performance":<OverallPerformence/>,
+        "Associate_Level_Performance":<OtherPerformence Head={AssociatePerHead}/>,
+        "Service_Level_Performance":<OtherPerformence Head={ServicePerHead}/>,
+    };
+
+    return typeMap[argument];
+}
+
+ const getPerformenceName=(agr)=>{
+   const Map={
+    "Overall_Performance":"Overall Performance",
+    "Associate_Level_Performance":"Associate Level Performance",
+    "Service_Level_Performance":"Service Level Performance",
+   }
+   return Map[agr]
+ }
+
+  // console.log(updateTotalNoWithTitle("Converted Leads",20))
   return (
     <>
+    {/* <Index.Button onClick={()=>}>tst</Index.Button> */}
     <div className='grid grid-cols-5 gap-4 w-full rounded-t-[40px] bg-[#2F3642] py-10 px-32 overflow-auto !h-[40.6rem] scrollbar-thin scrollbar-thumb-green-500 scrollbar-track-gray-200 scrollbar-thumb-rounded-lg scrollbar-w-lg'>
-      {total_head.map((details) => {
+      {TotalHead.map((details,index) => {
         return (
           <>
-            <Index.Card className={`${details.title==="Asked for Details" || details.title==="Associate Not Assigned" ? `${user_roll ==="admin" || user_roll ==="lead_manager" ?"!hidden":""}`:"" } grid grid-cols-3 gap-2 p-6  ${details.title === "Converted Leads" ? "bg-[#E8FAD1]" : ""} ${details.title === "Not Interested" ? "bg-[#F9CECE]" : ""}`}>
-              <div className='flex items-center'>
-                <Image src={details.image} />
-              </div>
-              <div className='col-span-2 text-center flex flex-col justify-around'>
-                <div className=''>
-                  <Index.Typography className='text-xl'>{details.title}</Index.Typography>
-                </div>
-                <div className='border-t-2 border-[#D9D9D9]'>
-                  <Index.Typography className='text-3xl'>{details.total_no}</Index.Typography>
-                </div>
-              </div>
-            </Index.Card>
+             <Dailoag Title={details.title} Img={details.image} TotalNo={details.total_no} user_roll={user_roll}/>  
           </>
         )
       })}
 
       <Index.Card className='col-span-4 p-4'>
         <div className='flex justify-between mb-2'>
-          <Index.Typography className='text-2xl px-[12px] text-[#67B037] font-bold'>Team Performance</Index.Typography>
+          <Index.Typography className='text-2xl px-[12px] text-[#67B037] font-bold'>{getPerformenceName(Selselectfild)}</Index.Typography>
           <div className='w-1/5'>
             <Index.Select size='md' value={Selselectfild} onChange={(value) => setSelselectfild(value)} variant="outlined" placeholder="Select Date" className={`px-5 pr-10 text-sm focus:outline-none !border !border-gray-300 text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 focus:!border-t-gray-900 focus:ring-gray-900/10 rounded-full bg-[#2F3642] ${Selselectfild === "Select_Performance_Type" ? "text-[#9e9e9e]" : "text-white"}`}
               labelProps={{
                 className: "hidden",
               }}
               containerProps={{ className: "min-w-[100px]" }} label="Select Version">
-              <Index.Option value='Select_Performance_Type' className='capitalize' disabled>Select Performance Type</Index.Option>
               <Index.Option value='Overall_Performance' className='capitalize'>Overall Performance</Index.Option>
               <Index.Option value='Associate_Level_Performance' className='capitalize'>Associate Level Performance</Index.Option>
               <Index.Option value='Service_Level_Performance' className='capitalize'>Service Level Performance</Index.Option>
@@ -51,113 +65,11 @@ export default function Page() {
           </div>
         </div>
         <Index.Card className="shadow-none h-full w-full overflow-scroll">
-          <table className="w-full min-w-max table-auto text-left">
-            <thead>
-              <tr>
-                {TABLE_HEAD.map((head) => (
-                  <th
-                    key={head}
-                    className="p-4"
-                  >
-                    <Index.Typography
-                      variant="small"
-                      color="blue-gray"
-                      className="font-bold leading-none"
-                    >
-                      {head}
-                    </Index.Typography>
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {TABLE_ROWS.map(({ name, job, date }) => {
-                const isLast = Index === TABLE_ROWS.length - 1;
-                const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
-
-                return (
-                  <tr key={name}>
-                    <td className={classes}>
-                      <Index.Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
-                      >
-                        {name}
-                      </Index.Typography>
-                    </td>
-                    <td className={classes}>
-                      <Index.Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
-                      >
-                        {job}
-                      </Index.Typography>
-                    </td>
-                    <td className={classes}>
-                      <Index.Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
-                      >
-                        {date}
-                      </Index.Typography>
-                    </td>
-                    <td className={classes}>
-                      <Index.Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
-                      >
-                        {date}
-                      </Index.Typography>
-                    </td>
-                    <td className={classes}>
-                      <Index.Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
-                      >
-                        {date}
-                      </Index.Typography>
-                    </td>
-                    <td className={classes}>
-                      <Index.Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
-                      >
-                        {date}
-                      </Index.Typography>
-                    </td>
-                    <td className={classes}>
-                      <Index.Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
-                      >
-                        {date}
-                      </Index.Typography>
-                    </td>
-                    <td className={classes}>
-                      <Index.Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
-                      >
-                        {date}
-                      </Index.Typography>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+          {getPerformence(Selselectfild)}
         </Index.Card>
       </Index.Card>
       <Index.Card>
-        <Image src={side_art} />
+        <Image alt='art' src={side_art} />
       </Index.Card>
     </div>
     </>

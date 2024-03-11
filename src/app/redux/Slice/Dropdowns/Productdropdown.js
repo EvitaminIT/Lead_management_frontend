@@ -4,7 +4,7 @@ import { API } from "@/Apis/API";
 
 
 
-export const resetState_viewll_led_BL = createAction('GetProductDroupRedu/resetState');
+export const ResetProductDroupdown = createAction('GetProductDroupRedu/resetState');
 
 export const GetProductDroupdownAPI = createAsyncThunk('GetProductDroupRedu/GetProductDroupdownAPI', async({accessToken,Degi_id}) => {
     try {
@@ -29,7 +29,7 @@ export const GetProductDroupdownAPI = createAsyncThunk('GetProductDroupRedu/GetP
       data:null,
     },
     reducers: {
-        resetState_viewll_led_BL: (state) => {
+        ResetProductDroupdown: (state) => {
         // Reset the state to its initial values
         return {
           ...state,

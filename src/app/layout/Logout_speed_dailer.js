@@ -2,16 +2,13 @@
   import Index from "@/material_component/client_component";
   import { useDispatch,useSelector } from "react-redux";
   import { resetState } from "../redux/Slice/AuthSlice";
-  import { resetState_viewll_led_BL } from "../redux/Slice/Bussness_leads/view_all_LedSlice";
   import { useRouter } from "next/navigation";
-  import { auth_Logout } from "../Routs/Auth_Routs";
 
    
-  export function LogoutSpeed_Di() {    
+  export function LogoutSpeedDi() {    
     const dispatch=useDispatch()
     const router = useRouter()
     const loading = useSelector((state) => state.myReducer.loading);
-    // auth_Logout(router,loading)
     React.useEffect(()=>{
       if(loading!=="fulfilled"){
         router.push("/")     
@@ -19,7 +16,6 @@
     },[loading])
     const Logout =()=>{
       dispatch(resetState())
-      dispatch(resetState_viewll_led_BL())
     }
     return (
       <div className="">

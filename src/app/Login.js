@@ -30,7 +30,7 @@ export default function Login() {
   }else{
     router.push("/")
   }
-  },[loading,router])
+  },[loading,router,data])
 
   return (
     <div className="flex justify-center bg-[#2F3642] h-[100vh]" 
@@ -41,7 +41,7 @@ export default function Login() {
       <Index.CardHeader className="text-center" color="transparent" shadow={false}>
       <div className="flex justify-center">
       <div className="bg-[#D9D9D9] w-fit rounded-full px-[11px] py-[20px]">
-      <Image className="rounded-full" src={evits_logo}/>
+      <Image alt="Evit's image" className="rounded-full" src={evits_logo}/>
       </div>
       </div>
       <Index.Typography variant="h4" className="text-[#FFFFFF] mt-4">Welcome to EVITS</Index.Typography>

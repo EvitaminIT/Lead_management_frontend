@@ -3,10 +3,10 @@ import React from "react";
 import Index from "@/material_component/client_component";
 import { usePathname } from 'next/navigation';
 import Link from "next/link";
-import { LogoutSpeed_Di } from "./Logout_speed_dailer";
+import { LogoutSpeedDi } from "./Logout_speed_dailer";
 import dynamic from 'next/dynamic'
 import { useSelector } from "react-redux";
-import { Admin_tabs } from "./SSRcomponent";
+import { AdminTabs } from "./SSRcomponent";
 
 export function NavbarWithMegaMenu({
 }) {
@@ -25,8 +25,7 @@ export function NavbarWithMegaMenu({
 
   React.useEffect(()=>{
     if (usertype === "admin") {
-      console.log("work")
-      setTab_list(Admin_tabs)
+      setTab_list(AdminTabs)
     }
   },[usertype])
 
@@ -95,7 +94,7 @@ export function NavbarWithMegaMenu({
             </div>
           </div>
           <div className="flex justify-end">
-            <LogoutSpeed_Di />
+            <LogoutSpeedDi />
           </div>
         </div>
       </div>

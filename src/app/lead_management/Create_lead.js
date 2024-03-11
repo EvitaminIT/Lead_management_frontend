@@ -2,10 +2,10 @@
 import React,{ useRef } from 'react'
 import Index from '@/material_component/client_component'
 import { useSelector, useDispatch } from "react-redux";
-import { Upload_File_BL_api } from '../redux/Slice/Bussness_leads/upload_file_blreducer';
+// import { Upload_File_BL_api } from '../redux/Slice/Bussness_leads/upload_file_blreducer';
 import { Flip, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { viewall_Leads_api } from '../redux/Slice/Bussness_leads/view_all_LedSlice';
+// import { viewall_Leads_api } from '../redux/Slice/Bussness_leads/view_all_LedSlice';
 
 export default function Create_lead({
   Btn
@@ -13,7 +13,7 @@ export default function Create_lead({
  const datePickerRef = useRef(null);
   const [selectedFile, setSelectedFile] = React.useState(null);
   const token = useSelector((state) => state.myReducer.token);
-  const loading = useSelector((state) => state.upload_file_bl_Reducer.loading);
+  const loading = false
   const dispatch = useDispatch();
   const handleOpenDatePicker = () => {
     if (datePickerRef.current) {
@@ -23,9 +23,9 @@ export default function Create_lead({
   
    
   const dispatch_file_for_create_lead=()=>{
-    dispatch(Upload_File_BL_api({accessToken:token.access,fileup:{file:selectedFile}}))
+    // dispatch(Upload_File_BL_api({accessToken:token.access,fileup:{file:selectedFile}}))
     setSelectedFile(null)
-    dispatch(viewall_Leads_api({accessToken:token.access,pages:1}))
+    // dispatch(viewall_Leads_api({accessToken:token.access,pages:1}))
   }
 
 

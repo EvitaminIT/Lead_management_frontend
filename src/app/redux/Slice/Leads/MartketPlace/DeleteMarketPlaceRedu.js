@@ -4,7 +4,7 @@ import { API } from "@/Apis/API";
 import { toast } from "react-toastify";
 
 
-export const resetState_DeleteMarketpalce = createAction('DeleteMarketPlaceReducer/resetState');
+export const resetStateDeleteMarketpalce = createAction('DeleteMarketPlaceReducer/resetStateDeleteMarketpalce');
 
 export const DeleteMarketPlaceAPI = createAsyncThunk('DeleteMarketPlaceReducer/DeleteMarketPlaceAPI', async({accessToken,MarketID}) => {
     try {
@@ -30,7 +30,7 @@ export const DeleteMarketPlaceAPI = createAsyncThunk('DeleteMarketPlaceReducer/D
       data:null,
     },
     reducers: {
-      resetState: (state) => {
+      resetStateDeleteMarketpalce: (state) => {
         // Reset the state to its initial values
         return {
           ...state,

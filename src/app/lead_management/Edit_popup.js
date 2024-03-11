@@ -3,10 +3,10 @@ import React from 'react'
 import { edit_from_title } from './SSRcomponent'
 import Index from '@/material_component/client_component'
 import { useSelector, useDispatch } from "react-redux";
-import { getInd_Leads_api } from '../redux/Slice/Bussness_leads/Get_ind_leads';
+// import { getInd_Leads_api } from '../redux/Slice/Bussness_leads/Get_ind_leads';
 import { convertToSlug, removeUnderscores } from './SSRcomponent';
 import { RotateLoader } from 'react-spinners';
-import { view_country_api } from '../redux/Slice/Bussness_leads/add_view_new_ser';
+// import { view_country_api } from '../redux/Slice/Bussness_leads/add_view_new_ser';
 
 function Icon({ id, open }) {
   return (
@@ -37,10 +37,10 @@ export default function Edit_popup({
   const token = useSelector((state) => state.myReducer.token);
   const dispatch = useDispatch()
   const [open, setOpen] = React.useState(0);
-  const loading = useSelector((state) => state.GetInd_leadsReducer.BL_view_loading)
+  const loading = false;
   const country_call = useSelector((state) => state.add_and_view_new_service_Reducer.data_country);
   const handleOpen = (value, title) => {
-    dispatch(getInd_Leads_api({accessToken:token.access,table: convertToSlug(title),lead_id: led_id}))
+    // dispatch(getInd_Leads_api({accessToken:token.access,table: convertToSlug(title),lead_id: led_id}))
     setOpen(open === value ? 0 : value);
     if(title==="All Identifiers"){
       setDisabled(true)
@@ -58,7 +58,7 @@ export default function Edit_popup({
   const handle_dropdown=(table)=>{
     console.log(table,"work dorp")
     if(table==="service_country"){
-      dispatch(view_country_api(token.access))
+      // dispatch(view_country_api(token.access))
     }
   }
 

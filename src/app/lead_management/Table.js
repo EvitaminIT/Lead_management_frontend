@@ -2,7 +2,6 @@
 import React from 'react'
 import Index from '@/material_component/client_component'
 import { TABLE_HEAD,TABLE_ROWS } from './SSRcomponent';
-import { viewall_Leads_api } from '../redux/Slice/Bussness_leads/view_all_LedSlice';
 import { useDispatch,useSelector } from 'react-redux';
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
@@ -13,9 +12,9 @@ import { MoonLoader } from 'react-spinners';
 export default function Table({
   table_Row 
 }) {
-  const BL_loading = useSelector((state) => state.view_all_leadsReducer.loading);
-  const search_data = useSelector((state) => state.Search_by_leadReducer.data);
-  const search_loading = useSelector((state) => state.Search_by_leadReducer.loading);
+  const BL_loading = false
+  // const search_data = useSelector((state) => state.Search_by_leadReducer.data);
+  const search_loading = false
 
   const[TBD,setTBD]=React.useState([])
   

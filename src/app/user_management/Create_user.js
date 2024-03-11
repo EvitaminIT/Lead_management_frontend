@@ -2,12 +2,12 @@ import React from 'react';
 import { Create_user_manuinput,Admin_Create_user_manuinput } from './SSRcomponent';
 import Index from '@/material_component/client_component';
 import { useDispatch,useSelector } from 'react-redux';
-import { getDepartment_Droupdown_API } from '../redux/Slice/Dropdowns/Depardropdown';
+import { GetDepartmentDroupdownAPI } from '../redux/Slice/Dropdowns/Depardropdown';
 import { removeUnderscores } from '../commen/commen_fun';
-import { DesigDroup_API } from '../redux/Slice/Dropdowns/Designationdroup';
-import { AddUser_API } from '../redux/Slice/Account/RegisterUserRedu';
+import { DesigDroupAPI } from '../redux/Slice/Dropdowns/Designationdroup';
+import { AddUserAPI } from '../redux/Slice/Account/RegisterUserRedu';
 import { ToastContainer,Flip, toast } from 'react-toastify';
-import { View_all_Emp_API } from '../redux/Slice/Employee/ViewAllEmployeeRedu';
+import { ViewAllEmpAPI } from '../redux/Slice/Employee/ViewAllEmployeeRedu';
 
 
 
@@ -29,7 +29,7 @@ export default function Create_user() {
 
     
     React.useEffect(() => {
-      dispatch(getDepartment_Droupdown_API({accessToken:token.access}))
+      dispatch(GetDepartmentDroupdownAPI({accessToken:token.access}))
     }, [])
 
     React.useEffect(()=>{
@@ -47,7 +47,7 @@ export default function Create_user() {
     },[data])
 
    const dispatch_details=()=>{
-    dispatch(AddUser_API({accessToken:token.access,data:CreateUserDetails}))
+    dispatch(AddUserAPI({accessToken:token.access,data:CreateUserDetails}))
    }    
 
    const onchange=(e)=>{
@@ -58,7 +58,7 @@ export default function Create_user() {
   const setDepartment=(value)=>{
     setdepartment(value)
     setCreateUserDetails({...CreateUserDetails,"department":value})
-    dispatch(DesigDroup_API({accessToken:token.access,Dep_id:value}))
+    dispatch(DesigDroupAPI({accessToken:token.access,Dep_id:value}))
   }
 
   const setdesignation=(value)=>{
@@ -105,39 +105,16 @@ export default function Create_user() {
     />
     
     <div className='grid grid-cols-3 gap-4 p-6 h-full'>
-       { userInputs.map((data)=>{
+       { userInputs.map((data,index)=>{
          return(
             <>
        {data.title==="Department" || data.title === "Designation" || data.title === "Admin Role" ? 
         <>
-         <div className='flex items-center'>
+         <div key={index} className='flex items-center'>
         <Index.Typography className='text-xl'>{data.title}:</Index.Typography>
        </div>
-       <div className='col-span-2'>
+       <div key={index} className='col-span-2'>
        <SelectFiled  optionList={data.title==="Department"?depatDroup:data.title === "Designation"?DesignationDroup:""} title={data.title}/>
-       {/* <Index.Select placeholder={data.title} value={data.title==="Department"? Seldepartment:data.title==="Designation"? SelDesignation:""} disabled={data.title === "Designation"? Seldepartment? false : true: ""} onChange={(value) => data.title==="Department" ? setDepartment(value): data.title==="Designation"? setdesignation(value):""}  variant="outlined" className='h-10 px-5 pr-10 text-sm focus:outline-none !border !border-gray-300 text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 focus:!border-t-gray-900 focus:ring-gray-900/10 rounded-full'
-           labelProps={{
-            className: "hidden",
-          }}
-          containerProps={{ className: "min-w-[100px]" }} label="Select Version">
-        {data.title==="Department" ?
-        depatDroup.map((depart_data,index)=>{
-            return(
-            <Index.Option className='capitalize'  value={depart_data.department_id} id={index+1} key={index}>{removeUnderscores(depart_data.department_name)}</Index.Option>  
-            )
-        })
-        : 
-        data.title==="Designation"?
-        DesignationDroup.map((desig_data,index)=>{
-          return(
-            <Index.Option className='capitalize'  value={desig_data.designation_id} id={index+1} key={index}>{removeUnderscores(desig_data.designation_name
-              )}</Index.Option> 
-          )
-        }):""
-        }
-  
-      </Index.Select> */}
-
        </div>
         </>
        :

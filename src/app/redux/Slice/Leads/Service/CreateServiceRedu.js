@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 
 
-export const resetState_CreateService = createAction('CreateServiceReducer/resetState');
+export const resetStateCreateService = createAction('CreateServiceReducer/resetStateCreateService');
 
 export const CreateServiceAPI = createAsyncThunk('CreateServiceReducer/CreateServiceAPI', async({accessToken,data}) => {
     try {
@@ -32,7 +32,7 @@ export const CreateServiceAPI = createAsyncThunk('CreateServiceReducer/CreateSer
       data:null,
     },
     reducers: {
-      resetState: (state) => {
+      resetStateCreateService: (state) => {
         // Reset the state to its initial values
         return {
           ...state,

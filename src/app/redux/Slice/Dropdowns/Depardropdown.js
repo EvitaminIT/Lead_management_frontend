@@ -5,9 +5,9 @@ import { Dropdown } from "react-day-picker";
 
 
 
-export const resetState_viewll_led_BL = createAction('GetTableDropRedu/resetState');
+export const ResetDepartmetDroupdown = createAction('GetTableDropRedu/resetState');
 
-export const getDepartment_Droupdown_API = createAsyncThunk('GetTableDropRedu/getDepartment_Droupdown_API', async({accessToken}) => {
+export const GetDepartmentDroupdownAPI = createAsyncThunk('GetTableDropRedu/GetDepartmentDroupdownAPI', async({accessToken}) => {
     try {
       const response = await API_Service.get(`${API.Dropdown.Department}`,{
         headers:{
@@ -30,7 +30,7 @@ export const getDepartment_Droupdown_API = createAsyncThunk('GetTableDropRedu/ge
       data:null,
     },
     reducers: {
-        resetState_viewll_led_BL: (state) => {
+        ResetDepartmetDroupdown: (state) => {
         // Reset the state to its initial values
         return {
           ...state,
@@ -42,14 +42,14 @@ export const getDepartment_Droupdown_API = createAsyncThunk('GetTableDropRedu/ge
     },
     extraReducers: (builder) => {
       builder
-        .addCase(getDepartment_Droupdown_API.pending, (state) => {
+        .addCase(GetDepartmentDroupdownAPI.pending, (state) => {
           state.loading = 'pending';
         })
-        .addCase(getDepartment_Droupdown_API.fulfilled, (state, action) => {
+        .addCase(GetDepartmentDroupdownAPI.fulfilled, (state, action) => {
           state.loading = 'fulfilled';
           state.data=action.payload.data;
         })
-        .addCase(getDepartment_Droupdown_API.rejected, (state, action) => {
+        .addCase(GetDepartmentDroupdownAPI.rejected, (state, action) => {
           state.error = 'rejected';
         })
 

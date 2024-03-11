@@ -10,7 +10,13 @@ import PendPayIMG from '../../Image/Pending_For_Payment.svg'
 import UnResIMG from '../../Image/Unresponsive.svg'
 
 
-export const total_head=[
+export const AssociatePerHead=["Name","Team Leader","Department","Total Assigned Leads","Open Leads","Closed Leads","Unresponsive","Not Interested","Conversion Rate"]
+
+export const ServicePerHead=["Country","Marketplace","Service","Total Leads","Open Leads","Closed Leads","Unresponsive","Not Interested"]
+
+
+
+export const TotalHead=[
     {
         title:'Assigned Leads',
         total_no:'80',
@@ -64,7 +70,23 @@ export const total_head=[
 ]
 
 
-export const TABLE_HEAD = ["Name", "Conversion Rate", "Total Assigned Leads", "Open Leads","Closed Leads","Follow Up","Unresponsive","Not Interested"];
+export const updateTotalNoWithTitle = (title, newTotalNo) => {
+  const updatedTotalHead = total_head.map(item => {
+      if (item.title === title) {
+          return {
+              ...item,
+              total_no: newTotalNo,
+          };
+      } else {
+          return item;
+      }
+  });
+
+  return updatedTotalHead;
+};
+
+
+export const TABLEHEAD = ["Name", "Conversion Rate", "Total Assigned Leads", "Open Leads","Closed Leads","Follow Up","Unresponsive","Not Interested"];
  
 export const TABLE_ROWS = [
   {

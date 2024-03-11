@@ -3,11 +3,10 @@ import Index from '@/material_component/client_component'
 import Create_user from './CreateAndEdit';
 import { useDispatch,useSelector } from 'react-redux';
 import { ViewAllServiceAPI } from '../redux/Slice/Leads/Service/VeiwAllServiceRedu';
-import { resetState_CreateService } from '../redux/Slice/Leads/Service/CreateServiceRedu';
+import { resetStateCreateService } from '../redux/Slice/Leads/Service/CreateServiceRedu';
 import CreateAndEditMarketPlace from './CreateAndEditMarketPlace';
 import { ViewAllMarketPlaceAPI } from '../redux/Slice/Leads/MartketPlace/ViewAllMarkerPlaceRedu';
-import { resetState_CreateMarketpalce } from '../redux/Slice/Leads/MartketPlace/CreatMarketPlaceRedu';
-import { resetState_UpdateMarketpalce } from '../redux/Slice/Leads/MartketPlace/UpdateMarketPlaceRedu';
+import { resetStateCreateMarketpalce } from '../redux/Slice/Leads/MartketPlace/CreatMarketPlaceRedu';
 
 
 export default function Diloge({
@@ -38,7 +37,7 @@ export default function Diloge({
     React.useEffect(()=>{
       if(AddMarketLoading==="fulfilled"){
         dispatch(ViewAllMarketPlaceAPI({ accessToken: token.access}))
-        dispatch(resetState_CreateMarketpalce())
+        dispatch(resetStateCreateMarketpalce())
         setOpen(false);
       }
     },[AddMarketLoading])
@@ -46,7 +45,7 @@ export default function Diloge({
     React.useEffect(()=>{
       if(creacteService==="fulfilled"){
         dispatch(ViewAllServiceAPI({accessToken:token.access,page:page_no}))
-        dispatch(resetState_CreateService())
+        dispatch(resetStateCreateService())
         setOpen(false);
       }
     },[creacteService])

@@ -11,7 +11,7 @@ import { DeleteCommericalAPI } from '../redux/Slice/Leads/commercial/DeleteComme
 import { ViewAllMarketPlaceAPI } from '../redux/Slice/Leads/MartketPlace/ViewAllMarkerPlaceRedu';
 import { ViewAllServiceAPI } from '../redux/Slice/Leads/Service/VeiwAllServiceRedu';
 import { CreateServiceAPI } from '../redux/Slice/Leads/Service/CreateServiceRedu';
-import { CreateMarketPlaceAPI,resetState_CreateMarketpalce } from '../redux/Slice/Leads/MartketPlace/CreatMarketPlaceRedu';
+import { CreateMarketPlaceAPI,resetStateCreateMarketpalce } from '../redux/Slice/Leads/MartketPlace/CreatMarketPlaceRedu';
 
 
 const TABLE_HEAD = ["Price", "Commission", "Price for mou"];
@@ -56,7 +56,7 @@ export default function Create_user({
   
   React.useEffect(()=>{
     if(AddmarketLoading==="fulfilled"){
-      dispatch(resetState_CreateMarketpalce())
+      dispatch(resetStateCreateMarketpalce())
       dispatch(ViewAllMarketPlaceAPI({ accessToken: token.access}))
       setAddMarketPlace("")
       setopenPopoverMarkert(false)

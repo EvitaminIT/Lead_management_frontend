@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 
 
-export const resetState = createAction('ViewAllMarketReducer/resetState');
+export const resetStateViewAllMarketPlace = createAction('ViewAllMarketReducer/resetStateViewAllMarketPlace');
 
 export const ViewAllMarketPlaceAPI = createAsyncThunk('ViewAllMarketReducer/ViewAllMarketPlaceAPI', async({accessToken}) => {
     try {
@@ -32,7 +32,7 @@ export const ViewAllMarketPlaceAPI = createAsyncThunk('ViewAllMarketReducer/View
       data:null,
     },
     reducers: {
-      resetState: (state) => {
+      resetStateViewAllMarketPlace: (state) => {
         // Reset the state to its initial values
         return {
           ...state,

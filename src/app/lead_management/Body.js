@@ -2,15 +2,15 @@
 import React from 'react'
 import Table from './Table'
 import { useDispatch,useSelector } from 'react-redux';
-import { viewall_Leads_api } from '../redux/Slice/Bussness_leads/view_all_LedSlice';
+// import { viewall_Leads_api } from '../redux/Slice/Bussness_leads/view_all_LedSlice';
 import Index from '@/material_component/client_component';
-import { Search_by_leadResetState } from '../redux/Slice/Bussness_leads/Search_by_leads';
+// import { Search_by_leadResetState } from '../redux/Slice/Bussness_leads/Search_by_leads';
 
 const pagecount=5
 
 export default function Body() {  
   const [bl_data,setbl_data]=React.useState([])
-  const BL_view_data = useSelector((state) => state.view_all_leadsReducer.Bl_data);
+  // const BL_view_data = useSelector((state) => state.view_all_leadsReducer.Bl_data);
   const page_bl=bl_data? bl_data.current_page:""
   const [active, setActive] = React.useState(1);
   const [goInput, setgoInput] = React.useState();
@@ -19,24 +19,24 @@ export default function Body() {
   
 
   React.useEffect(() => {
-    dispatch(viewall_Leads_api({accessToken:token.access,pages:1}))
+    // dispatch(viewall_Leads_api({accessToken:token.access,pages:1}))
   }, [])
 
-  React.useEffect(() => {
-     setbl_data(BL_view_data)
-  }, [BL_view_data])
+  // React.useEffect(() => {
+  //    setbl_data(BL_view_data)
+  // }, [BL_view_data])
 
   const next = () => {
-    dispatch(viewall_Leads_api({accessToken:token.access,pages:active+1}))
+    // dispatch(viewall_Leads_api({accessToken:token.access,pages:active+1}))
     if (active === BL_view_data.total_pages) return;
     setActive(active + 1); 
-    dispatch(Search_by_leadResetState())
+    // dispatch(Search_by_leadResetState())
   };
   const prev = () => {
-    dispatch(viewall_Leads_api({accessToken:token.access,pages:active-1}))
+    // dispatch(viewall_Leads_api({accessToken:token.access,pages:active-1}))
     if (active === 1) return;
     setActive(active - 1);
-    dispatch(Search_by_leadResetState())
+    // dispatch(Search_by_leadResetState())
   };
 
   const onchange=(e)=>{
@@ -44,8 +44,8 @@ export default function Body() {
  }
 
  const go_search=()=>{
-  dispatch(viewall_Leads_api({accessToken:token.access,pages:goInput}))
-  dispatch(Search_by_leadResetState())
+  // dispatch(viewall_Leads_api({accessToken:token.access,pages:goInput}))
+  // dispatch(Search_by_leadResetState())
  } 
 
 

@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import Index from '@/material_component/client_component'
-import { Delete_lead_for_app_api } from '../redux/Slice/Bussness_leads/delete_lead_for_approvl'
+// import { Delete_lead_for_app_api } from '../redux/Slice/Bussness_leads/delete_lead_for_approvl'
 import { useDispatch,useSelector } from 'react-redux';
 
 export default function DeleteBtn({
@@ -15,7 +15,7 @@ export default function DeleteBtn({
     const token = useSelector((state) => state.myReducer.token);
 
     const oncli_delbtn=()=>{
-        dispatch(Delete_lead_for_app_api({ accessToken: token.access, lead_id:Lead_id }))
+        // dispatch(Delete_lead_for_app_api({ accessToken: token.access, lead_id:Lead_id }))
         handleOpen()
     }
 

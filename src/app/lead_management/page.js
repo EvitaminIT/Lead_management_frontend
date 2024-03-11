@@ -4,14 +4,14 @@ import Body from "./Body"
 import Diloge from "./diloge"
 import { useDispatch,useSelector } from "react-redux"
 import React from "react"
-import { Search_by_lead_api } from "../redux/Slice/Bussness_leads/Search_by_leads"
-import { Search_by_leadResetState } from "../redux/Slice/Bussness_leads/Search_by_leads"
+// import { Search_by_lead_api } from "../redux/Slice/Bussness_leads/Search_by_leads"
+// import { Search_by_leadResetState } from "../redux/Slice/Bussness_leads/Search_by_leads"
 import CollapseDefault from "./test"
 
 
 
 export default function Page() {
-  const search_data = useSelector((state) => state.Search_by_leadReducer.data);
+  // const search_data = useSelector((state) => state.Search_by_leadReducer.data);
   const [ Search, SetSearch ] =React.useState()
   const dispatch =useDispatch()
   const token = useSelector((state) => state.myReducer.token);
@@ -22,7 +22,7 @@ export default function Page() {
 
 
   const dispatch_search=()=>{
-     dispatch(Search_by_lead_api({ accessToken: token.access, Lead_id:Search }))
+    //  dispatch(Search_by_lead_api({ accessToken: token.access, Lead_id:Search }))
   }
 
 
@@ -31,7 +31,7 @@ export default function Page() {
   };
 
   if(!Search){
-    dispatch(Search_by_leadResetState())
+    // dispatch(Search_by_leadResetState())
   }
 
   return (

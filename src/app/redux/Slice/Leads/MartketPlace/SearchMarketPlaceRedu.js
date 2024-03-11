@@ -1,13 +1,12 @@
 import { createAction, createAsyncThunk,createSlice } from "@reduxjs/toolkit";
 import API_Service from "@/Apis/Base_API";
 import { API } from "@/Apis/API";
-import { toast } from "react-toastify";
 
 
 
 
 
-export const resetState_SearchMarketpalce = createAction('SearchMarketPlaceReducer/resetState');
+export const resetStateSearchMarketpalce = createAction('SearchMarketPlaceReducer/resetStateSearchMarketpalce');
 
 export const SearchMarketPlaceAPI = createAsyncThunk('SearchMarketPlaceReducer/SearchMarketPlaceAPI', async({accessToken,data}) => {
     try {
@@ -33,7 +32,7 @@ export const SearchMarketPlaceAPI = createAsyncThunk('SearchMarketPlaceReducer/S
       data:null,
     },
     reducers: {
-      resetState: (state) => {
+      resetStateSearchMarketpalce: (state) => {
         // Reset the state to its initial values
         return {
           ...state,

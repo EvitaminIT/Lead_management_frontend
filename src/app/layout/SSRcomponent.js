@@ -1,14 +1,14 @@
-export const Admin_tabs=[
+export const AdminTabs = [
    {
-    title:"dashbord",
-    navigation:"/dashboard",
+      title: "dashbord",
+      navigation: "/dashboard",
    },
    {
-    title:"Admin Management",
-    navigation:"/user_management",
+      title: "User Management",
+      navigation: "/user_management",
    },
    {
-    title:"Service",
-    navigation:"/service",
+      title: "Service",
+      navigation: "/service",
    },
 ]

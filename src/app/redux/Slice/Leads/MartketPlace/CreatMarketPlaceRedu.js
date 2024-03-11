@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 
 
-export const resetState_CreateMarketpalce = createAction('CreateMarketPlaceReducer/resetState');
+export const resetStateCreateMarketpalce = createAction('CreateMarketPlaceReducer/resetStateCreateMarketpalce');
 
 export const CreateMarketPlaceAPI = createAsyncThunk('CreateMarketPlaceReducer/CreateMarketPlaceAPI', async({accessToken,data}) => {
     const id = toast.loading("Please wait...")
@@ -36,7 +36,7 @@ export const CreateMarketPlaceAPI = createAsyncThunk('CreateMarketPlaceReducer/C
       data:null,
     },
     reducers: {
-      resetState: (state) => {
+      resetStateCreateMarketpalce: (state) => {
         // Reset the state to its initial values
         return {
           ...state,

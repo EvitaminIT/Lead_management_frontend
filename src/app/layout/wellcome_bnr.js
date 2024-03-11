@@ -7,9 +7,9 @@ import { DayPicker } from "react-day-picker";
 import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
 
 
-function Wellcome_bnr() {
+function WellcomeBnr() {
     const data = useSelector((state) => state.myReducer.data);
-    const [Selselectfild, setSelselectfild] = React.useState("Select_Date");
+    const [Selselectfild, setSelselectfild] = React.useState("This_Month");
     const [value, setValue] = React.useState({
         // startDate: new Date(),
         // endDate: new Date().setMonth(11)
@@ -36,24 +36,7 @@ function Wellcome_bnr() {
                     </div>
 
                     <div className='grid grid-cols-3 gap-2'>
-                        <div>
-                            <div className=''>
-                                <Index.Select value={Selselectfild} onChange={(value) => setSelselectfild(value)} variant="outlined" placeholder="Select Date" className={`h-10 px-5 pr-10 text-sm focus:outline-none !border !border-gray-300 text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 focus:!border-t-gray-900 focus:ring-gray-900/10 rounded-full bg-[#2F3642] ${Selselectfild === "Select_Date" ? "text-[#9e9e9e]" : "text-white"}`}
-                                    labelProps={{
-                                        className: "hidden",
-                                    }}
-                                    containerProps={{ className: "min-w-[100px]" }} label="Select Version">
-                                    <Index.Option value='Select_Date' className='capitalize' disabled>Select Date</Index.Option>
-                                    <Index.Option value='Custom' className='capitalize'>Custom</Index.Option>
-                                    <Index.Option value='Last_Week' className='capitalize'>Last Week</Index.Option>
-                                    <Index.Option value='Last_Month' className='capitalize'>Last Month</Index.Option>
-                                    <Index.Option value='Last_7_Days' className='capitalize'>Last 7 Days</Index.Option>
-                                    <Index.Option value='Last_30_Days' className='capitalize'>Last 30 Days</Index.Option>
-                                    <Index.Option value='Last_60_Days' className='capitalize'>Last 60 Days</Index.Option>
-                                </Index.Select>
-                            </div>
-                        </div>
-                        <div className={`col-span-2 ${Selselectfild!=="Custom"?"hidden":""}`}>
+                        <div className={`col-span-2 ${Selselectfild!=="Custom"?"invisible":""}`}>
                             <div className='flex items-center gap-2'>
                             <div className="flex items-center">
                                 <Index.Typography className="p-2 bg-[#2F3642] text-white rounded-l-full h-10 text-base">Date:</Index.Typography>
@@ -184,6 +167,23 @@ function Wellcome_bnr() {
                             </div>
                             </div>
                         </div>
+                        <div>
+                            <div className=''>
+                                <Index.Select value={Selselectfild} onChange={(value) => setSelselectfild(value)} variant="outlined" placeholder="Select Date" className={`h-10 px-5 pr-10 text-sm focus:outline-none !border !border-gray-300 text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 focus:!border-t-gray-900 focus:ring-gray-900/10 rounded-full bg-[#2F3642] ${Selselectfild === "Select_Date" ? "text-[#9e9e9e]" : "text-white"}`}
+                                    labelProps={{
+                                        className: "hidden",
+                                    }}
+                                    containerProps={{ className: "min-w-[100px]" }} label="Select Version">
+                                    <Index.Option value='Custom' className='capitalize'>Custom</Index.Option>
+                                    <Index.Option value='This_Month' className='capitalize'>This Month</Index.Option>
+                                    <Index.Option value='Last_Week' className='capitalize'>Last Week</Index.Option>
+                                    <Index.Option value='Last_Month' className='capitalize'>Last Month</Index.Option>
+                                    <Index.Option value='Last_7_Days' className='capitalize'>Last 7 Days</Index.Option>
+                                    <Index.Option value='Last_30_Days' className='capitalize'>Last 30 Days</Index.Option>
+                                    <Index.Option value='Last_60_Days' className='capitalize'>Last 60 Days</Index.Option>
+                                </Index.Select>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -191,4 +191,4 @@ function Wellcome_bnr() {
     )
 }
 
-export default dynamic(() => Promise.resolve(Wellcome_bnr), { ssr: false })
+export default dynamic(() => Promise.resolve(WellcomeBnr), { ssr: false })

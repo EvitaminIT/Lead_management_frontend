@@ -4,17 +4,12 @@ import Index from '@/material_component/client_component';
 import Table from './Table';
 import Diloge from './diloge';
 import { useDispatch, useSelector } from 'react-redux';
-import { Search_service_API, resetSearchService } from '../redux/Slice/Evitamin/SearchServiceRedu';
 import { ViewAllServiceAPI } from '../redux/Slice/Leads/Service/VeiwAllServiceRedu';
 import { ViewAllMarketPlaceAPI } from '../redux/Slice/Leads/MartketPlace/ViewAllMarkerPlaceRedu';
 import { motion } from 'framer-motion';
 import { SearchServiceAPI,resetState_SearchService } from '../redux/Slice/Leads/Service/SearchServiceRedu';
 import { addUnderscores } from '../commen/commen_fun';
-import { SearchMarketPlaceAPI,resetState_SearchMarketpalce } from '../redux/Slice/Leads/MartketPlace/SearchMarketPlaceRedu';
-
-
-
-
+import { SearchMarketPlaceAPI,resetStateSearchMarketpalce } from '../redux/Slice/Leads/MartketPlace/SearchMarketPlaceRedu';
 
 export default function Page() {
   const dispatch = useDispatch()
@@ -27,18 +22,23 @@ export default function Page() {
   const [isVisible, setIsVisible] = React.useState(false);
   const table_coll = useSelector((state) => state.ViewAllServiceReducer.data);
   const token = useSelector((state) => state.myReducer.token);
+  const ServiceTableCall = useSelector((state) => state.ViewAllServiceReducer.data);
+  const MarkerplaceTableCall = useSelector((state) => state.ViewAllMarketReducer.data);
+  const serviceTBLData=ServiceTableCall?ServiceTableCall.data:[];
+  const marketplaceTBLData=MarkerplaceTableCall?MarkerplaceTableCall.marketplace:[];
+
 
 
   const data = [
     {
       label: "Services",
       value: "services",
-      desc: <Table pageNo={active} TableType={"Service"} />,
+      desc: <Table pageNo={active} TableType={"Service"} TableData={serviceTBLData} />,
     },
     {
       label: "Marketplace",
       value: "marketplace",
-      desc: <Table pageNo={active} TableType={"Markerplace"} />,
+      desc: <Table pageNo={active} TableType={"Markerplace"} TableData={marketplaceTBLData} />,
     },
   ];
 
@@ -77,7 +77,7 @@ export default function Page() {
 
   if (!Search) {
     activeTab==="services"? dispatch(resetState_SearchService()):
-    dispatch(resetState_SearchMarketpalce());
+    dispatch(resetStateSearchMarketpalce());
   }
 
   if (table_coll) {
@@ -108,6 +108,17 @@ export default function Page() {
     SetSearch("")
   }
 
+  React.useEffect(()=>{
+    if(goInput>TBLdata.total_pages){
+      setgoInput("")
+    }
+
+    if(goInput<1){
+      setgoInput("")
+    }
+  },[goInput])
+
+
   return (
     <>
       <Index.Tabs value={activeTab}
@@ -129,7 +140,7 @@ export default function Page() {
               </Index.TabsHeader>
             </div>
             <div className="grid grid-cols-5 gap-0">
-              <div className={`col-span-3 pr-[0.4rem]`}>
+              <div className={`col-span-4 px-8`}>
                 <div className="text-gray-600 flex items-center float-right">
                   <Index.Input
                     type="search"
@@ -173,9 +184,8 @@ export default function Page() {
                     </Index.Button>
                   </span>
                 </div>
-                <div></div>
               </div>
-              <div className='col-span-2'>
+              <div className=''>
                 <Diloge btn={"Create"} togel={activeTab} />
               </div>
             </div>
@@ -190,7 +200,6 @@ export default function Page() {
                 </Index.TabPanel>
               ))}
             </Index.TabsBody>
-            {/* <Table /> */}
             <div className={`grid grid-cols-3 gap-4 mt-4 ${activeTab === "marketplace" ? "invisible" : ""}`}>
               <div>
                 <div className='flex items-center gap-2'>
@@ -202,7 +211,7 @@ export default function Page() {
                     type='number'
                     name="gopage"
                     onChange={onchange}
-                    // value={active}
+                    value={goInput}
                     placeholder={active}
                     className='!w-16 py-2 text-sm px-1 focus:outline-none !border !border-gray-300 text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 focus:!border-t-gray-900 focus:ring-gray-900/10 rounded-md'
                     labelProps={{

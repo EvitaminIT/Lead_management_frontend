@@ -1,5 +1,5 @@
 import Create_lead from "./Create_lead";
-import Add_lead_manuall from "./Add_lead_manuall";
+import Add_lead_manuall from "./AddLeadManuall";
 
 export const TABLE_HEAD = ["Lead I.D.", "Requester Name", "Service Category", "Assigned Status","Assigned To","Status","Upload Date","Deadline","Action"];
  

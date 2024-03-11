@@ -1,9 +1,9 @@
 "use client"
 import React from 'react'
-import Layout_headder from './Layout_headder'
+import LayoutHeadder from './Layout_headder'
 import Index from '@/material_component/client_component'
 import { usePathname } from 'next/navigation';
-import Wellcome_bnr from './wellcome_bnr';
+import WellcomeBnr from './wellcome_bnr';
 
 export default function Layout({children}) {
   const pathname = usePathname();
@@ -11,10 +11,10 @@ export default function Layout({children}) {
     <>
     { pathname==="/"? "":
     <div>
-     <Layout_headder/>
+     <LayoutHeadder/>
      <div className={`grid grid-cols-5 gap-0 px-32 relative bottom-[3rem]  ${pathname!=="/dashboard"?"hidden":""}`}>
         <div></div>
-        <Wellcome_bnr/>
+        <WellcomeBnr/>
      </div>
     <div>
        {children}
